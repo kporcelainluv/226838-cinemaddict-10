@@ -128,6 +128,8 @@ export class FilmsController {
 
   _unrender() {
     this._defaultFilmListController.unrender();
+    this._ratedFilmListController.unrender();
+    this._commentedFilmListController.unrender();
   }
   hide() {
     this._filmsContainer.hide();
