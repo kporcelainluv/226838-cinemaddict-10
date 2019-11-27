@@ -1,7 +1,7 @@
 # Личный проект «Киноман» [![Build status][travis-image]][travis-url]
 
-* Студент: [Ksusha Zhukova](https://up.htmlacademy.ru/ecmascript/10/user/226838).
-* Наставник: `Неизвестно`.
+- Студент: [Ksusha Zhukova](https://up.htmlacademy.ru/ecmascript/9/user/226838).
+- Наставник: `Без наставника`.
 
 ---
 
@@ -48,5 +48,5 @@ git clone SSH-адрес_вашего_форка
 
 Репозиторий создан для обучения на интенсивном онлайн‑курсе «[Профессиональный JavaScript, уровень 2](https://htmlacademy.ru/intensive/ecmascript)» от [HTML Academy](https://htmlacademy.ru).
 
-[travis-image]: https://travis-ci.com/htmlacademy-ecmascript/226838-cinemaddict-10.svg?branch=master
-[travis-url]: https://travis-ci.com/htmlacademy-ecmascript/226838-cinemaddict-10
+[travis-image]: https://travis-ci.com/htmlacademy-ecmascript/226838-cinemaddict-9.svg?branch=master
+[travis-url]: https://travis-ci.com/htmlacademy-ecmascript/226838-cinemaddict-9
