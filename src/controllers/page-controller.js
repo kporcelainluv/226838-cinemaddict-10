@@ -71,14 +71,14 @@ export class PageController {
 
     this._filmsController.initWithFilms(this._films);
     this._headerController.initProfileStats(this._allFilms);
-    this._navigationController.initWithFilms(this._allFilms);
+    this._navigationController.initWithFilms(this._films);
     this._searchResultContoller.init(this._allFilms);
     this._stats.init(this._allFilms);
     this._footer.init(this._allFilms);
   }
 
   _onSearchChange(query) {
-    if (query.length > SEARCH_QUERY_LENGTH) {
+    if (query.length >= SEARCH_QUERY_LENGTH) {
       this._films = filterFilms(this._allFilms, query);
       this._filmsController.hide();
       this._sortController.hide();
@@ -104,22 +104,23 @@ export class PageController {
       this._filmsController.show();
       this._filmsController.renderFilmsContainer(this._films);
     } else if (navTab === NAV_TAB.WATCHLIST) {
+      this._films = getWatchlist(this._allFilms);
       this._stats.unrender();
       this._sortController.show();
       this._filmsController.show();
-      this._films = getWatchlist(this._allFilms);
       this._filmsController.renderFilmsContainer(this._films);
     } else if (navTab === NAV_TAB.HISTORY) {
+      this._films = getWatched(this._allFilms);
       this._stats.unrender();
       this._sortController.show();
       this._filmsController.show();
-      this._films = getWatched(this._allFilms);
+
       this._filmsController.renderFilmsContainer(this._films);
     } else if (navTab === NAV_TAB.FAVORITES) {
+      this._films = getFavorite(this._allFilms);
       this._stats.unrender();
       this._sortController.show();
       this._filmsController.show();
-      this._films = getFavorite(this._allFilms);
       this._filmsController.renderFilmsContainer(this._films);
     } else if (navTab === NAV_TAB.STATS) {
       this._filmsController.hide();
@@ -156,6 +157,7 @@ export class PageController {
       this._allFilms = updateFilms(this._allFilms, newFilm);
 
       this._filmsController.render(this._films);
+      //here
       this._navigationController.render(this._allFilms, this._currentTab);
     };
 

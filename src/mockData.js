@@ -27,7 +27,7 @@ export const mockFilms = [
     },
     user_details: {
       personal_rating: 7,
-      watchlist: true,
+      watchlist: false,
       already_watched: true,
       watching_date: 1561829956785,
       favorite: true

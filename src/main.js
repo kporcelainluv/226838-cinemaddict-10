@@ -3,6 +3,7 @@ import { API } from "./api";
 import { Provider } from "./provider";
 import { Store } from "./store";
 import { AUTHORIZATION, TASKS_STORE_KEY, END_POINT } from "./consts";
+import { mockFilms } from "./mockData";
 
 const headerSearchContainer = document.querySelector(`.header`);
 const mainPageContainer = document.querySelector(`.main`);
@@ -30,4 +31,6 @@ window.addEventListener(`online`, () => {
   document.title = document.title.split(`[OFFLINE]`)[0];
   provider.syncFilms();
 });
+
 provider.getFilms().then(films => page.initWithFilms(films));
+// page.initWithFilms(mockFilms);

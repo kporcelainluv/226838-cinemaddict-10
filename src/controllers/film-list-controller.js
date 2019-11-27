@@ -39,11 +39,8 @@ export class FilmListController {
   }
 
   init() {
-    this._films.slice(0, this._filmsDisplayed).forEach(film => {
-      this._renderFilmCard(this._container, film);
-    });
+    this.render(this._films);
   }
-
   render(films) {
     films.slice(0, this._filmsDisplayed).forEach(film => {
       this._renderFilmCard(this._container, film);
