@@ -12,7 +12,6 @@ class ShowMoreButton extends AbstractComponent {
   }
   removeOnShowMoreCallback(callback) {
     this.getElement().removeEventListener(`click`, callback);
-    console.log("event removed");
   }
 }
 export { ShowMoreButton };

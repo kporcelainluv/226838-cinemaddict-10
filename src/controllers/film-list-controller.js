@@ -39,14 +39,12 @@ export class FilmListController {
   }
 
   init() {
-    this.render(this._films);
+    this._films.slice(0, this._filmsDisplayed).forEach(film => {
+      this._renderFilmCard(this._container, film);
+    });
   }
 
   render(films) {
-    //the problem is here
-
-    this.unrender();
-
     films.slice(0, this._filmsDisplayed).forEach(film => {
       this._renderFilmCard(this._container, film);
     });
@@ -61,8 +59,7 @@ export class FilmListController {
         POSITION.BEFOREEND
       );
       const callback = () => {
-        console.log("callback called");
-
+        this.unrender();
         this._filmsDisplayed += PER_PAGE;
         this.render(this._films);
         console.log({ PER_PAGE, amount: this._filmsDisplayed });
