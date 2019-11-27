@@ -1,6 +1,6 @@
 import { MovieController } from "./movie-controller";
 import { ShowMoreButton } from "../components/showMoreBtn";
-import { render } from "../utils";
+import { render, unrender } from "../utils";
 import {
   PER_PAGE,
   POSITION,
@@ -22,7 +22,6 @@ export class FilmListController {
 
     this._films = films;
     this._type = type;
-    this._callBackExists = false;
     this._filmsDisplayed = (() => {
       if (type === PAGE_TYPE.DEFAULT) {
         return FILMS_DISPLAYED_INITIALLY;
@@ -47,27 +46,31 @@ export class FilmListController {
   }
 
   renderFilms(films) {
-    films.slice(0, this._filmsDisplayed).forEach(film => {
-      this._renderFilmCard(this._container, film);
-    });
+    if (films.length === 0) {
+      this._renderFilmCard(this._container, films);
+    } else {
+      films.slice(0, this._filmsDisplayed || 0).forEach(film => {
+        this._renderFilmCard(this._container, film);
+      });
 
-    if (
-      films.length > this._filmsDisplayed &&
-      this._type === PAGE_TYPE.DEFAULT
-    ) {
-      render(
-        this._container,
-        this._showMoreBtn.getElement(),
-        POSITION.BEFOREEND
-      );
-      const callback = () => {
-        this.unrender();
-        this._filmsDisplayed += PER_PAGE;
-        console.log({ amount: this._filmsDisplayed });
-        this._showMoreBtn.removeOnShowMoreCallback(callback);
-        this.renderFilms(films);
-      };
-      this._showMoreBtn.onClickShowMore(callback);
+      if (
+        films.length > this._filmsDisplayed &&
+        this._type === PAGE_TYPE.DEFAULT
+      ) {
+        render(
+          this._container,
+          this._showMoreBtn.getElement(),
+          POSITION.BEFOREEND
+        );
+        const callback = () => {
+          this.unrender();
+          this._filmsDisplayed += PER_PAGE;
+          console.log({ amount: this._filmsDisplayed });
+          this._showMoreBtn.removeOnShowMoreCallback(callback);
+          this.renderFilms(films);
+        };
+        this._showMoreBtn.onClickShowMore(callback);
+      }
     }
   }
   renderDefault(films) {

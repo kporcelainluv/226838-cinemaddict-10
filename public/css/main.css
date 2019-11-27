@@ -1102,3 +1102,6 @@ button {
   + .film-details__user-rating-label--error {
   background-color: red;
 }
+.movie-list-error {
+  height: 200px;
+}

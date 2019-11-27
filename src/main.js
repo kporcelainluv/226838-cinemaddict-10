@@ -3,7 +3,7 @@ import { API } from "./api";
 import { Provider } from "./provider";
 import { Store } from "./store";
 import { AUTHORIZATION, TASKS_STORE_KEY, END_POINT } from "./consts";
-import { mockFilms } from "./mockData";
+import { mockFilms, zeromockFilms } from "./mockData";
 
 const headerSearchContainer = document.querySelector(`.header`);
 const mainPageContainer = document.querySelector(`.main`);
@@ -32,5 +32,5 @@ window.addEventListener(`online`, () => {
   provider.syncFilms();
 });
 
-provider.getFilms().then(films => page.initWithFilms(films));
-// page.initWithFilms(mockFilms);
+// provider.getFilms().then(films => page.initWithFilms(films));
+page.initWithFilms(zeromockFilms);

@@ -43,55 +43,65 @@ export class FilmsController {
   }
 
   initWithFilms(films) {
-    unrender(this._loadingComponent.getElement());
-    this._loadingComponent.removeElement();
+    if (films.length === 0) {
+      unrender(this._loadingComponent.getElement());
+      this._loadingComponent.removeElement();
+      render(
+        this._filmsContainer.getElement(),
+        this._emptyFilmsComponent.getElement(),
+        `beforeend`
+      );
+    } else {
+      unrender(this._loadingComponent.getElement());
+      this._loadingComponent.removeElement();
 
-    this._defaultFilmListController = new FilmListController({
-      container: this._defaultFilmList.getElementToRenderFilmsTo(),
-      films,
-      onFilmUpdate: this._onFilmUpdate,
-      onTogglePopup: this._onTogglePopup,
-      onRenderFilmCard: this._onRenderFilmCard,
-      type: PAGE_TYPE.DEFAULT
-    });
+      this._defaultFilmListController = new FilmListController({
+        container: this._defaultFilmList.getElementToRenderFilmsTo(),
+        films,
+        onFilmUpdate: this._onFilmUpdate,
+        onTogglePopup: this._onTogglePopup,
+        onRenderFilmCard: this._onRenderFilmCard,
+        type: PAGE_TYPE.DEFAULT
+      });
 
-    this._ratedFilmListController = new FilmListController({
-      container: this._topRatedList.getElementToRenderFilmsTo(),
-      films: getTopRatedFilms(films),
-      onFilmUpdate: this._onFilmUpdate,
-      onTogglePopup: this._onTogglePopup,
-      onRenderFilmCard: this._onRenderFilmCard,
-      type: PAGE_TYPE.TOP_RATED
-    });
+      this._ratedFilmListController = new FilmListController({
+        container: this._topRatedList.getElementToRenderFilmsTo(),
+        films: getTopRatedFilms(films),
+        onFilmUpdate: this._onFilmUpdate,
+        onTogglePopup: this._onTogglePopup,
+        onRenderFilmCard: this._onRenderFilmCard,
+        type: PAGE_TYPE.TOP_RATED
+      });
 
-    this._commentedFilmListController = new FilmListController({
-      container: this._mostCommentedList.getElementToRenderFilmsTo(),
-      films: getMostCommentedFilms(films),
-      onFilmUpdate: this._onFilmUpdate,
-      onTogglePopup: this._onTogglePopup,
-      onRenderFilmCard: this._onRenderFilmCard,
-      type: PAGE_TYPE.MOST_COMMENTED
-    });
+      this._commentedFilmListController = new FilmListController({
+        container: this._mostCommentedList.getElementToRenderFilmsTo(),
+        films: getMostCommentedFilms(films),
+        onFilmUpdate: this._onFilmUpdate,
+        onTogglePopup: this._onTogglePopup,
+        onRenderFilmCard: this._onRenderFilmCard,
+        type: PAGE_TYPE.MOST_COMMENTED
+      });
 
-    render(
-      this._filmsContainer.getElement(),
-      this._defaultFilmList.getElement(),
-      POSITION.BEFOREEND
-    );
-    render(
-      this._filmsContainer.getElement(),
-      this._topRatedList.getElement(),
-      POSITION.BEFOREEND
-    );
-    render(
-      this._filmsContainer.getElement(),
-      this._mostCommentedList.getElement(),
-      POSITION.BEFOREEND
-    );
+      render(
+        this._filmsContainer.getElement(),
+        this._defaultFilmList.getElement(),
+        POSITION.BEFOREEND
+      );
+      render(
+        this._filmsContainer.getElement(),
+        this._topRatedList.getElement(),
+        POSITION.BEFOREEND
+      );
+      render(
+        this._filmsContainer.getElement(),
+        this._mostCommentedList.getElement(),
+        POSITION.BEFOREEND
+      );
 
-    this._defaultFilmListController.init();
-    this._ratedFilmListController.init();
-    this._commentedFilmListController.init();
+      this._defaultFilmListController.init();
+      this._ratedFilmListController.init();
+      this._commentedFilmListController.init();
+    }
   }
 
   render(films) {
@@ -101,15 +111,7 @@ export class FilmsController {
     this._ratedFilmListController.render(films);
     this._commentedFilmListController.render(films);
   }
-  renderEmptyFilms() {
-    unrender(this._loadingComponent.getElement());
-    this._loadingComponent.removeElement();
-    render(
-      this._filmsContainer.getElement(),
-      this._emptyFilmsComponent.getElement(),
-      `beforeend`
-    );
-  }
+
   renderFilmsContainer(films) {
     this._unrender();
 

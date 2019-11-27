@@ -842,3 +842,4 @@ export const mockFilms = [
     ]
   }
 ];
+export const zeromockFilms = [];
