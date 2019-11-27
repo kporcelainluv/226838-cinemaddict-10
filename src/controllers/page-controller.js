@@ -114,7 +114,6 @@ export class PageController {
       this._stats.unrender();
       this._sortController.show();
       this._filmsController.show();
-
       this._filmsController.renderFilmsContainer(this._films);
     } else if (navTab === NAV_TAB.FAVORITES) {
       this._films = getFavorite(this._allFilms);
@@ -157,7 +156,6 @@ export class PageController {
       this._allFilms = updateFilms(this._allFilms, newFilm);
 
       this._filmsController.render(this._films);
-      //here
       this._navigationController.render(this._allFilms, this._currentTab);
     };
 

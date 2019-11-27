@@ -22,6 +22,7 @@ export class FilmListController {
 
     this._films = films;
     this._type = type;
+    this._callBackExists = false;
     this._filmsDisplayed = (() => {
       if (type === PAGE_TYPE.DEFAULT) {
         return FILMS_DISPLAYED_INITIALLY;
@@ -39,9 +40,13 @@ export class FilmListController {
   }
 
   init() {
-    this.render(this._films);
+    this.renderFilms(this._films);
   }
   render(films) {
+    this.renderFilms(films);
+  }
+
+  renderFilms(films) {
     films.slice(0, this._filmsDisplayed).forEach(film => {
       this._renderFilmCard(this._container, film);
     });
@@ -58,13 +63,13 @@ export class FilmListController {
       const callback = () => {
         this.unrender();
         this._filmsDisplayed += PER_PAGE;
-        this.render(this._films);
+        console.log({ amount: this._filmsDisplayed });
         this._showMoreBtn.removeOnShowMoreCallback(callback);
+        this.renderFilms(films);
       };
       this._showMoreBtn.onClickShowMore(callback);
     }
   }
-
   renderDefault(films) {
     this._filmsDisplayed = FILMS_DISPLAYED_INITIALLY;
     this.render(films);
