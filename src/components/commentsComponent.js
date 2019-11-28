@@ -41,7 +41,7 @@ export class CommentsSection extends AbstractComponent {
 
         <div class="film-details__new-comment">
           <div for="add-emoji" class="film-details__add-emoji-label">
-                    <img src="images/emoji/angry.png" width="55" height="55" alt="emoji"></div>
+                    <img src="images/emoji/smile.png" width="55" height="55" alt="emoji"></div>
 
           <label class="film-details__comment-label">
 
@@ -63,11 +63,6 @@ export class CommentsSection extends AbstractComponent {
             <input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio" id="emoji-gpuke" value="grinning">
             <label class="film-details__emoji-label" for="emoji-gpuke">
               <img src="./images/emoji/puke.png" width="30" height="30" alt="emoji">
-            </label>
-
-            <input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio" id="emoji-angry" value="grinning">
-            <label class="film-details__emoji-label" for="emoji-angry">
-              <img src="./images/emoji/angry.png" width="30" height="30" alt="emoji">
             </label>
           </div>
         </div>

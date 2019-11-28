@@ -5,8 +5,7 @@ import { UPDATE_TYPE, POSITION, DELETE_BUTTON_NAME, EXIT_KEY } from "../consts";
 const emojis = {
   "emoji-smile": `smile`,
   "emoji-sleeping": `sleeping`,
-  "emoji-gpuke": `puke`,
-  "emoji-angry": `angry`
+  "emoji-gpuke": `puke`
 };
 const getEmojiUrl = id => `./images/emoji/${emojis[id]}.png`;
 
@@ -89,7 +88,7 @@ export class CommentsController {
         const formData = new FormData(this._popup.getFormElement());
 
         const newComment = {
-          emotion: this._currentEmoji || `angry`,
+          emotion: this._currentEmoji || `smile`,
           comment: formData.get(`comment`),
           author: ``,
           date: new Date().toISOString().slice(0, 10)
