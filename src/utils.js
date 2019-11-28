@@ -140,9 +140,9 @@ export const getMostCommentedFilms = films => {
 
 export const sortByDefault = films => {
   return films.sort((a, b) => {
-    if (a.id > b.id) {
+    if (parseInt(a.id) > parseInt(b.id)) {
       return 1;
-    } else if (a.id < b.id) {
+    } else if (parseInt(a.id) < parseInt(b.id)) {
       return -1;
     }
     return 0;
