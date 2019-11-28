@@ -32,5 +32,5 @@ window.addEventListener(`online`, () => {
   provider.syncFilms();
 });
 
-// provider.getFilms().then(films => page.initWithFilms(films));
-page.initWithFilms(zeromockFilms);
+provider.getFilms().then(films => page.initWithFilms(films));
+// page.initWithFilms(zeromockFilms);

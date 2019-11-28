@@ -106,12 +106,10 @@ export class API {
   }
 
   createComment({ film, comment }) {
-    console.log("create comment");
     return this._create(`comments/${film.id}`, JSON.stringify(comment));
   }
 
   deleteComment({ comment }) {
-    console.log("delete comment");
     return this._delete(`comments/${comment.id}`);
   }
   syncFilms({ films }) {
