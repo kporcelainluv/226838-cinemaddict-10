@@ -232,7 +232,7 @@ export class Popup extends AbstractComponent {
   toggleRatingButton(callback) {
     this.getElement()
       .querySelectorAll(`.film-details__user-rating-input`)
-      .forEach(elm => elm.addEventListener(`click`, callback));
+      .forEach(elm => elm.addEventListener(`keydown`, callback));
   }
   disableForm() {
     this.getElement()
