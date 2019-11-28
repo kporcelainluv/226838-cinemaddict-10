@@ -106,7 +106,7 @@ export const getTopGenre = films => {
 
 export const getTopRatedFilms = films => {
   if (films.every(film => film.film_info.total_rating === 0)) {
-    return false;
+    return 0;
   }
   return films
     .sort((a, b) => {

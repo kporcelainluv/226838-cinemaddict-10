@@ -46,9 +46,7 @@ export class FilmListController {
   }
 
   renderFilms(films) {
-    if (films.length === 0) {
-      this._renderFilmCard(this._container, films);
-    } else {
+    if (films.length > 0) {
       films.slice(0, this._filmsDisplayed || 0).forEach(film => {
         this._renderFilmCard(this._container, film);
       });
