@@ -27,10 +27,8 @@ export class PageController {
   constructor(headerContainer, container, films, api) {
     this._container = container;
     this._api = api;
-
-    // TODO remove allFilms or films
-    this._films = sortByDefault(films);
-    this._allFilms = sortByDefault(films);
+    this._films = films;
+    this._allFilms = films;
     this._currentTab = NAV_TAB.ALL;
 
     this._sortController = new SortController(
@@ -66,15 +64,15 @@ export class PageController {
   }
 
   initWithFilms(films) {
-    this._films = sortByDefault(films);
-    this._allFilms = sortByDefault(films);
+    this._films = films;
+    this._allFilms = films;
 
     this._filmsController.initWithFilms(this._films);
-    this._headerController.initProfileStats(this._allFilms);
+    this._headerController.initProfileStats(this._films);
     this._navigationController.initWithFilms(this._films);
-    this._searchResultContoller.init(this._allFilms);
-    this._stats.init(this._allFilms);
-    this._footer.init(this._allFilms);
+    this._searchResultContoller.init(this._films);
+    this._stats.init(this._films);
+    this._footer.init(this._films);
   }
 
   _onSearchChange(query) {

@@ -108,34 +108,30 @@ export const getTopRatedFilms = films => {
   if (films.every(film => film.film_info.total_rating === 0)) {
     return 0;
   }
-  return films
-    .sort((a, b) => {
-      if (a.film_info.total_rating > b.film_info.total_rating) {
-        return -1;
-      }
-      if (a.film_info.total_rating < b.film_info.total_rating) {
-        return 1;
-      }
-      return 0;
-    })
-    .slice(0, 2);
+  return films.sort((a, b) => {
+    if (a.film_info.total_rating > b.film_info.total_rating) {
+      return -1;
+    }
+    if (a.film_info.total_rating < b.film_info.total_rating) {
+      return 1;
+    }
+    return 0;
+  });
 };
 
 export const getMostCommentedFilms = films => {
   if (films.every(film => film.comments.length === 0)) {
     return false;
   }
-  return films
-    .sort((a, b) => {
-      if (a.comments > b.comments) {
-        return -1;
-      }
-      if (a.comments < b.comments) {
-        return 1;
-      }
-      return 0;
-    })
-    .slice(0, 2);
+  return films.sort((a, b) => {
+    if (a.comments > b.comments) {
+      return -1;
+    }
+    if (a.comments < b.comments) {
+      return 1;
+    }
+    return 0;
+  });
 };
 
 export const sortByDefault = films => {
