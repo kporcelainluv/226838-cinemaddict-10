@@ -1,3 +1,4 @@
+import { sort } from "ramda";
 import { POSITION, STATS_FILTER_TYPE, STATS_RANK } from "./consts";
 import { addMonths, addWeeks, addYears, isAfter, startOfToday } from "date-fns";
 
@@ -108,7 +109,7 @@ export const getTopRatedFilms = films => {
   if (films.every(film => film.film_info.total_rating === 0)) {
     return 0;
   }
-  return films.sort((a, b) => {
+  return sort((a, b) => {
     if (a.film_info.total_rating > b.film_info.total_rating) {
       return -1;
     }
@@ -116,14 +117,14 @@ export const getTopRatedFilms = films => {
       return 1;
     }
     return 0;
-  });
+  }, films);
 };
 
 export const getMostCommentedFilms = films => {
   if (films.every(film => film.comments.length === 0)) {
     return false;
   }
-  return films.sort((a, b) => {
+  return sort((a, b) => {
     if (a.comments > b.comments) {
       return -1;
     }
@@ -131,7 +132,7 @@ export const getMostCommentedFilms = films => {
       return 1;
     }
     return 0;
-  });
+  }, films);
 };
 
 export const sortByDefault = films => {
