@@ -63,7 +63,6 @@ export class FilmListController {
         const callback = () => {
           this.unrender();
           this._filmsDisplayed += PER_PAGE;
-          console.log({ amount: this._filmsDisplayed });
           this._showMoreBtn.removeOnShowMoreCallback(callback);
           this.renderFilms(films);
         };

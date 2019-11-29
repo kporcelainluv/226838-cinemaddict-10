@@ -106,18 +106,17 @@ export class FilmsController {
 
   render(films) {
     this._unrender();
-
     this._defaultFilmListController.render(films);
-    this._ratedFilmListController.render(films);
-    this._commentedFilmListController.render(films);
+    this._ratedFilmListController.render(getTopRatedFilms(films));
+    this._commentedFilmListController.render(getMostCommentedFilms(films));
   }
 
   renderFilmsContainer(films) {
     this._unrender();
 
     this._defaultFilmListController.renderDefault(films);
-    this._ratedFilmListController.render(films);
-    this._commentedFilmListController.render(films);
+    this._ratedFilmListController.render(getTopRatedFilms(films));
+    this._commentedFilmListController.render(getMostCommentedFilms(films));
   }
 
   _onTogglePopup() {
