@@ -244,6 +244,16 @@ export class Popup extends AbstractComponent {
       .querySelectorAll(`.film-details__user-rating-input`)
       .forEach(elm => (elm.disabled = false));
   }
+  disableDeleteBtns() {
+    this.getElement()
+      .querySelectorAll(`.film-details__comment-delete`)
+      .forEach(elm => (elm.disabled = true));
+  }
+  enableDeleteBtns() {
+    this.getElement()
+      .querySelectorAll(`.film-details__comment-delete`)
+      .forEach(elm => (elm.disabled = false));
+  }
   shakePopup() {
     const form = this.getFormElement();
     form.style.animation = `shake 0.6s`;

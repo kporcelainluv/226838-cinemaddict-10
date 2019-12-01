@@ -49,6 +49,15 @@ export class MovieController {
   init() {
     render(this._container, this._filmCard.getElement(), POSITION.BEFOREEND);
 
+    window.addEventListener("offline", () => {
+      this._popup.disableForm();
+      this._popup.disableDeleteBtns();
+    });
+    window.addEventListener("online", () => {
+      this._popup.enableForm();
+      this._popup.enableDeleteBtns();
+    });
+
     const onEscKeyDown = evt => {
       if (evt.key === `Escape` || evt.key === `Esc`) {
         this.closePopup();

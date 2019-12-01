@@ -40,10 +40,18 @@ export class CommentsController {
   _rerender(comments) {
     this._unrender();
     this._commentsSection = new CommentsSection(comments);
+
     this.init();
   }
 
   init() {
+    window.addEventListener("offline", () => {
+      this._commentsSection.disableCommentsSection();
+    });
+    window.addEventListener("online", () => {
+      this._commentsSection.enableCommentsSection();
+    });
+
     this._commentsSection.addCallbackOnEachDeleteBtnClick(index => {
       this._commentsSection.changeHeadingOnBtnClick(
         DELETE_BUTTON_NAME.DELETING,

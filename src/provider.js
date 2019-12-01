@@ -6,7 +6,6 @@ export const Provider = class {
   constructor({ api, store, generateId }) {
     this._api = api;
     this._store = store;
-    this._generateId = generateId;
   }
 
   updateFilm({ film }) {
@@ -28,11 +27,6 @@ export const Provider = class {
         this._store.setItem({ key: updatedComment.id, item: updatedComment });
         return updatedComment;
       });
-    } else {
-      comment.id = this._generateId();
-
-      this._store.setItem({ key: comment.id, item: comment });
-      return Promise.resolve(film, comment);
     }
   }
 
@@ -41,9 +35,6 @@ export const Provider = class {
       return this._api.deleteComment({ comment }).then(() => {
         this._store.removeItem({ key: comment.id });
       });
-    } else {
-      this._store.removeItem({ key: comment.id });
-      return Promise.resolve(true);
     }
   }
 

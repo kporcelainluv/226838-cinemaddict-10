@@ -189,4 +189,7 @@ export class PageController {
         .catch(() => onError());
     }
   }
+  _isOnline() {
+    return window.navigator.onLine;
+  }
 }
