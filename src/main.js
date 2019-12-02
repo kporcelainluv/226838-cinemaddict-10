@@ -17,8 +17,7 @@ const api = new API({ endPoint: END_POINT, authorization: AUTHORIZATION });
 const store = new Store({ key: TASKS_STORE_KEY, storage: localStorage });
 const provider = new Provider({
   api,
-  store,
-  generateId: () => String(Date.now() + Math.random())
+  store
 });
 
 const page = new PageController(

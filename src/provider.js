@@ -3,7 +3,7 @@ const objectToArray = object => {
 };
 
 export const Provider = class {
-  constructor({ api, store, generateId }) {
+  constructor({ api, store }) {
     this._api = api;
     this._store = store;
   }
@@ -45,8 +45,8 @@ export const Provider = class {
         return films;
       });
     } else {
-      const rawFilmsMap = this._store.getAll();
-      const films = objectToArray(rawFilmsMap);
+      const filmsMap = this._store.getAll();
+      const films = objectToArray(filmsMap);
       return Promise.resolve(films);
     }
   }
