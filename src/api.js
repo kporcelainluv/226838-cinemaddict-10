@@ -116,7 +116,7 @@ export class API {
     return fetchWrapper({
       url: `movies/sync`,
       method: METHOD.POST,
-      body: JSON.stringify({ films }),
+      body: JSON.stringify(films),
       endpoint: this._endPoint,
       authorization: this._authorization
     }).then(toJSON);
