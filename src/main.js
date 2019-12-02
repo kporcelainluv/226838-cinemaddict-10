@@ -3,12 +3,6 @@ import { API } from "./api";
 import { Provider } from "./provider";
 import { Store } from "./store";
 import { AUTHORIZATION, TASKS_STORE_KEY, END_POINT } from "./consts";
-import {
-  mockFilms,
-  zeromockFilms,
-  zeroRatingmockFilms,
-  zeroCommentsMockData
-} from "./mockData";
 
 const headerSearchContainer = document.querySelector(`.header`);
 const mainPageContainer = document.querySelector(`.main`);
