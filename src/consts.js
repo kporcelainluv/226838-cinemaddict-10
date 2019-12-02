@@ -8,30 +8,30 @@ export const END_POINT = `https://htmlacademy-es-9.appspot.com/cinemaddict`;
 export const AUTHORIZATION = `Basic eo0w590ik29889a=${Math.random()}`;
 
 export const NAV_TAB = {
-  ALL: `#all`,
-  HISTORY: `#history`,
-  WATCHLIST: `#watchlist`,
-  FAVORITES: `#favorites`,
-  STATS: `#stats`
+  all: `#all`,
+  history: `#history`,
+  watchlist: `#watchlist`,
+  favorites: `#favorites`,
+  stats: `#stats`
 };
 
 export const SORT_TYPE = {
-  DEFAULT: `default`,
-  DATE: `date`,
-  RATING: `rating`
+  default: `default`,
+  date: `date`,
+  rating: `rating`
 };
 
 export const STATS_FILTER_TYPE = {
-  ALL: `all-time`,
-  TODAY: `today`,
-  WEEK: `week`,
-  MONTH: `month`,
-  YEAR: `year`
+  all: `all-time`,
+  today: `today`,
+  week: `week`,
+  month: `month`,
+  year: `year`
 };
 
 export const POSITION = {
-  AFTERBEGIN: `afterbegin`,
-  BEFOREEND: `beforeend`
+  afterbegin: `afterbegin`,
+  beforeend: `beforeend`
 };
 
 export const METHOD = {
@@ -42,9 +42,9 @@ export const METHOD = {
 };
 
 export const UPDATE_TYPE = {
-  UPDATE_USER_INFO: "UPDATE_USER_INFO",
-  CREATE_COMMENT: "CREATE_COMMENT",
-  DELETE_COMMENT: "DELETE_COMMENT"
+  updateUserInfo: "UPDATE_USER_INFO",
+  createComment: "CREATE_COMMENT",
+  deleteComment: "DELETE_COMMENT"
 };
 
 export const PAGE_TYPE = {
@@ -54,12 +54,12 @@ export const PAGE_TYPE = {
   TOP_RATED: `top-rated`
 };
 export const STATS_RANK = {
-  NOVICE: `novice`,
-  FAN: `fan`,
-  MOVIE_BUFF: `movie buff`
+  novice: `novice`,
+  fan: `fan`,
+  movieBuff: `movie buff`
 };
 
 export const DELETE_BUTTON_NAME = {
-  DELETING: `deleting`,
-  DELETE: `delete`
+  deleting: `deleting`,
+  delete: `delete`
 };

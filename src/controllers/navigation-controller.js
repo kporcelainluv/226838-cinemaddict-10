@@ -15,7 +15,7 @@ export class NavigationController {
     this._navigation = new Navigation(0, 0, 0);
   }
   init() {
-    render(this._container, this._navigation.getElement(), POSITION.AFTERBEGIN);
+    render(this._container, this._navigation.getElement(), POSITION.afterbegin);
   }
   initWithFilms(films) {
     unrender(this._navigation.getElement());
@@ -27,7 +27,7 @@ export class NavigationController {
       getFavorite(films).length
     );
 
-    render(this._container, this._navigation.getElement(), POSITION.AFTERBEGIN);
+    render(this._container, this._navigation.getElement(), POSITION.afterbegin);
     this._navigation.addCallbackOnNavigationItem(hash => {
       this._navigation.makeButtonActive(hash);
       this._onNavigationChange(hash);

@@ -29,7 +29,7 @@ export class StatsController {
     render(
       this._container,
       this._statsSection.getElement(),
-      POSITION.BEFOREEND
+      POSITION.beforeend
     );
   }
 
@@ -42,7 +42,7 @@ export class StatsController {
 
   render() {
     this._filters.render();
-    this.onTabChange(STATS_FILTER_TYPE.ALL);
+    this.onTabChange(STATS_FILTER_TYPE.all);
   }
   unrender() {
     this._rankController.unrender();

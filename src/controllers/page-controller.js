@@ -29,7 +29,7 @@ export class PageController {
     this._api = api;
     this._films = films;
     this._allFilms = films;
-    this._currentTab = NAV_TAB.ALL;
+    this._currentTab = NAV_TAB.all;
 
     this._sortController = new SortController(
       this._container,
@@ -95,31 +95,31 @@ export class PageController {
   _onNavigationChange(navTab) {
     this._currentTab = navTab;
 
-    if (navTab === NAV_TAB.ALL) {
+    if (navTab === NAV_TAB.all) {
       this._films = this._allFilms;
       this._stats.unrender();
       this._sortController.show();
       this._filmsController.show();
       this._filmsController.renderFilmsContainer(this._films);
-    } else if (navTab === NAV_TAB.WATCHLIST) {
+    } else if (navTab === NAV_TAB.watchlist) {
       this._films = getWatchlist(this._allFilms);
       this._stats.unrender();
       this._sortController.show();
       this._filmsController.show();
       this._filmsController.renderFilmsContainer(this._films);
-    } else if (navTab === NAV_TAB.HISTORY) {
+    } else if (navTab === NAV_TAB.history) {
       this._films = getWatched(this._allFilms);
       this._stats.unrender();
       this._sortController.show();
       this._filmsController.show();
       this._filmsController.renderFilmsContainer(this._films);
-    } else if (navTab === NAV_TAB.FAVORITES) {
+    } else if (navTab === NAV_TAB.favorites) {
       this._films = getFavorite(this._allFilms);
       this._stats.unrender();
       this._sortController.show();
       this._filmsController.show();
       this._filmsController.renderFilmsContainer(this._films);
-    } else if (navTab === NAV_TAB.STATS) {
+    } else if (navTab === NAV_TAB.stats) {
       this._filmsController.hide();
       this._sortController.hide();
       this._stats.render();
@@ -127,13 +127,13 @@ export class PageController {
   }
 
   _onSortTypeChange(sortType) {
-    if (sortType === SORT_TYPE.DEFAULT) {
+    if (sortType === SORT_TYPE.default) {
       this._films = sortByDefault(this._films);
       this._filmsController.render(this._films);
-    } else if (sortType === SORT_TYPE.DATE) {
+    } else if (sortType === SORT_TYPE.date) {
       this._films = sortByDate(this._films);
       this._filmsController.render(this._films);
-    } else if (sortType === SORT_TYPE.RATING) {
+    } else if (sortType === SORT_TYPE.rating) {
       this._films = sortByRating(this._films);
       this._filmsController.render(this._films);
     }
@@ -157,7 +157,7 @@ export class PageController {
       this._navigationController.render(this._allFilms, this._currentTab);
     };
 
-    if (updateType === UPDATE_TYPE.DELETE_COMMENT) {
+    if (updateType === UPDATE_TYPE.deleteComment) {
       const deletedComment = difference(
         this._films.find(f => f.id === updatedFilm.id).comments,
         updatedFilm.comments
@@ -167,11 +167,11 @@ export class PageController {
         .then(() => rerender(updatedFilm))
         .then(() => onSuccess())
         .catch(() => onError());
-    } else if (updateType === UPDATE_TYPE.UPDATE_USER_INFO) {
+    } else if (updateType === UPDATE_TYPE.updateUserInfo) {
       return this._api.updateFilm({ film: updatedFilm }).then(() => {
         rerender(updatedFilm);
       });
-    } else if (updateType === UPDATE_TYPE.CREATE_COMMENT) {
+    } else if (updateType === UPDATE_TYPE.createComment) {
       const createdComment = difference(
         updatedFilm.comments,
         this._films.find(f => f.id === updatedFilm.id).comments

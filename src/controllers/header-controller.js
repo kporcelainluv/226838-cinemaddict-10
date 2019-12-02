@@ -21,12 +21,12 @@ export class HeaderController {
   init() {
     const heading = createHeading();
     this._search.init();
-    render(headerElement, heading, POSITION.AFTERBEGIN);
+    render(headerElement, heading, POSITION.afterbegin);
   }
 
   initProfileStats(films) {
     this._profileStats = getStatsRank(countWatchedFilms(films));
     this._profile = new ProfileRating(this._profileStats);
-    render(headerElement, this._profile.getElement(), POSITION.BEFOREEND);
+    render(headerElement, this._profile.getElement(), POSITION.beforeend);
   }
 }

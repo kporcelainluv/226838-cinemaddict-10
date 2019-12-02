@@ -10,10 +10,10 @@ export const createElement = template => {
 
 export const render = (container, element, place) => {
   switch (place) {
-    case POSITION.AFTERBEGIN:
+    case POSITION.afterbegin:
       container.prepend(element);
       break;
-    case POSITION.BEFOREEND:
+    case POSITION.beforeend:
       container.append(element);
       break;
   }
@@ -34,15 +34,15 @@ export const countHoursAndMins = initialMinutes => {
 export const getDateByFilterType = filterType => {
   const today = new Date();
 
-  if (filterType === STATS_FILTER_TYPE.ALL) {
+  if (filterType === STATS_FILTER_TYPE.all) {
     return addYears(today, -100);
-  } else if (filterType === STATS_FILTER_TYPE.YEAR) {
+  } else if (filterType === STATS_FILTER_TYPE.year) {
     return addYears(today, -1);
-  } else if (filterType === STATS_FILTER_TYPE.MONTH) {
+  } else if (filterType === STATS_FILTER_TYPE.month) {
     return addMonths(today, -1);
-  } else if (filterType === STATS_FILTER_TYPE.WEEK) {
+  } else if (filterType === STATS_FILTER_TYPE.week) {
     return addWeeks(today, -1);
-  } else if (filterType === STATS_FILTER_TYPE.TODAY) {
+  } else if (filterType === STATS_FILTER_TYPE.today) {
     return startOfToday();
   }
   return false;
@@ -182,11 +182,11 @@ export const updateFilms = (films, updatedFilm) => {
 
 export const getStatsRank = watchedAmount => {
   if (watchedAmount < 10) {
-    return STATS_RANK.NOVICE;
+    return STATS_RANK.novice;
   } else if (watchedAmount < 20) {
-    return STATS_RANK.FAN;
+    return STATS_RANK.fan;
   } else if (watchedAmount >= 20) {
-    return STATS_RANK.MOVIE_BUFF;
+    return STATS_RANK.movieBuff;
   }
 };
 export const countWatchedFilms = films => {

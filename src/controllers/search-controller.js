@@ -10,7 +10,7 @@ export class SearchController {
   }
 
   init() {
-    render(this._container, this._search.getElement(), POSITION.BEFOREEND);
+    render(this._container, this._search.getElement(), POSITION.beforeend);
 
     this._search.addCallbackOnInputChange(evt => {
       this._onSearchChange(evt.target.value);

@@ -19,7 +19,7 @@ export class StatsFiltersController {
     render(
       this._container.getElement(),
       this._statsFilters.getElement(),
-      POSITION.BEFOREEND
+      POSITION.beforeend
     );
     this.getActiveTab();
   }

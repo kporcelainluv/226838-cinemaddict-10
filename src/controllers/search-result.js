@@ -25,7 +25,7 @@ export class SearchResultController {
     render(
       this._container,
       this._searchResultContainer.getElement(),
-      POSITION.BEFOREEND
+      POSITION.beforeend
     );
     this._filmListController = new FilmListController({
       container: this._searchResultContainer.getElement(),
@@ -45,14 +45,14 @@ export class SearchResultController {
       render(
         this._searchResultContainer.getElement(),
         this._searchResultHeading.getElement(),
-        POSITION.AFTERBEGIN
+        POSITION.afterbegin
       );
       this._filmListController.render(films);
     } else {
       render(
         this._searchResultContainer.getElement(),
         this._emptySearch.getElement(),
-        POSITION.AFTERBEGIN
+        POSITION.afterbegin
       );
     }
   }

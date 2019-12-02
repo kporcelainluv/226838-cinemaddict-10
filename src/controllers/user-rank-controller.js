@@ -17,7 +17,7 @@ export class UserRankController {
     render(
       this._container.getElement(),
       this._statsRank.getElement(),
-      POSITION.AFTERBEGIN
+      POSITION.afterbegin
     );
   }
   unrender() {

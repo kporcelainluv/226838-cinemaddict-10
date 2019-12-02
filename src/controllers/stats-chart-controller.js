@@ -16,7 +16,7 @@ export class StatsChartController {
     render(
       this._container.getElement(),
       this._chart.getElement(),
-      POSITION.BEFOREEND
+      POSITION.beforeend
     );
   }
   unrender() {

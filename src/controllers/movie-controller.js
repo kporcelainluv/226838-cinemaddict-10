@@ -43,11 +43,11 @@ export class MovieController {
   }
 
   openPopup() {
-    render(body, this._popup.getElement(), POSITION.BEFOREEND);
+    render(body, this._popup.getElement(), POSITION.beforeend);
   }
 
   init() {
-    render(this._container, this._filmCard.getElement(), POSITION.BEFOREEND);
+    render(this._container, this._filmCard.getElement(), POSITION.beforeend);
 
     const disableForms = () => {
       this._popup.disableForm();
@@ -93,7 +93,7 @@ export class MovieController {
         }
       };
       this._onFilmChange(updatedFilm, {
-        updateType: UPDATE_TYPE.UPDATE_USER_INFO
+        updateType: UPDATE_TYPE.updateUserInfo
       });
     });
 
@@ -106,7 +106,7 @@ export class MovieController {
         }
       };
       this._onFilmChange(updatedFilm, {
-        updateType: UPDATE_TYPE.UPDATE_USER_INFO
+        updateType: UPDATE_TYPE.updateUserInfo
       });
     });
 
@@ -119,7 +119,7 @@ export class MovieController {
         }
       };
       this._onFilmChange(updatedFilm, {
-        updateType: UPDATE_TYPE.UPDATE_USER_INFO
+        updateType: UPDATE_TYPE.updateUserInfo
       });
     });
 
@@ -132,7 +132,7 @@ export class MovieController {
         }
       };
       this._onFilmChange(updatedFilm, {
-        updateType: UPDATE_TYPE.UPDATE_USER_INFO
+        updateType: UPDATE_TYPE.updateUserInfo
       });
       this._film = updatedFilm;
 
@@ -148,7 +148,7 @@ export class MovieController {
         }
       };
       this._onFilmChange(updatedFilm, {
-        updateType: UPDATE_TYPE.UPDATE_USER_INFO
+        updateType: UPDATE_TYPE.updateUserInfo
       });
       this._film = updatedFilm;
     });
@@ -162,7 +162,7 @@ export class MovieController {
         }
       };
       this._onFilmChange(updatedFilm, {
-        updateType: UPDATE_TYPE.UPDATE_USER_INFO
+        updateType: UPDATE_TYPE.updateUserInfo
       });
       this._film = updatedFilm;
 
@@ -179,7 +179,7 @@ export class MovieController {
         }
       };
       this._onFilmChange(updatedFilm, {
-        updateType: UPDATE_TYPE.UPDATE_USER_INFO
+        updateType: UPDATE_TYPE.updateUserInfo
       });
       this._film = updatedFilm;
     });
@@ -197,7 +197,7 @@ export class MovieController {
         }
       };
       this._onFilmChange(updatedFilm, {
-        updateType: UPDATE_TYPE.UPDATE_USER_INFO,
+        updateType: UPDATE_TYPE.updateUserInfo,
         onSuccess: () => {
           this._popup.enableForm();
         },

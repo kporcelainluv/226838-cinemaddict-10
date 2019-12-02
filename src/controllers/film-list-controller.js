@@ -1,6 +1,6 @@
 import { MovieController } from "./movie-controller";
 import { ShowMoreButton } from "../components/showMoreBtn";
-import { render, unrender } from "../utils";
+import { render } from "../utils";
 import {
   PER_PAGE,
   POSITION,
@@ -58,7 +58,7 @@ export class FilmListController {
         render(
           this._container,
           this._showMoreBtn.getElement(),
-          POSITION.BEFOREEND
+          POSITION.beforeend
         );
         const callback = () => {
           this.unrender();

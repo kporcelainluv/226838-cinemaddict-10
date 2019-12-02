@@ -33,12 +33,12 @@ export class FilmsController {
     render(
       this._container,
       this._filmsContainer.getElement(),
-      POSITION.BEFOREEND
+      POSITION.beforeend
     );
     render(
       this._filmsContainer.getElement(),
       this._loadingComponent.getElement(),
-      POSITION.AFTERBEGIN
+      POSITION.afterbegin
     );
   }
 
@@ -85,17 +85,17 @@ export class FilmsController {
       render(
         this._filmsContainer.getElement(),
         this._defaultFilmList.getElement(),
-        POSITION.BEFOREEND
+        POSITION.beforeend
       );
       render(
         this._filmsContainer.getElement(),
         this._topRatedList.getElement(),
-        POSITION.BEFOREEND
+        POSITION.beforeend
       );
       render(
         this._filmsContainer.getElement(),
         this._mostCommentedList.getElement(),
-        POSITION.BEFOREEND
+        POSITION.beforeend
       );
 
       this._defaultFilmListController.init();

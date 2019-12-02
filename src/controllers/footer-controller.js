@@ -10,6 +10,6 @@ export class FooterController {
 
   init(films) {
     this._footer.updateFilmsAmount(films.length);
-    render(this._body, this._footer.getElement(), POSITION.BEFOREEND);
+    render(this._body, this._footer.getElement(), POSITION.beforeend);
   }
 }

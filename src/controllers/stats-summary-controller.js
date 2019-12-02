@@ -24,7 +24,7 @@ export class StatsSummaryController {
     render(
       this._container.getElement(),
       this._statsList.getElement(),
-      POSITION.BEFOREEND
+      POSITION.beforeend
     );
   }
 

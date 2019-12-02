@@ -10,7 +10,7 @@ export class SortController {
   }
 
   init() {
-    render(this._container, this._sort.getElement(), POSITION.AFTERBEGIN);
+    render(this._container, this._sort.getElement(), POSITION.afterbegin);
     this._sort.addCallbackOnSortBtnClick(evt => {
       evt.preventDefault();
       const type = evt.target.dataset.sortType;

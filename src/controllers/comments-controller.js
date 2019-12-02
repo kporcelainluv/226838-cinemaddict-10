@@ -28,7 +28,7 @@ export class CommentsController {
     render(
       this._popup.getCommentsContainer(),
       this._commentsSection.getElement(),
-      POSITION.BEFOREEND
+      POSITION.beforeend
     );
   }
 
@@ -54,7 +54,7 @@ export class CommentsController {
 
     this._commentsSection.addCallbackOnEachDeleteBtnClick(index => {
       this._commentsSection.changeHeadingOnBtnClick(
-        DELETE_BUTTON_NAME.DELETING,
+        DELETE_BUTTON_NAME.deleting,
         index
       );
       this._comments = [
@@ -63,13 +63,13 @@ export class CommentsController {
       ];
       this._render();
       this._onCommentsChange(this._comments, {
-        updateType: UPDATE_TYPE.DELETE_COMMENT,
+        updateType: UPDATE_TYPE.deleteComment,
         onSuccess: () => {
           this._rerender(this._comments);
         },
         onError: () => {
           this._commentsSection.changeHeadingOnBtnClick(
-            DELETE_BUTTON_NAME.DELETE,
+            DELETE_BUTTON_NAME.delete,
             index
           );
         }
@@ -105,7 +105,7 @@ export class CommentsController {
         this._commentsSection.disableCommentsSection();
         this._comments = [...this._comments, newComment];
         this._onCommentsChange(this._comments, {
-          updateType: UPDATE_TYPE.CREATE_COMMENT,
+          updateType: UPDATE_TYPE.createComment,
           onSuccess: comments => {
             this._commentsSection.enableCommentsSection();
             document.removeEventListener(`keydown`, onAddComment);
