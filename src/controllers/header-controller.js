@@ -1,7 +1,7 @@
 import { render, getStatsRank, countWatchedFilms } from "../utils";
 import { ProfileRating } from "../components/profileRating";
 import { SearchController } from "./search-controller";
-import { POSITION } from "../consts";
+import { Position } from "../consts";
 
 const headerElement = document.querySelector(`.header`);
 
@@ -21,12 +21,12 @@ export class HeaderController {
   init() {
     const heading = createHeading();
     this._search.init();
-    render(headerElement, heading, POSITION.afterbegin);
+    render(headerElement, heading, Position.AFTERBEGIN);
   }
 
   initProfileStats(films) {
     this._profileStats = getStatsRank(countWatchedFilms(films));
     this._profile = new ProfileRating(this._profileStats);
-    render(headerElement, this._profile.getElement(), POSITION.beforeend);
+    render(headerElement, this._profile.getElement(), Position.BEFOREEND);
   }
 }

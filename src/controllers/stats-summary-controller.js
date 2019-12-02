@@ -6,7 +6,7 @@ import {
   getTopGenre
 } from "../utils";
 import { StatsSummary } from "../components/statsSummary";
-import { POSITION } from "../consts";
+import { Position } from "../consts";
 
 export class StatsSummaryController {
   constructor(container) {
@@ -24,7 +24,7 @@ export class StatsSummaryController {
     render(
       this._container.getElement(),
       this._statsList.getElement(),
-      POSITION.beforeend
+      Position.BEFOREEND
     );
   }
 

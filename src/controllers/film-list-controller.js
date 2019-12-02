@@ -3,8 +3,8 @@ import { ShowMoreButton } from "../components/showMoreBtn";
 import { render } from "../utils";
 import {
   PER_PAGE,
-  POSITION,
-  PAGE_TYPE,
+  Position,
+  PageType,
   FILMS_DISPLAYED_INITIALLY,
   DEFAULT_AMOUNT_DISPLAYED
 } from "../consts";
@@ -23,10 +23,10 @@ export class FilmListController {
     this._films = films;
     this._type = type;
     this._filmsDisplayed = (() => {
-      if (type === PAGE_TYPE.DEFAULT) {
+      if (type === PageType.DEFAULT) {
         return FILMS_DISPLAYED_INITIALLY;
       }
-      if (type === PAGE_TYPE.SEARCH) {
+      if (type === PageType.SEARCH) {
         return Number.MAX_SAFE_INTEGER;
       }
       return DEFAULT_AMOUNT_DISPLAYED;
@@ -53,12 +53,12 @@ export class FilmListController {
 
       if (
         films.length > this._filmsDisplayed &&
-        this._type === PAGE_TYPE.DEFAULT
+        this._type === PageType.DEFAULT
       ) {
         render(
           this._container,
           this._showMoreBtn.getElement(),
-          POSITION.beforeend
+          Position.BEFOREEND
         );
         const callback = () => {
           this.unrender();

@@ -1,6 +1,6 @@
 import { CommentsSection } from "../components/commentsComponent";
 import { render, unrender } from "../utils";
-import { UPDATE_TYPE, POSITION, DELETE_BUTTON_NAME, EXIT_KEY } from "../consts";
+import { UpdateType, Position, DeleteButtonName, EXIT_KEY } from "../consts";
 
 const EMOJI = {
   "emoji-smile": `smile`,
@@ -28,7 +28,7 @@ export class CommentsController {
     render(
       this._popup.getCommentsContainer(),
       this._commentsSection.getElement(),
-      POSITION.beforeend
+      Position.BEFOREEND
     );
   }
 
@@ -54,7 +54,7 @@ export class CommentsController {
 
     this._commentsSection.addCallbackOnEachDeleteBtnClick(index => {
       this._commentsSection.changeHeadingOnBtnClick(
-        DELETE_BUTTON_NAME.deleting,
+        DeleteButtonName.DELETING,
         index
       );
       this._comments = [
@@ -63,13 +63,13 @@ export class CommentsController {
       ];
       this._render();
       this._onCommentsChange(this._comments, {
-        updateType: UPDATE_TYPE.deleteComment,
+        updateType: UpdateType.DELETECOMMENT,
         onSuccess: () => {
           this._rerender(this._comments);
         },
         onError: () => {
           this._commentsSection.changeHeadingOnBtnClick(
-            DELETE_BUTTON_NAME.delete,
+            DeleteButtonName.DELETE,
             index
           );
         }
@@ -105,7 +105,7 @@ export class CommentsController {
         this._commentsSection.disableCommentsSection();
         this._comments = [...this._comments, newComment];
         this._onCommentsChange(this._comments, {
-          updateType: UPDATE_TYPE.createComment,
+          updateType: UpdateType.CREATECOMMENT,
           onSuccess: comments => {
             this._commentsSection.enableCommentsSection();
             document.removeEventListener(`keydown`, onAddComment);

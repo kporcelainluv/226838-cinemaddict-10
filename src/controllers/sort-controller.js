@@ -1,6 +1,6 @@
 import { render } from "../utils";
 import { Sort } from "../components/sort";
-import { POSITION } from "../consts";
+import { Position } from "../consts";
 
 export class SortController {
   constructor(container, onSortChange) {
@@ -10,7 +10,7 @@ export class SortController {
   }
 
   init() {
-    render(this._container, this._sort.getElement(), POSITION.afterbegin);
+    render(this._container, this._sort.getElement(), Position.AFTERBEGIN);
     this._sort.addCallbackOnSortBtnClick(evt => {
       evt.preventDefault();
       const type = evt.target.dataset.sortType;

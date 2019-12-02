@@ -5,7 +5,7 @@ import { StatsSummaryController } from "./stats-summary-controller";
 import { StatsChartController } from "./stats-chart-controller";
 
 import { render, getFilmsByFilter } from "../utils";
-import { POSITION, STATS_FILTER_TYPE } from "../consts";
+import { Position, StatsFilterType } from "../consts";
 
 export class StatsController {
   constructor(container, films) {
@@ -29,7 +29,7 @@ export class StatsController {
     render(
       this._container,
       this._statsSection.getElement(),
-      POSITION.beforeend
+      Position.BEFOREEND
     );
   }
 
@@ -42,7 +42,7 @@ export class StatsController {
 
   render() {
     this._filters.render();
-    this.onTabChange(STATS_FILTER_TYPE.all);
+    this.onTabChange(StatsFilterType.ALL);
   }
   unrender() {
     this._rankController.unrender();

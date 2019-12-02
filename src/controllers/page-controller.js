@@ -10,10 +10,10 @@ import {
   getWatchlist
 } from "../utils";
 import {
-  NAV_TAB,
+  NavTab,
   SEARCH_QUERY_LENGTH,
-  SORT_TYPE,
-  UPDATE_TYPE
+  SortType,
+  UpdateType
 } from "../consts";
 import { SearchResultController } from "./search-result";
 import { StatsController } from "../controllers/stats-controller";
@@ -29,7 +29,7 @@ export class PageController {
     this._api = api;
     this._films = films;
     this._allFilms = films;
-    this._currentTab = NAV_TAB.all;
+    this._currentTab = NavTab.ALL;
 
     this._sortController = new SortController(
       this._container,
@@ -95,31 +95,31 @@ export class PageController {
   _onNavigationChange(navTab) {
     this._currentTab = navTab;
 
-    if (navTab === NAV_TAB.all) {
+    if (navTab === NavTab.ALL) {
       this._films = this._allFilms;
       this._stats.unrender();
       this._sortController.show();
       this._filmsController.show();
       this._filmsController.renderFilmsContainer(this._films);
-    } else if (navTab === NAV_TAB.watchlist) {
+    } else if (navTab === NavTab.WATCHLIST) {
       this._films = getWatchlist(this._allFilms);
       this._stats.unrender();
       this._sortController.show();
       this._filmsController.show();
       this._filmsController.renderFilmsContainer(this._films);
-    } else if (navTab === NAV_TAB.history) {
+    } else if (navTab === NavTab.HISTORY) {
       this._films = getWatched(this._allFilms);
       this._stats.unrender();
       this._sortController.show();
       this._filmsController.show();
       this._filmsController.renderFilmsContainer(this._films);
-    } else if (navTab === NAV_TAB.favorites) {
+    } else if (navTab === NavTab.FAVORITES) {
       this._films = getFavorite(this._allFilms);
       this._stats.unrender();
       this._sortController.show();
       this._filmsController.show();
       this._filmsController.renderFilmsContainer(this._films);
-    } else if (navTab === NAV_TAB.stats) {
+    } else if (navTab === NavTab.STATS) {
       this._filmsController.hide();
       this._sortController.hide();
       this._stats.render();
@@ -127,13 +127,13 @@ export class PageController {
   }
 
   _onSortTypeChange(sortType) {
-    if (sortType === SORT_TYPE.default) {
+    if (sortType === SortType.DEFAULT) {
       this._films = sortByDefault(this._films);
       this._filmsController.render(this._films);
-    } else if (sortType === SORT_TYPE.date) {
+    } else if (sortType === SortType.DATE) {
       this._films = sortByDate(this._films);
       this._filmsController.render(this._films);
-    } else if (sortType === SORT_TYPE.rating) {
+    } else if (sortType === SortType.RATING) {
       this._films = sortByRating(this._films);
       this._filmsController.render(this._films);
     }
@@ -157,7 +157,7 @@ export class PageController {
       this._navigationController.render(this._allFilms, this._currentTab);
     };
 
-    if (updateType === UPDATE_TYPE.deleteComment) {
+    if (updateType === UpdateType.DELETECOMMENT) {
       const deletedComment = difference(
         this._films.find(f => f.id === updatedFilm.id).comments,
         updatedFilm.comments
@@ -167,11 +167,11 @@ export class PageController {
         .then(() => rerender(updatedFilm))
         .then(() => onSuccess())
         .catch(() => onError());
-    } else if (updateType === UPDATE_TYPE.updateUserInfo) {
+    } else if (updateType === UpdateType.UPDATEUSERINFO) {
       return this._api.updateFilm({ film: updatedFilm }).then(() => {
         rerender(updatedFilm);
       });
-    } else if (updateType === UPDATE_TYPE.createComment) {
+    } else if (updateType === UpdateType.CREATECOMMENT) {
       const createdComment = difference(
         updatedFilm.comments,
         this._films.find(f => f.id === updatedFilm.id).comments

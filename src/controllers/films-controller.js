@@ -10,7 +10,7 @@ import { FilmListController } from "./film-list-controller";
 import { AdditionalFilmList } from "../components/additionalFilmBlocks";
 import { Loading } from "../components/loading";
 import { EmptyFilms } from "../components/emptyFilms";
-import { PAGE_TYPE, POSITION } from "../consts";
+import { PageType, Position } from "../consts";
 
 export class FilmsController {
   constructor({ container, onFilmUpdate }) {
@@ -33,12 +33,12 @@ export class FilmsController {
     render(
       this._container,
       this._filmsContainer.getElement(),
-      POSITION.beforeend
+      Position.BEFOREEND
     );
     render(
       this._filmsContainer.getElement(),
       this._loadingComponent.getElement(),
-      POSITION.afterbegin
+      Position.AFTERBEGIN
     );
   }
 
@@ -61,7 +61,7 @@ export class FilmsController {
         onFilmUpdate: this._onFilmUpdate,
         onTogglePopup: this._onTogglePopup,
         onRenderFilmCard: this._onRenderFilmCard,
-        type: PAGE_TYPE.DEFAULT
+        type: PageType.DEFAULT
       });
 
       this._ratedFilmListController = new FilmListController({
@@ -70,7 +70,7 @@ export class FilmsController {
         onFilmUpdate: this._onFilmUpdate,
         onTogglePopup: this._onTogglePopup,
         onRenderFilmCard: this._onRenderFilmCard,
-        type: PAGE_TYPE.TOP_RATED
+        type: PageType.TOP_RATED
       });
 
       this._commentedFilmListController = new FilmListController({
@@ -79,23 +79,23 @@ export class FilmsController {
         onFilmUpdate: this._onFilmUpdate,
         onTogglePopup: this._onTogglePopup,
         onRenderFilmCard: this._onRenderFilmCard,
-        type: PAGE_TYPE.MOST_COMMENTED
+        type: PageType.MOST_COMMENTED
       });
 
       render(
         this._filmsContainer.getElement(),
         this._defaultFilmList.getElement(),
-        POSITION.beforeend
+        Position.BEFOREEND
       );
       render(
         this._filmsContainer.getElement(),
         this._topRatedList.getElement(),
-        POSITION.beforeend
+        Position.BEFOREEND
       );
       render(
         this._filmsContainer.getElement(),
         this._mostCommentedList.getElement(),
-        POSITION.beforeend
+        Position.BEFOREEND
       );
 
       this._defaultFilmListController.init();

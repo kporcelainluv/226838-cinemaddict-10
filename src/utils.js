@@ -1,5 +1,5 @@
 import { sort } from "ramda";
-import { POSITION, STATS_FILTER_TYPE, STATS_RANK } from "./consts";
+import { Position, StatsFilterType, StatsRank } from "./consts";
 import { addMonths, addWeeks, addYears, isAfter, startOfToday } from "date-fns";
 
 export const createElement = template => {
@@ -10,10 +10,10 @@ export const createElement = template => {
 
 export const render = (container, element, place) => {
   switch (place) {
-    case POSITION.afterbegin:
+    case Position.AFTERBEGIN:
       container.prepend(element);
       break;
-    case POSITION.beforeend:
+    case Position.BEFOREEND:
       container.append(element);
       break;
   }
@@ -34,15 +34,15 @@ export const countHoursAndMins = initialMinutes => {
 export const getDateByFilterType = filterType => {
   const today = new Date();
 
-  if (filterType === STATS_FILTER_TYPE.all) {
+  if (filterType === StatsFilterType.ALL) {
     return addYears(today, -100);
-  } else if (filterType === STATS_FILTER_TYPE.year) {
+  } else if (filterType === StatsFilterType.YEAR) {
     return addYears(today, -1);
-  } else if (filterType === STATS_FILTER_TYPE.month) {
+  } else if (filterType === StatsFilterType.MONTH) {
     return addMonths(today, -1);
-  } else if (filterType === STATS_FILTER_TYPE.week) {
+  } else if (filterType === StatsFilterType.WEEK) {
     return addWeeks(today, -1);
-  } else if (filterType === STATS_FILTER_TYPE.today) {
+  } else if (filterType === StatsFilterType.TODAY) {
     return startOfToday();
   }
   return false;
@@ -182,11 +182,11 @@ export const updateFilms = (films, updatedFilm) => {
 
 export const getStatsRank = watchedAmount => {
   if (watchedAmount < 10) {
-    return STATS_RANK.novice;
+    return StatsRank.NOVICE;
   } else if (watchedAmount < 20) {
-    return STATS_RANK.fan;
+    return StatsRank.FAN;
   } else if (watchedAmount >= 20) {
-    return STATS_RANK.movieBuff;
+    return StatsRank.MOVIEBUFF;
   }
 };
 export const countWatchedFilms = films => {

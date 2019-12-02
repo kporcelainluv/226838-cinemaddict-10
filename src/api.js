@@ -1,4 +1,4 @@
-import { METHOD } from "./consts";
+import { Method } from "./consts";
 
 const checkStatus = response => {
   if (response.status >= 200 && response.status < 300) {
@@ -14,7 +14,7 @@ const toJSON = response => {
 
 const fetchWrapper = ({
   url,
-  method = METHOD.GET,
+  method = Method.GET,
   body = null,
   endpoint,
   authorization
@@ -50,7 +50,7 @@ export class API {
       url,
       endpoint: this._endPoint,
       authorization: this._authorization,
-      method: METHOD.GET
+      method: Method.GET
     }).then(toJSON);
   }
 
@@ -59,7 +59,7 @@ export class API {
       url,
       endpoint: this._endPoint,
       authorization: this._authorization,
-      method: METHOD.PUT,
+      method: Method.PUT,
       body
     }).then(toJSON);
   }
@@ -69,7 +69,7 @@ export class API {
       url,
       endpoint: this._endPoint,
       authorization: this._authorization,
-      method: METHOD.POST,
+      method: Method.POST,
       body
     }).then(toJSON);
   }
@@ -79,7 +79,7 @@ export class API {
       url,
       endpoint: this._endPoint,
       authorization: this._authorization,
-      method: METHOD.DELETE
+      method: Method.DELETE
     });
   }
 
@@ -115,7 +115,7 @@ export class API {
   syncFilms({ films }) {
     return fetchWrapper({
       url: `movies/sync`,
-      method: METHOD.POST,
+      method: Method.POST,
       body: JSON.stringify(films),
       endpoint: this._endPoint,
       authorization: this._authorization

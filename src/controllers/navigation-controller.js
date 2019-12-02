@@ -6,7 +6,7 @@ import {
   getFavorite
 } from "../utils";
 import { Navigation } from "../components/navigation";
-import { POSITION } from "../consts";
+import { Position } from "../consts";
 
 export class NavigationController {
   constructor(container, onNavigationChange) {
@@ -15,7 +15,7 @@ export class NavigationController {
     this._navigation = new Navigation(0, 0, 0);
   }
   init() {
-    render(this._container, this._navigation.getElement(), POSITION.afterbegin);
+    render(this._container, this._navigation.getElement(), Position.AFTERBEGIN);
   }
   initWithFilms(films) {
     unrender(this._navigation.getElement());
@@ -27,7 +27,7 @@ export class NavigationController {
       getFavorite(films).length
     );
 
-    render(this._container, this._navigation.getElement(), POSITION.afterbegin);
+    render(this._container, this._navigation.getElement(), Position.AFTERBEGIN);
     this._navigation.addCallbackOnNavigationItem(hash => {
       this._navigation.makeButtonActive(hash);
       this._onNavigationChange(hash);

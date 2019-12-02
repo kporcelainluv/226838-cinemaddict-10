@@ -1,7 +1,7 @@
 import { StatsRank } from "../components/statsRank";
 import { render, unrender, getWatchedFilms } from "../utils";
 import { getStatsRank } from "../utils";
-import { POSITION } from "../consts";
+import { Position } from "../consts";
 
 export class UserRankController {
   constructor(container) {
@@ -17,7 +17,7 @@ export class UserRankController {
     render(
       this._container.getElement(),
       this._statsRank.getElement(),
-      POSITION.afterbegin
+      Position.AFTERBEGIN
     );
   }
   unrender() {

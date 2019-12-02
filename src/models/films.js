@@ -2,7 +2,7 @@ export class ModelMovie {
   constructor(film) {
     console.log(film);
     this.id = film[`id`];
-    // this.poster = film[`film_info`][`poster`];
+    this.poster = film[`film_info`][`poster`];
     this.title = film[`film_info`][`title`];
     this.alternativeTitle = film[`film_info`][`alternative_title`];
     this.rating = film[`film_info`][`total_rating`];

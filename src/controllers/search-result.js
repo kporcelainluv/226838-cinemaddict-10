@@ -3,7 +3,7 @@ import { FilmListController } from "./film-list-controller";
 import { SearchResultHeading } from "../components/searchResultHeading";
 import { EmptySearch } from "../components/emptySearch";
 import { SearchResultContainer } from "../components/searchResultContainer";
-import { POSITION, PAGE_TYPE } from "../consts";
+import { Position, PageType } from "../consts";
 
 export class SearchResultController {
   constructor({ container, onFilmUpdate }) {
@@ -25,7 +25,7 @@ export class SearchResultController {
     render(
       this._container,
       this._searchResultContainer.getElement(),
-      POSITION.beforeend
+      Position.BEFOREEND
     );
     this._filmListController = new FilmListController({
       container: this._searchResultContainer.getElement(),
@@ -33,7 +33,7 @@ export class SearchResultController {
       onFilmUpdate: this._onFilmUpdate,
       onTogglePopup: this._onTogglePopup,
       onRenderFilmCard: this._onRenderFilmCard,
-      type: PAGE_TYPE.SEARCH
+      type: PageType.SEARCH
     });
   }
 
@@ -45,14 +45,14 @@ export class SearchResultController {
       render(
         this._searchResultContainer.getElement(),
         this._searchResultHeading.getElement(),
-        POSITION.afterbegin
+        Position.AFTERBEGIN
       );
       this._filmListController.render(films);
     } else {
       render(
         this._searchResultContainer.getElement(),
         this._emptySearch.getElement(),
-        POSITION.afterbegin
+        Position.AFTERBEGIN
       );
     }
   }

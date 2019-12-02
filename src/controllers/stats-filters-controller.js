@@ -1,6 +1,6 @@
 import { StatsFilters } from "../components/statsFilters";
 import { render, unrender } from "../utils";
-import { POSITION } from "../consts";
+import { Position } from "../consts";
 
 export class StatsFiltersController {
   constructor(container, onTabChange) {
@@ -19,7 +19,7 @@ export class StatsFiltersController {
     render(
       this._container.getElement(),
       this._statsFilters.getElement(),
-      POSITION.beforeend
+      Position.BEFOREEND
     );
     this.getActiveTab();
   }

@@ -7,59 +7,59 @@ export const TASKS_STORE_KEY = `tasks-store-key`;
 export const END_POINT = `https://htmlacademy-es-9.appspot.com/cinemaddict`;
 export const AUTHORIZATION = `Basic eo0w590ik29889a=${Math.random()}`;
 
-export const NAV_TAB = {
-  all: `#all`,
-  history: `#history`,
-  watchlist: `#watchlist`,
-  favorites: `#favorites`,
-  stats: `#stats`
+export const NavTab = {
+  ALL: `#all`,
+  HISTORY: `#history`,
+  WATCHLIST: `#watchlist`,
+  FAVORITES: `#favorites`,
+  STATS: `#stats`
 };
 
-export const SORT_TYPE = {
-  default: `default`,
-  date: `date`,
-  rating: `rating`
+export const SortType = {
+  DEFAULT: `default`,
+  DATE: `date`,
+  RATING: `rating`
 };
 
-export const STATS_FILTER_TYPE = {
-  all: `all-time`,
-  today: `today`,
-  week: `week`,
-  month: `month`,
-  year: `year`
+export const StatsFilterType = {
+  ALL: `all-time`,
+  TODAY: `today`,
+  WEEK: `week`,
+  MONTH: `month`,
+  YEAR: `year`
 };
 
-export const POSITION = {
-  afterbegin: `afterbegin`,
-  beforeend: `beforeend`
+export const Position = {
+  AFTERBEGIN: `afterbegin`,
+  BEFOREEND: `beforeend`
 };
 
-export const METHOD = {
+export const Method = {
   GET: `GET`,
   POST: `POST`,
   PUT: `PUT`,
   DELETE: `DELETE`
 };
 
-export const UPDATE_TYPE = {
-  updateUserInfo: "UPDATE_USER_INFO",
-  createComment: "CREATE_COMMENT",
-  deleteComment: "DELETE_COMMENT"
+export const UpdateType = {
+  UPDATEUSERINFO: "UPDATE_USER_INFO",
+  CREATECOMMENT: "CREATE_COMMENT",
+  DELETECOMMENT: "DELETE_COMMENT"
 };
 
-export const PAGE_TYPE = {
+export const PageType = {
   DEFAULT: `default`,
   SEARCH: `search`,
   MOST_COMMENTED: `most-commented`,
   TOP_RATED: `top-rated`
 };
-export const STATS_RANK = {
-  novice: `novice`,
-  fan: `fan`,
-  movieBuff: `movie buff`
+export const StatsRank = {
+  NOVICE: `novice`,
+  FAN: `fan`,
+  MOVIEBUFF: `movie buff`
 };
 
-export const DELETE_BUTTON_NAME = {
-  deleting: `deleting`,
-  delete: `delete`
+export const DeleteButtonName = {
+  DELETING: `deleting`,
+  DELETE: `delete`
 };
