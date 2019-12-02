@@ -235,25 +235,35 @@ export class Popup extends AbstractComponent {
       .forEach(elm => elm.addEventListener(`keydown`, callback));
   }
   disableForm() {
-    this.getElement()
-      .querySelectorAll(`.film-details__user-rating-input`)
-      .forEach(elm => (elm.disabled = true));
+    const userRatingBtns = this.getElement().querySelectorAll(
+      `.film-details__user-rating-input`
+    );
+    if (userRatingBtns) {
+      userRatingBtns.forEach(elm => (elm.disabled = true));
+    }
+    const commentInput = this.getElement().querySelector(
+      `.film-details__comment-input`
+    );
+    if (commentInput) {
+      commentInput.disabled = true;
+    }
   }
   enableForm() {
-    this.getElement()
-      .querySelectorAll(`.film-details__user-rating-input`)
-      .forEach(elm => (elm.disabled = false));
+    const userRatingBtns = this.getElement().querySelectorAll(
+      `.film-details__user-rating-input`
+    );
+    if (userRatingBtns) {
+      userRatingBtns.forEach(elm => (elm.disabled = false));
+    }
+
+    const commentInput = this.getElement().querySelector(
+      `.film-details__comment-input`
+    );
+    if (commentInput) {
+      commentInput.disabled = false;
+    }
   }
-  disableDeleteBtns() {
-    this.getElement()
-      .querySelectorAll(`.film-details__comment-delete`)
-      .forEach(elm => (elm.disabled = true));
-  }
-  enableDeleteBtns() {
-    this.getElement()
-      .querySelectorAll(`.film-details__comment-delete`)
-      .forEach(elm => (elm.disabled = false));
-  }
+
   shakePopup() {
     const form = this.getFormElement();
     form.style.animation = `shake 0.6s`;

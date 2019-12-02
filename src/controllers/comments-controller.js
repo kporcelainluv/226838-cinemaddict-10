@@ -2,12 +2,12 @@ import { CommentsSection } from "../components/commentsComponent";
 import { render, unrender } from "../utils";
 import { UPDATE_TYPE, POSITION, DELETE_BUTTON_NAME, EXIT_KEY } from "../consts";
 
-const emojis = {
+const EMOJI = {
   "emoji-smile": `smile`,
   "emoji-sleeping": `sleeping`,
   "emoji-gpuke": `puke`
 };
-const getEmojiUrl = id => `./images/emoji/${emojis[id]}.png`;
+const getEmojiUrl = id => `./images/emoji/${EMOJI[id]}.png`;
 
 export class CommentsController {
   constructor(popup, comments, onCommentsChange) {
@@ -82,7 +82,7 @@ export class CommentsController {
       evt.preventDefault();
       const emojiId = evt.target.id;
 
-      this._currentEmoji = emojis[emojiId];
+      this._currentEmoji = EMOJI[emojiId];
       this._commentsSection.updateSelectedEmojiUrl(getEmojiUrl(emojiId));
     });
 
@@ -125,5 +125,13 @@ export class CommentsController {
       evt.preventDefault();
       document.addEventListener(`keydown`, onAddComment);
     });
+  }
+  blockForm() {
+    this._commentsSection.disableCommentsSection();
+    this._commentsSection.disableDeleteBtns();
+  }
+  enableForm() {
+    this._commentsSection.enableCommentsSection();
+    this._commentsSection.enableDeleteBtns();
   }
 }

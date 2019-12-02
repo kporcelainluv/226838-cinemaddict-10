@@ -49,14 +49,17 @@ export class MovieController {
   init() {
     render(this._container, this._filmCard.getElement(), POSITION.BEFOREEND);
 
-    window.addEventListener("offline", () => {
+    const disableForms = () => {
       this._popup.disableForm();
-      this._popup.disableDeleteBtns();
-    });
-    window.addEventListener("online", () => {
+      this._comments.blockForm();
+    };
+
+    const enableForms = () => {
       this._popup.enableForm();
-      this._popup.enableDeleteBtns();
-    });
+      this._comments.enableForm();
+    };
+    window.addEventListener("offline", disableForms);
+    window.addEventListener("online", enableForms);
 
     const onEscKeyDown = evt => {
       if (evt.key === `Escape` || evt.key === `Esc`) {
@@ -65,26 +68,18 @@ export class MovieController {
       }
     };
 
-    this._filmCard.addCallbackOnClickCommentsBtn(() => {
+    const openPopup = () => {
+      if (!navigator.onLine) {
+        disableForms();
+      }
       this._onTogglePopup();
       this.openPopup();
       this._comments.init();
       document.addEventListener(`keydown`, onEscKeyDown);
-    });
-
-    this._filmCard.addCallbackOnClickPoster(() => {
-      this._onTogglePopup();
-      this.openPopup();
-      this._comments.init();
-      document.addEventListener(`keydown`, onEscKeyDown);
-    });
-    this._filmCard.addCallbackOnClickTitle(() => {
-      this._onTogglePopup();
-      this.openPopup();
-      this._comments.init();
-      document.addEventListener(`keydown`, onEscKeyDown);
-    });
-
+    };
+    this._filmCard.addCallbackOnClickCommentsBtn(openPopup);
+    this._filmCard.addCallbackOnClickPoster(openPopup);
+    this._filmCard.addCallbackOnClickTitle(openPopup);
     this._popup.addCallBackOnClosingBtn(() => {
       unrender(this._popup.getElement());
     });
@@ -190,7 +185,6 @@ export class MovieController {
     });
 
     this._popup.toggleRatingButton(evt => {
-      this._popup.disableForm();
       this._popup.removeErrorFromButtons();
       evt.target.checked = true;
 

@@ -96,6 +96,9 @@ export class CommentsSection extends AbstractComponent {
     const commentList = this.getElement().querySelectorAll(
       `.film-details__comment-delete`
     );
+    if (!navigator.onLine) {
+      this.disableDeleteBtns();
+    }
 
     Array.from(commentList).forEach((comment, index) => {
       comment.addEventListener(`click`, evt => {
@@ -146,5 +149,15 @@ export class CommentsSection extends AbstractComponent {
     if (state === `remove`) {
       textarea.style.border = ``;
     }
+  }
+  disableDeleteBtns() {
+    this.getElement()
+      .querySelectorAll(`.film-details__comment-delete`)
+      .forEach(elm => (elm.disabled = true));
+  }
+  enableDeleteBtns() {
+    this.getElement()
+      .querySelectorAll(`.film-details__comment-delete`)
+      .forEach(elm => (elm.disabled = false));
   }
 }
