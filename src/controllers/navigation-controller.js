@@ -28,7 +28,7 @@ export class NavigationController {
     );
 
     render(this._container, this._navigation.getElement(), Position.AFTERBEGIN);
-    this._navigation.addCallbackOnNavigationItem((hash) => {
+    this._navigation.onNavigationItemClick((hash) => {
       this._navigation.makeButtonActive(hash);
       this._onNavigationChange(hash);
     });

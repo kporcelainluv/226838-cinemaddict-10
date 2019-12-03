@@ -1,6 +1,6 @@
-import {MovieController} from "./movie-controller";
-import {ShowMoreButton} from "../components/showMoreBtn";
-import {render} from "../utils";
+import { MovieController } from "./movie-controller";
+import { ShowMoreButton } from "../components/showMoreBtn";
+import { render } from "../utils";
 import {
   PER_PAGE,
   Position,
@@ -39,15 +39,11 @@ export class FilmListController {
   }
 
   init() {
-    this.renderFilms(this._films);
+    this.render(this._films);
   }
   render(films) {
-    this.renderFilms(films);
-  }
-
-  renderFilms(films) {
     if (films.length > 0) {
-      films.slice(0, this._filmsDisplayed || 0).forEach((film) => {
+      films.slice(0, this._filmsDisplayed || 0).forEach(film => {
         this._renderFilmCard(this._container, film);
       });
 
@@ -56,20 +52,21 @@ export class FilmListController {
         this._type === PageType.DEFAULT
       ) {
         render(
-            this._container,
-            this._showMoreBtn.getElement(),
-            Position.BEFOREEND
+          this._container,
+          this._showMoreBtn.getElement(),
+          Position.BEFOREEND
         );
         const callback = () => {
           this.unrender();
           this._filmsDisplayed += PER_PAGE;
-          this._showMoreBtn.removeOnShowMoreCallback(callback);
-          this.renderFilms(films);
+          this._showMoreBtn.removeShowMoreCallback(callback);
+          this.render(films);
         };
-        this._showMoreBtn.onClickShowMore(callback);
+        this._showMoreBtn.onShowMoreClick(callback);
       }
     }
   }
+
   renderDefault(films) {
     this._filmsDisplayed = FILMS_DISPLAYED_INITIALLY;
     this.render(films);
@@ -81,10 +78,10 @@ export class FilmListController {
 
   _renderFilmCard(container, film) {
     const movieController = new MovieController(
-        container,
-        film,
-        this._onFilmUpdate,
-        this._onTogglePopup
+      container,
+      film,
+      this._onFilmUpdate,
+      this._onTogglePopup
     );
 
     movieController.init();

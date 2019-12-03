@@ -10,7 +10,7 @@ export class StatsFiltersController {
   }
 
   getActiveTab() {
-    this._statsFilters.onAddListenersOnFilters((evt) => {
+    this._statsFilters.onFiltersClick((evt) => {
       this.onTabChange(evt.target.value);
     });
   }

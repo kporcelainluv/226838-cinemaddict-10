@@ -52,8 +52,8 @@ export class CommentsController {
       this._commentsSection.enableCommentsSection();
     });
 
-    this._commentsSection.addCallbackOnEachDeleteBtnClick((index) => {
-      this._commentsSection.changeHeadingOnBtnClick(
+    this._commentsSection.onEachDeleteButtonsClick((index) => {
+      this._commentsSection.buttonHeadingHandler(
           DeleteButtonName.DELETING,
           index
       );
@@ -68,7 +68,7 @@ export class CommentsController {
           this._rerender(this._comments);
         },
         onError: () => {
-          this._commentsSection.changeHeadingOnBtnClick(
+          this._commentsSection.buttonHeadingHandler(
               DeleteButtonName.DELETE,
               index
           );
@@ -78,12 +78,12 @@ export class CommentsController {
 
     this._render();
 
-    this._commentsSection.addCallbackForEachEmojiOption((evt) => {
+    this._commentsSection.EmojiOptionHandler((evt) => {
       evt.preventDefault();
       const emojiId = evt.target.id;
 
       this._currentEmoji = EMOJI[emojiId];
-      this._commentsSection.updateSelectedEmojiUrl(getEmojiUrl(emojiId));
+      this._commentsSection.EmojiUrlUpdateHandler(getEmojiUrl(emojiId));
     });
 
     const onAddComment = (evt) => {
@@ -121,17 +121,17 @@ export class CommentsController {
       }
     };
 
-    this._commentsSection.addCallbackOnTextInputFocus((evt) => {
+    this._commentsSection.onInputFocus((evt) => {
       evt.preventDefault();
       document.addEventListener(`keydown`, onAddComment);
     });
   }
   blockForm() {
     this._commentsSection.disableCommentsSection();
-    this._commentsSection.disableDeleteBtns();
+    this._commentsSection.disableDeleteButtons();
   }
   enableForm() {
     this._commentsSection.enableCommentsSection();
-    this._commentsSection.enableDeleteBtns();
+    this._commentsSection.enableDeleteButtons();
   }
 }

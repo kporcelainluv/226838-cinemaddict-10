@@ -14,12 +14,12 @@ export class Search extends AbstractComponent {
       </form>`;
   }
 
-  addCallbackOnInputChange(callback) {
+  inputChangeHandler(callback) {
     this.getElement()
       .querySelector(`input`)
       .addEventListener(`keyup`, callback);
   }
-  addCallBackOnClearButton(callback) {
+  onClearButtonClick(callback) {
     this.getElement()
       .querySelector(`.search__reset`)
       .addEventListener(`click`, callback);

@@ -12,11 +12,11 @@ export class SearchController {
   init() {
     render(this._container, this._search.getElement(), Position.BEFOREEND);
 
-    this._search.addCallbackOnInputChange((evt) => {
+    this._search.inputChangeHandler((evt) => {
       this._onSearchChange(evt.target.value);
     });
 
-    this._search.addCallBackOnClearButton(() => {
+    this._search.onClearButtonClick(() => {
       this._onSearchChange(``);
     });
   }

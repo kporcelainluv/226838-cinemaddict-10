@@ -11,7 +11,7 @@ export class SortController {
 
   init() {
     render(this._container, this._sort.getElement(), Position.AFTERBEGIN);
-    this._sort.addCallbackOnSortBtnClick((evt) => {
+    this._sort.onSortBtnClick((evt) => {
       evt.preventDefault();
       const type = evt.target.dataset.sortType;
       this._sort.makeButtonStateActive(type);

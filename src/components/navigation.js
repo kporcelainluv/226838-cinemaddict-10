@@ -17,7 +17,7 @@ export class Navigation extends AbstractComponent {
     <a href="${NavTab.STATS}" class="main-navigation__item main-navigation__item--additional">Stats</a>
   </nav>`;
   }
-  addCallbackOnNavigationItem(callback) {
+  onNavigationItemClick(callback) {
     const navigationItems = this.getElement().querySelectorAll(
         `.main-navigation__item`
     );

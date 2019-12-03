@@ -184,25 +184,25 @@ export class Popup extends AbstractComponent {
     </form>
   </section>`;
   }
-  addCallBackOnClosingBtn(callback) {
+  onClosingBtnClick(callback) {
     const closingButton = this.getElement().querySelector(
       `.film-details__close-btn`
     );
     closingButton.addEventListener(`click`, callback);
   }
-  addCallbackOnClickWatchlistBtn(callback) {
+  onWatchlistBtnClick(callback) {
     this.getElement()
       .querySelector(`.film-details__control-label--watchlist`)
       .addEventListener(`click`, callback);
   }
 
-  addCallbackOnClickFavoriteBtn(callback) {
+  onFavoriteBtnClick(callback) {
     this.getElement()
       .querySelector(`.film-details__control-label--favorite`)
       .addEventListener(`click`, callback);
   }
 
-  addCallbackOnClickHistoryBtn(callback) {
+  onHistoryBtnClick(callback) {
     this.getElement()
       .querySelector(`.film-details__control-label--watched`)
       .addEventListener(`click`, callback);
@@ -212,7 +212,7 @@ export class Popup extends AbstractComponent {
       .querySelector(`.form-details__middle-container`)
       .classList.toggle(`visually-hidden`);
   }
-  addCallbackOnRatingUndo(callback) {
+  onRatingUndoClick(callback) {
     this.getElement()
       .querySelector(`.film-details__watched-reset`)
       .addEventListener(`click`, callback);
@@ -230,7 +230,7 @@ export class Popup extends AbstractComponent {
   getFormElement() {
     return this.getElement().querySelector(`.film-details__inner`);
   }
-  toggleRatingButton(callback) {
+  ratingButtonHandler(callback) {
     this.getElement()
       .querySelectorAll(`.film-details__user-rating-input`)
       .forEach(elm => elm.addEventListener(`keydown`, callback));

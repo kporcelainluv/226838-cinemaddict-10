@@ -67,7 +67,7 @@ export class FilmCard extends AbstractComponent {
     return state ? `film-card__controls-item--active` : ``;
   }
 
-  addCallbackOnClickCommentsBtn(callback) {
+  onCommentsBtnClick(callback) {
     const commentsButton = this.getElement().querySelector(
       `.film-card__comments`
     );
@@ -75,18 +75,18 @@ export class FilmCard extends AbstractComponent {
     commentsButton.addEventListener(`click`, callback);
   }
 
-  addCallbackOnClickPoster(callback) {
+  onPosterClick(callback) {
     const poster = this.getElement().querySelector(`.film-card__poster`);
     poster.style.cursor = `pointer`;
     poster.addEventListener(`click`, callback);
   }
-  addCallbackOnClickTitle(callback) {
+  onTitleClick(callback) {
     const title = this.getElement().querySelector(`.film-card__title`);
     title.style.cursor = `pointer`;
     title.addEventListener(`click`, callback);
   }
 
-  addCallbackOnClickWatchlistBtn(callback) {
+  onWatchlistBtnClick(callback) {
     this.getElement()
       .querySelector(`.film-card__controls-item--add-to-watchlist`)
       .addEventListener(`click`, evt => {
@@ -95,7 +95,7 @@ export class FilmCard extends AbstractComponent {
       });
   }
 
-  addCallbackOnClickFavoriteBtn(callback) {
+  onFavoriteBtnClick(callback) {
     this.getElement()
       .querySelector(`.film-card__controls-item--favorite`)
       .addEventListener(`click`, evt => {
@@ -104,7 +104,7 @@ export class FilmCard extends AbstractComponent {
       });
   }
 
-  addCallbackOnClickHistoryBtn(callback) {
+  onHistoryBtnClick(callback) {
     this.getElement()
       .querySelector(`.film-card__controls-item--mark-as-watched`)
       .addEventListener(`click`, evt => {

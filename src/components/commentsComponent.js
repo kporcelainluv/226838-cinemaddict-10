@@ -71,13 +71,13 @@ export class CommentsSection extends AbstractComponent {
   `;
   }
 
-  addCallbackOnTextInputFocus(callback) {
+  onInputFocus(callback) {
     this.getElement()
       .querySelector(`.film-details__comment-input`)
       .addEventListener(`focus`, callback);
   }
 
-  addCallbackForEachEmojiOption(callback) {
+  EmojiOptionHandler(callback) {
     const emojiOptions = this.getElement().querySelectorAll(
       `.film-details__emoji-item`
     );
@@ -87,18 +87,18 @@ export class CommentsSection extends AbstractComponent {
     });
   }
 
-  updateSelectedEmojiUrl(newUrl) {
+  EmojiUrlUpdateHandler(newUrl) {
     this.getElement().querySelector(
       `.film-details__add-emoji-label img`
     ).src = newUrl;
   }
 
-  addCallbackOnEachDeleteBtnClick(callback) {
+  onEachDeleteButtonsClick(callback) {
     const commentList = this.getElement().querySelectorAll(
       `.film-details__comment-delete`
     );
     if (!navigator.onLine) {
-      this.disableDeleteBtns();
+      this.disableDeleteButtons();
     }
 
     Array.from(commentList).forEach((comment, index) => {
@@ -108,7 +108,7 @@ export class CommentsSection extends AbstractComponent {
       });
     });
   }
-  changeHeadingOnBtnClick(state, index) {
+  buttonHeadingHandler(state, index) {
     const button = this.getElement().querySelectorAll(
       `.film-details__comment-delete`
     )[index];
@@ -151,12 +151,12 @@ export class CommentsSection extends AbstractComponent {
       textarea.style.border = ``;
     }
   }
-  disableDeleteBtns() {
+  disableDeleteButtons() {
     this.getElement()
       .querySelectorAll(`.film-details__comment-delete`)
       .forEach(elm => (elm.disabled = true));
   }
-  enableDeleteBtns() {
+  enableDeleteButtons() {
     this.getElement()
       .querySelectorAll(`.film-details__comment-delete`)
       .forEach(elm => (elm.disabled = false));

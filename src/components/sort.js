@@ -12,7 +12,7 @@ export class Sort extends AbstractComponent {
     </ul>`;
   }
 
-  addCallbackOnSortBtnClick(callback) {
+  onSortBtnClick(callback) {
     const sortButtons = this.getElement().querySelectorAll(`.sort__button`);
 
     Array.from(sortButtons).forEach((button) =>

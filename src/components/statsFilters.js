@@ -24,7 +24,7 @@ export class StatsFilters extends AbstractComponent {
        <label for="statistic-year" class="statistic__filters-label">Year</label>
     </form>`;
   }
-  onAddListenersOnFilters(callback) {
+  onFiltersClick(callback) {
     const filters = this.getElement().querySelectorAll(
         `.statistic__filters-input`
     );

@@ -77,14 +77,14 @@ export class MovieController {
       this._comments.init();
       document.addEventListener(`keydown`, onEscKeyDown);
     };
-    this._filmCard.addCallbackOnClickCommentsBtn(openPopup);
-    this._filmCard.addCallbackOnClickPoster(openPopup);
-    this._filmCard.addCallbackOnClickTitle(openPopup);
-    this._popup.addCallBackOnClosingBtn(() => {
+    this._filmCard.onCommentsBtnClick(openPopup);
+    this._filmCard.onPosterClick(openPopup);
+    this._filmCard.onTitleClick(openPopup);
+    this._popup.onClosingBtnClick(() => {
       unrender(this._popup.getElement());
     });
 
-    this._filmCard.addCallbackOnClickWatchlistBtn(() => {
+    this._filmCard.onWatchlistBtnClick(() => {
       const updatedFilm = {
         ...this._film,
         user_details: {
@@ -97,7 +97,7 @@ export class MovieController {
       });
     });
 
-    this._filmCard.addCallbackOnClickHistoryBtn(() => {
+    this._filmCard.onHistoryBtnClick(() => {
       const updatedFilm = {
         ...this._film,
         user_details: {
@@ -110,7 +110,7 @@ export class MovieController {
       });
     });
 
-    this._filmCard.addCallbackOnClickFavoriteBtn(() => {
+    this._filmCard.onFavoriteBtnClick(() => {
       const updatedFilm = {
         ...this._film,
         user_details: {
@@ -123,7 +123,7 @@ export class MovieController {
       });
     });
 
-    this._popup.addCallbackOnClickHistoryBtn(() => {
+    this._popup.onHistoryBtnClick(() => {
       const updatedFilm = {
         ...this._film,
         user_details: {
@@ -139,7 +139,7 @@ export class MovieController {
       this._popup.toggleRatingSection();
     });
 
-    this._popup.addCallbackOnClickWatchlistBtn(() => {
+    this._popup.onWatchlistBtnClick(() => {
       const updatedFilm = {
         ...this._film,
         user_details: {
@@ -153,7 +153,7 @@ export class MovieController {
       this._film = updatedFilm;
     });
 
-    this._popup.addCallbackOnRatingUndo(() => {
+    this._popup.onRatingUndoClick(() => {
       const updatedFilm = {
         ...this._film,
         user_details: {
@@ -170,7 +170,7 @@ export class MovieController {
       this._popup.getWatchedBtnUnchecked();
     });
 
-    this._popup.addCallbackOnClickFavoriteBtn(() => {
+    this._popup.onFavoriteBtnClick(() => {
       const updatedFilm = {
         ...this._film,
         user_details: {
@@ -184,7 +184,7 @@ export class MovieController {
       this._film = updatedFilm;
     });
 
-    this._popup.toggleRatingButton((evt) => {
+    this._popup.ratingButtonHandler((evt) => {
       this._popup.removeErrorFromButtons();
       evt.target.checked = true;
 
