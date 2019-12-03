@@ -1,5 +1,6 @@
+import { TIMEOUT } from "../consts";
 import moment from "moment";
-import {AbstractComponent} from "./abstractComponent";
+import { AbstractComponent } from "./abstractComponent";
 
 export class CommentsSection extends AbstractComponent {
   constructor(comments) {
@@ -11,32 +12,32 @@ export class CommentsSection extends AbstractComponent {
   getTemplate() {
     return `<section class="film-details__comments-wrap">
         <h3 class="film-details__comments-title">Comments <span class="film-details__comments-count">${
-  this._commentsLen
-}</span></h3>
+          this._commentsLen
+        }</span></h3>
         <ul class="film-details__comments-list">
         
         ${this._comments.reduce((acc, comment) => {
-    acc += `<li class="film-details__comment">
+          acc += `<li class="film-details__comment">
             <span class="film-details__comment-emoji">
               <img src="./images/emoji/${
-  comment.emotion
-}.png" width="55" height="55" alt="emoji">
+                comment.emotion
+              }.png" width="55" height="55" alt="emoji">
             </span>
             <div>
               <p class="film-details__comment-text">${comment.comment}</p>
               <p class="film-details__comment-info">
                 <span class="film-details__comment-author">${
-  comment.author
-}</span>
+                  comment.author
+                }</span>
                 <span class="film-details__comment-day">${moment(
-      comment.date
-  ).format(`YY/MM/DD HH:MM`)}</span>
+                  comment.date
+                ).format(`YY/MM/DD HH:MM`)}</span>
                 <button class="film-details__comment-delete">Delete</button>
               </p>
             </div>
           </li>`;
-    return acc;
-  }, ``)}
+          return acc;
+        }, ``)}
         </ul>
 
         <div class="film-details__new-comment">
@@ -78,30 +79,30 @@ export class CommentsSection extends AbstractComponent {
 
   addCallbackForEachEmojiOption(callback) {
     const emojiOptions = this.getElement().querySelectorAll(
-        `.film-details__emoji-item`
+      `.film-details__emoji-item`
     );
 
-    Array.from(emojiOptions).forEach((emoji) => {
+    Array.from(emojiOptions).forEach(emoji => {
       emoji.addEventListener(`click`, callback);
     });
   }
 
   updateSelectedEmojiUrl(newUrl) {
     this.getElement().querySelector(
-        `.film-details__add-emoji-label img`
+      `.film-details__add-emoji-label img`
     ).src = newUrl;
   }
 
   addCallbackOnEachDeleteBtnClick(callback) {
     const commentList = this.getElement().querySelectorAll(
-        `.film-details__comment-delete`
+      `.film-details__comment-delete`
     );
     if (!navigator.onLine) {
       this.disableDeleteBtns();
     }
 
     Array.from(commentList).forEach((comment, index) => {
-      comment.addEventListener(`click`, (evt) => {
+      comment.addEventListener(`click`, evt => {
         evt.preventDefault();
         callback(index);
       });
@@ -109,7 +110,7 @@ export class CommentsSection extends AbstractComponent {
   }
   changeHeadingOnBtnClick(state, index) {
     const button = this.getElement().querySelectorAll(
-        `.film-details__comment-delete`
+      `.film-details__comment-delete`
     )[index];
 
     if (state === `deleting`) {
@@ -122,26 +123,26 @@ export class CommentsSection extends AbstractComponent {
   }
   disableCommentsSection() {
     this.getElement().querySelector(
-        `.film-details__comment-input`
+      `.film-details__comment-input`
     ).disabled = true;
   }
   enableCommentsSection() {
     this.getElement().querySelector(
-        `.film-details__comment-input`
+      `.film-details__comment-input`
     ).disabled = false;
   }
   shakeTextarea() {
     const textarea = this.getElement().querySelector(
-        `.film-details__comment-input`
+      `.film-details__comment-input`
     );
     textarea.style.animation = `shake 0.6s`;
     setTimeout(() => {
       textarea.style.animation = ``;
-    }, 600);
+    }, TIMEOUT);
   }
   toggleRedErrorWrap(state) {
     const textarea = this.getElement().querySelector(
-        `.film-details__comment-input`
+      `.film-details__comment-input`
     );
     if (state === `add`) {
       textarea.style.border = `2px solid red`;
@@ -153,11 +154,11 @@ export class CommentsSection extends AbstractComponent {
   disableDeleteBtns() {
     this.getElement()
       .querySelectorAll(`.film-details__comment-delete`)
-      .forEach((elm) => (elm.disabled = true));
+      .forEach(elm => (elm.disabled = true));
   }
   enableDeleteBtns() {
     this.getElement()
       .querySelectorAll(`.film-details__comment-delete`)
-      .forEach((elm) => (elm.disabled = false));
+      .forEach(elm => (elm.disabled = false));
   }
 }
