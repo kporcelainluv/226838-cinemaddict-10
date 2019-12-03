@@ -1,7 +1,7 @@
-import { render, getStatsRank, countWatchedFilms } from "../utils";
-import { ProfileRating } from "../components/profileRating";
-import { SearchController } from "./search-controller";
-import { Position } from "../consts";
+import {render, getStatsRank, countWatchedFilms} from "../utils";
+import {ProfileRating} from "../components/profileRating";
+import {SearchController} from "./search-controller";
+import {Position} from "../consts";
 
 const headerElement = document.querySelector(`.header`);
 
@@ -14,7 +14,7 @@ const createHeading = () => {
 };
 
 export class HeaderController {
-  constructor({ onSearchChange }) {
+  constructor({onSearchChange}) {
     this._search = new SearchController(headerElement, onSearchChange);
   }
 

@@ -1,4 +1,4 @@
-import { AbstractComponent } from "./abstractComponent";
+import {AbstractComponent} from "./abstractComponent";
 
 export class SearchResultContainer extends AbstractComponent {
   constructor() {

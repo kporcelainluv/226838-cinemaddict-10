@@ -1,4 +1,4 @@
-import { AbstractComponent } from "./abstractComponent";
+import {AbstractComponent} from "./abstractComponent";
 
 export class AdditionalFilmList extends AbstractComponent {
   constructor(blockName) {

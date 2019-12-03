@@ -1,4 +1,4 @@
-import { AbstractComponent } from "./abstractComponent";
+import {AbstractComponent} from "./abstractComponent";
 
 export class StatsFilters extends AbstractComponent {
   constructor() {
@@ -26,9 +26,9 @@ export class StatsFilters extends AbstractComponent {
   }
   onAddListenersOnFilters(callback) {
     const filters = this.getElement().querySelectorAll(
-      `.statistic__filters-input`
+        `.statistic__filters-input`
     );
-    filters.forEach(element => {
+    filters.forEach((element) => {
       element.addEventListener(`click`, callback);
     });
   }

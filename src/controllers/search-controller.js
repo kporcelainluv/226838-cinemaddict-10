@@ -1,6 +1,6 @@
-import { Search } from "../components/search";
-import { render } from "../utils";
-import { Position } from "../consts";
+import {Search} from "../components/search";
+import {render} from "../utils";
+import {Position} from "../consts";
 
 export class SearchController {
   constructor(container, onSearchChange) {
@@ -12,7 +12,7 @@ export class SearchController {
   init() {
     render(this._container, this._search.getElement(), Position.BEFOREEND);
 
-    this._search.addCallbackOnInputChange(evt => {
+    this._search.addCallbackOnInputChange((evt) => {
       this._onSearchChange(evt.target.value);
     });
 

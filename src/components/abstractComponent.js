@@ -1,10 +1,10 @@
-import { createElement } from "../utils.js";
+import {createElement} from "../utils.js";
 class AbstractComponent {
   constructor() {
     this._element = null;
     if (new.target === AbstractComponent) {
       throw new Error(
-        `Can't instantiate AbstractComponent, only concrete one.`
+          `Can't instantiate AbstractComponent, only concrete one.`
       );
     }
   }
@@ -23,4 +23,4 @@ class AbstractComponent {
     this._element = null;
   }
 }
-export { AbstractComponent };
+export {AbstractComponent};

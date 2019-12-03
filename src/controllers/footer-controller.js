@@ -1,10 +1,10 @@
-import { Footer } from "../components/footerComponent";
-import { render } from "../utils";
-import { Position } from "../consts";
+import {Footer} from "../components/footerComponent";
+import {render} from "../utils";
+import {Position} from "../consts";
 
 export class FooterController {
   constructor() {
-    this._body = document.getElementsByTagName("body")[0];
+    this._body = document.getElementsByTagName(`body`)[0];
     this._footer = new Footer();
   }
 

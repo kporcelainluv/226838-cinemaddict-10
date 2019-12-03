@@ -1,7 +1,7 @@
-import { StatsRank } from "../components/statsRank";
-import { render, unrender, getWatchedFilms } from "../utils";
-import { getStatsRank } from "../utils";
-import { Position } from "../consts";
+import {StatsRank} from "../components/statsRank";
+import {render, unrender, getWatchedFilms} from "../utils";
+import {getStatsRank} from "../utils";
+import {Position} from "../consts";
 
 export class UserRankController {
   constructor(container) {
@@ -15,9 +15,9 @@ export class UserRankController {
 
     this._statsRank = new StatsRank(getStatsRank(watched));
     render(
-      this._container.getElement(),
-      this._statsRank.getElement(),
-      Position.AFTERBEGIN
+        this._container.getElement(),
+        this._statsRank.getElement(),
+        Position.AFTERBEGIN
     );
   }
   unrender() {

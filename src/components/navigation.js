@@ -1,5 +1,5 @@
-import { AbstractComponent } from "./abstractComponent";
-import { NavTab } from "../consts";
+import {AbstractComponent} from "./abstractComponent";
+import {NavTab} from "../consts";
 
 export class Navigation extends AbstractComponent {
   constructor(historyAmount, watchlistAmount, favoritesAmount) {
@@ -19,10 +19,10 @@ export class Navigation extends AbstractComponent {
   }
   addCallbackOnNavigationItem(callback) {
     const navigationItems = this.getElement().querySelectorAll(
-      `.main-navigation__item`
+        `.main-navigation__item`
     );
-    navigationItems.forEach(element => {
-      element.addEventListener(`click`, event =>
+    navigationItems.forEach((element) => {
+      element.addEventListener(`click`, (event) =>
         callback(event.target.getAttribute(`href`))
       );
     });
@@ -33,10 +33,10 @@ export class Navigation extends AbstractComponent {
       .classList.remove(`main-navigation__item--active`);
 
     const navigationTabs = this.getElement().querySelectorAll(
-      `.main-navigation__item`
+        `.main-navigation__item`
     );
     const node = Array.from(navigationTabs).filter(
-      element => element.getAttribute(`href`) === hash
+        (element) => element.getAttribute(`href`) === hash
     )[0];
     node.classList.add(`main-navigation__item--active`);
   }

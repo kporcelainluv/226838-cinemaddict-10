@@ -2,7 +2,7 @@ import { sort } from "ramda";
 import { Position, StatsFilterType, StatsRank } from "./consts";
 import { addMonths, addWeeks, addYears, isAfter, startOfToday } from "date-fns";
 
-export const createElement = template => {
+export const createElement = (template) => {
   const newElement = document.createElement(`div`);
   newElement.innerHTML = template;
   return newElement.firstChild;

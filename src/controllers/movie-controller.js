@@ -1,10 +1,10 @@
-import { Popup } from "../components/popup";
-import { render, unrender } from "../utils";
-import { Position, UpdateType } from "../consts";
-import { FilmCard } from "../components/filmCard";
-import { CommentsController } from "../controllers/comments-controller";
+import {Popup} from "../components/popup";
+import {render, unrender} from "../utils";
+import {Position, UpdateType} from "../consts";
+import {FilmCard} from "../components/filmCard";
+import {CommentsController} from "../controllers/comments-controller";
 
-const body = document.getElementsByTagName("body")[0];
+const body = document.getElementsByTagName(`body`)[0];
 
 export class MovieController {
   constructor(container, film, onFilmChange, onTogglePopup) {
@@ -21,9 +21,9 @@ export class MovieController {
     this._filmCard = new FilmCard(this._film);
     this._popup = new Popup(this._film);
     this._comments = new CommentsController(
-      this._popup,
-      this._film.comments,
-      this.onCommentsChange
+        this._popup,
+        this._film.comments,
+        this.onCommentsChange
     );
   }
 
@@ -35,11 +35,11 @@ export class MovieController {
   }
 
   onCommentsChange(newComments, updateType) {
-    this._film = {
+    const updatedFilm = {
       ...this._film,
       comments: newComments
     };
-    this._onFilmChange(this._film, updateType);
+    this._onFilmChange(updatedFilm, updateType);
   }
 
   openPopup() {
@@ -58,10 +58,10 @@ export class MovieController {
       this._popup.enableForm();
       this._comments.enableForm();
     };
-    window.addEventListener("offline", disableForms);
-    window.addEventListener("online", enableForms);
+    window.addEventListener(`offline`, disableForms);
+    window.addEventListener(`online`, enableForms);
 
-    const onEscKeyDown = evt => {
+    const onEscKeyDown = (evt) => {
       if (evt.key === `Escape` || evt.key === `Esc`) {
         this.closePopup();
         document.removeEventListener(`keydown`, onEscKeyDown);
@@ -184,7 +184,7 @@ export class MovieController {
       this._film = updatedFilm;
     });
 
-    this._popup.toggleRatingButton(evt => {
+    this._popup.toggleRatingButton((evt) => {
       this._popup.removeErrorFromButtons();
       evt.target.checked = true;
 

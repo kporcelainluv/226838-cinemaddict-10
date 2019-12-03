@@ -4,16 +4,16 @@ import {
   getMostCommentedFilms,
   getTopRatedFilms
 } from "../utils";
-import { DefaultFilmList } from "../components/defaultFilmList";
-import { FilmsContainer } from "../components/filmContainter";
-import { FilmListController } from "./film-list-controller";
-import { AdditionalFilmList } from "../components/additionalFilmBlocks";
-import { Loading } from "../components/loading";
-import { EmptyFilms } from "../components/emptyFilms";
-import { PageType, Position } from "../consts";
+import {DefaultFilmList} from "../components/defaultFilmList";
+import {FilmsContainer} from "../components/filmContainter";
+import {FilmListController} from "./film-list-controller";
+import {AdditionalFilmList} from "../components/additionalFilmBlocks";
+import {Loading} from "../components/loading";
+import {EmptyFilms} from "../components/emptyFilms";
+import {PageType, Position} from "../consts";
 
 export class FilmsController {
-  constructor({ container, onFilmUpdate }) {
+  constructor({container, onFilmUpdate}) {
     this._container = container;
     this._subscriptions = [];
     this._filmsContainer = new FilmsContainer();
@@ -31,14 +31,14 @@ export class FilmsController {
 
   init() {
     render(
-      this._container,
-      this._filmsContainer.getElement(),
-      Position.BEFOREEND
+        this._container,
+        this._filmsContainer.getElement(),
+        Position.BEFOREEND
     );
     render(
-      this._filmsContainer.getElement(),
-      this._loadingComponent.getElement(),
-      Position.AFTERBEGIN
+        this._filmsContainer.getElement(),
+        this._loadingComponent.getElement(),
+        Position.AFTERBEGIN
     );
   }
 
@@ -47,9 +47,9 @@ export class FilmsController {
       unrender(this._loadingComponent.getElement());
       this._loadingComponent.removeElement();
       render(
-        this._filmsContainer.getElement(),
-        this._emptyFilmsComponent.getElement(),
-        `beforeend`
+          this._filmsContainer.getElement(),
+          this._emptyFilmsComponent.getElement(),
+          `beforeend`
       );
     } else {
       unrender(this._loadingComponent.getElement());
@@ -83,19 +83,19 @@ export class FilmsController {
       });
 
       render(
-        this._filmsContainer.getElement(),
-        this._defaultFilmList.getElement(),
-        Position.BEFOREEND
+          this._filmsContainer.getElement(),
+          this._defaultFilmList.getElement(),
+          Position.BEFOREEND
       );
       render(
-        this._filmsContainer.getElement(),
-        this._topRatedList.getElement(),
-        Position.BEFOREEND
+          this._filmsContainer.getElement(),
+          this._topRatedList.getElement(),
+          Position.BEFOREEND
       );
       render(
-        this._filmsContainer.getElement(),
-        this._mostCommentedList.getElement(),
-        Position.BEFOREEND
+          this._filmsContainer.getElement(),
+          this._mostCommentedList.getElement(),
+          Position.BEFOREEND
       );
 
       this._defaultFilmListController.init();
@@ -120,7 +120,7 @@ export class FilmsController {
   }
 
   _onTogglePopup() {
-    this._subscriptions.forEach(subscription => subscription());
+    this._subscriptions.forEach((subscription) => subscription());
   }
 
   _onRenderFilmCard(closePopup) {

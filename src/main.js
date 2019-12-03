@@ -31,4 +31,3 @@ window.addEventListener(`online`, () => {
 });
 
 provider.getFilms().then(films => page.initWithFilms(films));
-// page.initWithFilms(zeroCommentsMockData);

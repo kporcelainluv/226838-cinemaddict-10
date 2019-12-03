@@ -1,6 +1,5 @@
 export class ModelMovie {
   constructor(film) {
-    console.log(film);
     this.id = film[`id`];
     this.poster = film[`film_info`][`poster`];
     this.title = film[`film_info`][`title`];
@@ -17,7 +16,7 @@ export class ModelMovie {
     this.user.favorite = Boolean(film[`user_details`][`favorite`]);
     this.user.rating = film[`user_details`][`personal_rating`];
     this.user.watchingDate = new Date(
-      film[`user_details`][`watching_date`]
+        film[`user_details`][`watching_date`]
     ).getTime();
     this.director = film[`film_info`][`director`];
     this.writers = film[`film_info`][`writers`];
@@ -50,7 +49,7 @@ export class ModelMovie {
     userDetails[`favorite`] = this.user.favorite;
     userDetails[`personal_rating`] = this.user.rating || 0;
     userDetails[`watching_date`] = new Date(
-      this.user.watchingDate
+        this.user.watchingDate
     ).toISOString();
     filmInfo[`poster`] = this.poster;
     filmInfo[`title`] = this.title;
@@ -68,8 +67,8 @@ export class ModelMovie {
     filmInfo[`age_rating`] = this.age;
     comments[`comment`] = this.comment.comment;
     comments[`date`] = new Date(this.comment.published).toISOString();
-    comments["emotion"] = this.comment.emoji;
-
+    comments[`emotion`] = this.comment.emoji;
+    /* eslint-disable camelcase */
     return {
       id: this.id,
       user_details: userDetails,
