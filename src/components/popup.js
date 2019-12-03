@@ -184,57 +184,24 @@ export class Popup extends AbstractComponent {
     </form>
   </section>`;
   }
-  onClosingBtnClick(callback) {
-    const closingButton = this.getElement().querySelector(
-      `.film-details__close-btn`
-    );
-    closingButton.addEventListener(`click`, callback);
+  getFormElement() {
+    return this.getElement().querySelector(`.film-details__inner`);
   }
-  onWatchlistBtnClick(callback) {
-    this.getElement()
-      .querySelector(`.film-details__control-label--watchlist`)
-      .addEventListener(`click`, callback);
+  getCommentsContainer() {
+    return this.getElement().querySelector(`.form-details__bottom-container`);
   }
-
-  onFavoriteBtnClick(callback) {
-    this.getElement()
-      .querySelector(`.film-details__control-label--favorite`)
-      .addEventListener(`click`, callback);
-  }
-
-  onHistoryBtnClick(callback) {
-    this.getElement()
-      .querySelector(`.film-details__control-label--watched`)
-      .addEventListener(`click`, callback);
-  }
-  toggleRatingSection() {
-    this.getElement()
-      .querySelector(`.form-details__middle-container`)
-      .classList.toggle(`visually-hidden`);
-  }
-  onRatingUndoClick(callback) {
-    this.getElement()
-      .querySelector(`.film-details__watched-reset`)
-      .addEventListener(`click`, callback);
-  }
-
   getWatchedBtnUnchecked() {
     this.getElement().querySelectorAll(
       `.film-details__control-input`
     )[1].checked = false;
   }
-  getCommentsContainer() {
-    return this.getElement().querySelector(`.form-details__bottom-container`);
+
+  toggleRatingSection() {
+    this.getElement()
+      .querySelector(`.form-details__middle-container`)
+      .classList.toggle(`visually-hidden`);
   }
 
-  getFormElement() {
-    return this.getElement().querySelector(`.film-details__inner`);
-  }
-  ratingButtonHandler(callback) {
-    this.getElement()
-      .querySelectorAll(`.film-details__user-rating-input`)
-      .forEach(elm => elm.addEventListener(`keydown`, callback));
-  }
   disableForm() {
     const userRatingBtns = this.getElement().querySelectorAll(
       `.film-details__user-rating-input`
@@ -290,5 +257,38 @@ export class Popup extends AbstractComponent {
         elm.classList.toggle(`film-details__user-rating-label--error`);
       }
     });
+  }
+  onClosingBtnClick(callback) {
+    const closingButton = this.getElement().querySelector(
+      `.film-details__close-btn`
+    );
+    closingButton.addEventListener(`click`, callback);
+  }
+  onWatchlistBtnClick(callback) {
+    this.getElement()
+      .querySelector(`.film-details__control-label--watchlist`)
+      .addEventListener(`click`, callback);
+  }
+
+  onFavoriteBtnClick(callback) {
+    this.getElement()
+      .querySelector(`.film-details__control-label--favorite`)
+      .addEventListener(`click`, callback);
+  }
+
+  onHistoryBtnClick(callback) {
+    this.getElement()
+      .querySelector(`.film-details__control-label--watched`)
+      .addEventListener(`click`, callback);
+  }
+  onRatingUndoClick(callback) {
+    this.getElement()
+      .querySelector(`.film-details__watched-reset`)
+      .addEventListener(`click`, callback);
+  }
+  ratingButtonHandler(callback) {
+    this.getElement()
+      .querySelectorAll(`.film-details__user-rating-input`)
+      .forEach(elm => elm.addEventListener(`keydown`, callback));
   }
 }

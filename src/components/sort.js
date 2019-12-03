@@ -1,4 +1,4 @@
-import {AbstractComponent} from "./abstractComponent";
+import { AbstractComponent } from "./abstractComponent";
 
 export class Sort extends AbstractComponent {
   constructor() {
@@ -12,13 +12,6 @@ export class Sort extends AbstractComponent {
     </ul>`;
   }
 
-  onSortBtnClick(callback) {
-    const sortButtons = this.getElement().querySelectorAll(`.sort__button`);
-
-    Array.from(sortButtons).forEach((button) =>
-      button.addEventListener(`click`, callback)
-    );
-  }
   makeButtonStateActive(type) {
     this.getElement()
       .querySelector(`.sort__button--active`)
@@ -26,7 +19,7 @@ export class Sort extends AbstractComponent {
 
     const sortButtons = this.getElement().querySelectorAll(`.sort__button`);
     const index = Array.from(sortButtons).findIndex(
-        (button) => button.dataset.sortType === type
+      button => button.dataset.sortType === type
     );
     sortButtons[index].classList.add(`sort__button--active`);
   }
@@ -35,5 +28,12 @@ export class Sort extends AbstractComponent {
   }
   show() {
     this.getElement().classList.remove(`visually-hidden`);
+  }
+  onSortBtnClick(callback) {
+    const sortButtons = this.getElement().querySelectorAll(`.sort__button`);
+
+    Array.from(sortButtons).forEach(button =>
+      button.addEventListener(`click`, callback)
+    );
   }
 }

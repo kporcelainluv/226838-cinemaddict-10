@@ -37,7 +37,17 @@ export class FilmListController {
     this._onRenderFilmCard = onRenderFilmCard;
     this._showMoreBtn = new ShowMoreButton();
   }
+  _renderFilmCard(container, film) {
+    const movieController = new MovieController(
+      container,
+      film,
+      this._onFilmUpdate,
+      this._onTogglePopup
+    );
 
+    movieController.init();
+    this._onRenderFilmCard(movieController.closePopup.bind(movieController));
+  }
   init() {
     this.render(this._films);
   }
@@ -74,17 +84,5 @@ export class FilmListController {
 
   unrender() {
     this._container.innerHTML = ``;
-  }
-
-  _renderFilmCard(container, film) {
-    const movieController = new MovieController(
-      container,
-      film,
-      this._onFilmUpdate,
-      this._onTogglePopup
-    );
-
-    movieController.init();
-    this._onRenderFilmCard(movieController.closePopup.bind(movieController));
   }
 }

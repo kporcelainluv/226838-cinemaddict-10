@@ -71,43 +71,12 @@ export class CommentsSection extends AbstractComponent {
   `;
   }
 
-  onInputFocus(callback) {
-    this.getElement()
-      .querySelector(`.film-details__comment-input`)
-      .addEventListener(`focus`, callback);
-  }
-
-  EmojiOptionHandler(callback) {
-    const emojiOptions = this.getElement().querySelectorAll(
-      `.film-details__emoji-item`
-    );
-
-    Array.from(emojiOptions).forEach(emoji => {
-      emoji.addEventListener(`click`, callback);
-    });
-  }
-
   EmojiUrlUpdateHandler(newUrl) {
     this.getElement().querySelector(
       `.film-details__add-emoji-label img`
     ).src = newUrl;
   }
 
-  onEachDeleteButtonsClick(callback) {
-    const commentList = this.getElement().querySelectorAll(
-      `.film-details__comment-delete`
-    );
-    if (!navigator.onLine) {
-      this.disableDeleteButtons();
-    }
-
-    Array.from(commentList).forEach((comment, index) => {
-      comment.addEventListener(`click`, evt => {
-        evt.preventDefault();
-        callback(index);
-      });
-    });
-  }
   buttonHeadingHandler(state, index) {
     const button = this.getElement().querySelectorAll(
       `.film-details__comment-delete`
@@ -160,5 +129,35 @@ export class CommentsSection extends AbstractComponent {
     this.getElement()
       .querySelectorAll(`.film-details__comment-delete`)
       .forEach(elm => (elm.disabled = false));
+  }
+  onInputFocus(callback) {
+    this.getElement()
+      .querySelector(`.film-details__comment-input`)
+      .addEventListener(`focus`, callback);
+  }
+
+  EmojiOptionHandler(callback) {
+    const emojiOptions = this.getElement().querySelectorAll(
+      `.film-details__emoji-item`
+    );
+
+    Array.from(emojiOptions).forEach(emoji => {
+      emoji.addEventListener(`click`, callback);
+    });
+  }
+  onEachDeleteButtonsClick(callback) {
+    const commentList = this.getElement().querySelectorAll(
+      `.film-details__comment-delete`
+    );
+    if (!navigator.onLine) {
+      this.disableDeleteButtons();
+    }
+
+    Array.from(commentList).forEach((comment, index) => {
+      comment.addEventListener(`click`, evt => {
+        evt.preventDefault();
+        callback(index);
+      });
+    });
   }
 }

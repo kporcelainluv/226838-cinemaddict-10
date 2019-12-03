@@ -1,5 +1,5 @@
-import {AbstractComponent} from "./abstractComponent";
-import {NavTab} from "../consts";
+import { AbstractComponent } from "./abstractComponent";
+import { NavTab } from "../consts";
 
 export class Navigation extends AbstractComponent {
   constructor(historyAmount, watchlistAmount, favoritesAmount) {
@@ -17,26 +17,17 @@ export class Navigation extends AbstractComponent {
     <a href="${NavTab.STATS}" class="main-navigation__item main-navigation__item--additional">Stats</a>
   </nav>`;
   }
-  onNavigationItemClick(callback) {
-    const navigationItems = this.getElement().querySelectorAll(
-        `.main-navigation__item`
-    );
-    navigationItems.forEach((element) => {
-      element.addEventListener(`click`, (event) =>
-        callback(event.target.getAttribute(`href`))
-      );
-    });
-  }
+
   makeButtonActive(hash) {
     this.getElement()
       .querySelector(`.main-navigation__item--active`)
       .classList.remove(`main-navigation__item--active`);
 
     const navigationTabs = this.getElement().querySelectorAll(
-        `.main-navigation__item`
+      `.main-navigation__item`
     );
     const node = Array.from(navigationTabs).filter(
-        (element) => element.getAttribute(`href`) === hash
+      element => element.getAttribute(`href`) === hash
     )[0];
     node.classList.add(`main-navigation__item--active`);
   }
@@ -45,5 +36,15 @@ export class Navigation extends AbstractComponent {
   }
   show() {
     this.getElement().classList.remove(`visually-hidden`);
+  }
+  onNavigationItemClick(callback) {
+    const navigationItems = this.getElement().querySelectorAll(
+      `.main-navigation__item`
+    );
+    navigationItems.forEach(element => {
+      element.addEventListener(`click`, event =>
+        callback(event.target.getAttribute(`href`))
+      );
+    });
   }
 }
