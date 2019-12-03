@@ -1,7 +1,8 @@
 import { AbstractComponent } from "./abstractComponent";
 import { countHoursAndMins } from "../utils";
 import moment from "moment";
-import { RATING_LENGTH, TIMEOUT } from "../consts";
+import { RATING_LENGTH, TIMEOUT, DEBOUNCE_TIMEOUT } from "../consts";
+import { debounce } from "lodash";
 
 export class Popup extends AbstractComponent {
   constructor(film) {
@@ -267,19 +268,19 @@ export class Popup extends AbstractComponent {
   onWatchlistBtnClick(callback) {
     this.getElement()
       .querySelector(`.film-details__control-label--watchlist`)
-      .addEventListener(`click`, callback);
+      .addEventListener(`click`, debounce(callback, DEBOUNCE_TIMEOUT));
   }
 
   onFavoriteBtnClick(callback) {
     this.getElement()
       .querySelector(`.film-details__control-label--favorite`)
-      .addEventListener(`click`, callback);
+      .addEventListener(`click`, debounce(callback, DEBOUNCE_TIMEOUT));
   }
 
   onHistoryBtnClick(callback) {
     this.getElement()
       .querySelector(`.film-details__control-label--watched`)
-      .addEventListener(`click`, callback);
+      .addEventListener(`click`, debounce(callback, DEBOUNCE_TIMEOUT));
   }
   onRatingUndoClick(callback) {
     this.getElement()

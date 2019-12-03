@@ -1,8 +1,9 @@
 import moment from "moment";
-import { DESCRIPTION_LENGTH } from "../consts";
+import { DEBOUNCE_TIMEOUT, DESCRIPTION_LENGTH } from "../consts";
 
 import { AbstractComponent } from "./abstractComponent";
 import { countHoursAndMins } from "../utils";
+import { debounce } from "lodash";
 
 export class FilmCard extends AbstractComponent {
   constructor(film) {
@@ -89,27 +90,18 @@ export class FilmCard extends AbstractComponent {
   onWatchlistBtnClick(callback) {
     this.getElement()
       .querySelector(`.film-card__controls-item--add-to-watchlist`)
-      .addEventListener(`click`, evt => {
-        evt.preventDefault();
-        callback(evt);
-      });
+      .addEventListener(`click`, debounce(callback, DEBOUNCE_TIMEOUT));
   }
 
   onFavoriteBtnClick(callback) {
     this.getElement()
       .querySelector(`.film-card__controls-item--favorite`)
-      .addEventListener(`click`, evt => {
-        evt.preventDefault();
-        callback(evt);
-      });
+      .addEventListener(`click`, debounce(callback, DEBOUNCE_TIMEOUT));
   }
 
   onHistoryBtnClick(callback) {
     this.getElement()
       .querySelector(`.film-card__controls-item--mark-as-watched`)
-      .addEventListener(`click`, evt => {
-        evt.preventDefault();
-        callback(evt);
-      });
+      .addEventListener(`click`, debounce(callback, DEBOUNCE_TIMEOUT));
   }
 }

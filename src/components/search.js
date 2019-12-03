@@ -1,4 +1,6 @@
-import {AbstractComponent} from "./abstractComponent";
+import { AbstractComponent } from "./abstractComponent";
+import { debounce } from "lodash";
+import { DEBOUNCE_TIMEOUT } from "../consts";
 
 export class Search extends AbstractComponent {
   constructor() {
@@ -16,8 +18,8 @@ export class Search extends AbstractComponent {
 
   inputChangeHandler(callback) {
     this.getElement()
-      .querySelector(`input`)
-      .addEventListener(`keyup`, callback);
+      .querySelector(`.search__field`)
+      .addEventListener(`keyup`, debounce(callback, DEBOUNCE_TIMEOUT));
   }
   onClearButtonClick(callback) {
     this.getElement()
