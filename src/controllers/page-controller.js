@@ -19,6 +19,22 @@ import { FilmsController } from "./films-controller";
 import { FooterController } from "./footer-controller";
 import { NavigationController } from "./navigation-controller";
 
+const filterFilmsbyTab = (navTab, allFilms) => {
+  const f = (() => {
+    if (navTab === NavTab.WATCHLIST) {
+      return getWatchlist;
+    } else if (navTab === NavTab.HISTORY) {
+      return getWatched;
+    } else if (navTab === NavTab.FAVORITES) {
+      return getFavorite;
+    } else {
+      return x => x;
+    }
+  })();
+
+  return f(allFilms);
+};
+
 export class PageController {
   constructor(headerContainer, container, films, api) {
     this._container = container;
@@ -73,7 +89,7 @@ export class PageController {
 
   _onSearchChange(query) {
     if (query.length >= SEARCH_QUERY_LENGTH) {
-      this._films = filterFilms(this._allFilms, query);
+      this._films = filterFilmsbyTab(this._allFilms, query);
       this._filmsController.hide();
       this._sortController.hide();
       this._navigationController.hide();
@@ -149,7 +165,9 @@ export class PageController {
       this._films = updateFilms(this._films, newFilm);
       this._allFilms = updateFilms(this._allFilms, newFilm);
 
-      this._filmsController.render(this._films);
+      this._filmsController.render(
+        filterFilmsbyTab(this._currentTab, this._allFilms)
+      );
       this._navigationController.render(this._allFilms, this._currentTab);
     };
 
