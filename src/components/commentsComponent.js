@@ -29,10 +29,10 @@ export class CommentsSection extends AbstractComponent {
                 <span class="film-details__comment-author">${
                   comment.author
                 }</span>
-                <span class="film-details__comment-day">${(console.log(
-                  "here is called"
-                ),
-                getDistanceInWords(new Date(comment.date), Date.now()))}</span>
+                <span class="film-details__comment-day">${getDistanceInWords(
+                  new Date(comment.date),
+                  Date.now()
+                )}</span>
                 <button class="film-details__comment-delete">Delete</button>
               </p>
             </div>
