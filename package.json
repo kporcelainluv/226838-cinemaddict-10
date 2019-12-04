@@ -22,7 +22,7 @@
   "dependencies": {
     "chart.js": "^2.8.0",
     "chartjs-plugin-datalabels": "^0.7.0",
-    "date-fns": "^2.6.0",
+    "date-fns": "^2.8.1",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "node-static": "^0.7.11",

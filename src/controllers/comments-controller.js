@@ -101,7 +101,7 @@ export class CommentsController {
           emotion: this._currentEmoji || `smile`,
           comment: formData.get(`comment`),
           author: ``,
-          date: new Date().toISOString().slice(0, 10)
+          date: new Date()
         };
 
         this._commentsSection.disableCommentsSection();

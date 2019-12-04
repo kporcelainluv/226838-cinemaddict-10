@@ -1,8 +1,13 @@
 import { sort } from "ramda";
 import { Position, StatsFilterType, StatsRank } from "./consts";
 import { addMonths, addWeeks, addYears, isAfter, startOfToday } from "date-fns";
-
-export const createElement = (template) => {
+import {
+  differenceInSeconds,
+  differenceInMinutes,
+  differenceInHours,
+  differenceInDays
+} from "date-fns";
+export const createElement = template => {
   const newElement = document.createElement(`div`);
   newElement.innerHTML = template;
   return newElement.firstChild;
@@ -200,3 +205,24 @@ export const getWatchlist = films =>
   films.filter(element => element.user_details.watchlist);
 export const getFavorite = films =>
   films.filter(element => element.user_details.favorite);
+
+export const getDistanceInWords = (dateLeft, dateRight) => {
+  const differenceinSeconds = differenceInSeconds(dateRight, dateLeft);
+  const differenceinMinutes = differenceInMinutes(dateRight, dateLeft);
+  const differenceinHours = differenceInHours(dateRight, dateLeft);
+  const differenceinDays = differenceInDays(dateRight, dateLeft);
+
+  if (differenceinDays >= 1) {
+    return `${differenceinDays} days ago`;
+  } else if (differenceinHours >= 2) {
+    return `a few hours ago`;
+  } else if (differenceinHours >= 1) {
+    return `an hour ago`;
+  } else if (differenceinMinutes >= 4) {
+    return `a few minutes ago`;
+  } else if (differenceinMinutes >= 1) {
+    return `a minute ago`;
+  } else if (differenceinSeconds >= 0 && differenceinSeconds < 60) {
+    return `now`;
+  }
+};

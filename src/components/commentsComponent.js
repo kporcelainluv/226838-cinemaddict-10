@@ -1,6 +1,6 @@
 import { TIMEOUT } from "../consts";
-import moment from "moment";
 import { AbstractComponent } from "./abstractComponent";
+import { getDistanceInWords } from "../utils";
 
 export class CommentsSection extends AbstractComponent {
   constructor(comments) {
@@ -29,9 +29,10 @@ export class CommentsSection extends AbstractComponent {
                 <span class="film-details__comment-author">${
                   comment.author
                 }</span>
-                <span class="film-details__comment-day">${moment(
-                  comment.date
-                ).format(`YY/MM/DD HH:MM`)}</span>
+                <span class="film-details__comment-day">${(console.log(
+                  "here is called"
+                ),
+                getDistanceInWords(new Date(comment.date), Date.now()))}</span>
                 <button class="film-details__comment-delete">Delete</button>
               </p>
             </div>
