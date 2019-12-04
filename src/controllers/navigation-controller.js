@@ -5,8 +5,8 @@ import {
   getWatchlist,
   getFavorite
 } from "../utils";
-import {Navigation} from "../components/navigation";
-import {Position} from "../consts";
+import { Navigation } from "../components/navigation";
+import { Position } from "../consts";
 
 export class NavigationController {
   constructor(container, onNavigationChange) {
@@ -22,27 +22,19 @@ export class NavigationController {
     this._navigation.removeElement();
 
     this._navigation = new Navigation(
-        getWatched(films).length,
-        getWatchlist(films).length,
-        getFavorite(films).length
+      getWatched(films).length,
+      getWatchlist(films).length,
+      getFavorite(films).length
     );
 
     render(this._container, this._navigation.getElement(), Position.AFTERBEGIN);
-    this._navigation.onNavigationItemClick((hash) => {
+    this._navigation.onNavigationItemClick(hash => {
       this._navigation.makeButtonActive(hash);
       this._onNavigationChange(hash);
     });
   }
   render(films, tab) {
-    unrender(this._navigation.getElement());
-    this._navigation.removeElement();
-
-    this._navigation = new Navigation(
-        getWatched(films).length,
-        getWatchlist(films).length,
-        getFavorite(films).length
-    );
-    this.init();
+    this.initWithFilms(films);
     this._navigation.makeButtonActive(tab);
   }
   hide() {
