@@ -6,13 +6,13 @@ export class CommentsSection extends AbstractComponent {
   constructor(comments) {
     super();
     this._comments = comments;
-    this._commentsLen = comments.length;
+    this._commentsAmount = comments.length;
   }
 
   getTemplate() {
     return `<section class="film-details__comments-wrap">
         <h3 class="film-details__comments-title">Comments <span class="film-details__comments-count">${
-          this._commentsLen
+          this._commentsAmount
         }</span></h3>
         <ul class="film-details__comments-list">
         
