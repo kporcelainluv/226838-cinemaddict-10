@@ -16,14 +16,14 @@ export class ModelMovie {
     this.user.favorite = Boolean(film[`user_details`][`favorite`]);
     this.user.rating = film[`user_details`][`personal_rating`];
     this.user.watchingDate = new Date(
-        film[`user_details`][`watching_date`]
+      film[`user_details`][`watching_date`]
     ).getTime();
     this.director = film[`film_info`][`director`];
     this.writers = film[`film_info`][`writers`];
     this.actors = film[`film_info`][`actors`];
     this.country = film[`film_info`][`release`][`release_country`];
     this.age = film[`film_info`][`age_rating`];
-    this.comment = {};
+    this.comments = {};
     this.name = film[`author`];
     this.published = new Date(film[`date`]).getTime();
     this.comment = film[`comment`];
@@ -49,13 +49,13 @@ export class ModelMovie {
     userDetails[`favorite`] = this.user.favorite;
     userDetails[`personal_rating`] = this.user.rating || 0;
     userDetails[`watching_date`] = new Date(
-        this.user.watchingDate
+      this.user.watchingDate
     ).toISOString();
     filmInfo[`poster`] = this.poster;
     filmInfo[`title`] = this.title;
     filmInfo[`alternative_title`] = this.alternativeTitle;
     filmInfo[`total_rating`] = this.rating;
-    release[`date`] = new Date(this.releaseDate).toISOString();
+    release[`date`] = new Date(this.releaseDate);
     release[`release_country`] = this.country;
     filmInfo[`release`] = release;
     filmInfo[`runtime`] = this.runtime;
@@ -65,9 +65,9 @@ export class ModelMovie {
     filmInfo[`writers`] = this.writers;
     filmInfo[`actors`] = this.actors;
     filmInfo[`age_rating`] = this.age;
-    comments[`comment`] = this.comment.comment;
-    comments[`date`] = new Date(this.comment.published).toISOString();
-    comments[`emotion`] = this.comment.emoji;
+    comments[`comment`] = this.comments.comment;
+    comments[`date`] = new Date(this.comments.published);
+    comments[`emotion`] = this.comments.emoji;
     /* eslint-disable camelcase */
     return {
       id: this.id,

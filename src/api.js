@@ -1,4 +1,6 @@
 import { Method } from "./consts";
+import { ModelMovie } from "./models/films";
+import { ModelComment } from "./models/comments";
 
 const checkStatus = response => {
   if (response.status >= 200 && response.status < 300) {
@@ -51,7 +53,20 @@ export class API {
       endpoint: this._endPoint,
       authorization: this._authorization,
       method: Method.GET
-    }).then(toJSON);
+    })
+      .then(toJSON)
+      .then(ModelMovie.parseMovies);
+  }
+
+  _getComments(url) {
+    return fetchWrapper({
+      url,
+      endpoint: this._endPoint,
+      authorization: this._authorization,
+      method: Method.GET
+    })
+      .then(toJSON)
+      .then(ModelComment.parseComments);
   }
 
   _update(url, body) {
@@ -71,7 +86,9 @@ export class API {
       authorization: this._authorization,
       method: Method.POST,
       body
-    }).then(toJSON);
+    })
+      .then(toJSON)
+      .then(ModelMovie.parseMovie);
   }
 
   _delete(url) {
@@ -85,11 +102,11 @@ export class API {
 
   async getFilms() {
     const films = await this._get(`movies`);
-
+    console.log({ films });
+    // problem here
     const commentsPromises = films
       .map(f => f.id)
-      .map(id => this._get(`comments/${id}`));
-
+      .map(id => this._getComments(`comments/${id}`));
     const allFilmsComments = await Promise.all(commentsPromises);
     films.forEach((elm, index) => {
       elm.comments = allFilmsComments[index];
