@@ -1,6 +1,7 @@
 import { sort } from "ramda";
 import { Position, StatsFilterType, StatsRank } from "./consts";
 import { addMonths, addWeeks, addYears, isAfter, startOfToday } from "date-fns";
+import { Movie } from "./models/films";
 import {
   differenceInSeconds,
   differenceInMinutes,
@@ -56,7 +57,7 @@ export const getDateByFilterType = filterType => {
 export const getFilmsByFilter = (films, filterType) => {
   const date = getDateByFilterType(filterType);
   return films.filter(film => {
-    const watchDate = film.user_details.watching_date;
+    const watchDate = Movie.getWatchingDate(film);
     return isAfter(watchDate, date);
   });
 };
@@ -67,7 +68,7 @@ export const getWatchedFilms = films => {
 
 export const getHoursAndMins = films => {
   const duration = films.reduce((acc, elm) => {
-    return acc + elm.film_info.runtime;
+    return acc + Movie.getRuntime(elm);
   }, 0);
   const [hours, minutes] = countHoursAndMins(duration);
   return [hours, minutes];
@@ -75,7 +76,7 @@ export const getHoursAndMins = films => {
 
 const getSortedGenres = films => {
   const genres = films.reduce((acc, elm) => {
-    const genresList = elm.film_info.genre;
+    const genresList = Movie.getGenres(elm);
     genresList.forEach(genre => {
       if (genre in acc) {
         acc[genre] += 1;
@@ -111,14 +112,14 @@ export const getTopGenre = films => {
 };
 
 export const getTopRatedFilms = films => {
-  if (films.every(film => film.film_info.total_rating === 0)) {
+  if (films.every(film => Movie.getRating(film) === 0)) {
     return 0;
   }
   return sort((a, b) => {
-    if (a.film_info.total_rating > b.film_info.total_rating) {
+    if (Movie.getRating(a) > Movie.getRating(b)) {
       return -1;
     }
-    if (a.film_info.total_rating < b.film_info.total_rating) {
+    if (Movie.getRating(a) < Movie.getRating(b)) {
       return 1;
     }
     return 0;
@@ -126,14 +127,14 @@ export const getTopRatedFilms = films => {
 };
 
 export const getMostCommentedFilms = films => {
-  if (films.every(film => film.comments.length === 0)) {
+  if (films.every(film => Movie.getCommentsLength(film) === 0)) {
     return false;
   }
   return sort((a, b) => {
-    if (a.comments > b.comments) {
+    if (Movie.getCommentsLength(a) > Movie.getCommentsLength(b)) {
       return -1;
     }
-    if (a.comments < b.comments) {
+    if (Movie.getCommentsLength(a) < Movie.getCommentsLength(b)) {
       return 1;
     }
     return 0;
@@ -154,25 +155,24 @@ export const sortByDefault = films => {
 export const sortByDate = films => {
   return films.sort((a, b) => {
     return (
-      parseInt(a.film_info.release.date, 10) -
-      parseInt(b.film_info.release.date, 10)
+      parseInt(Movie.getReleaseDate(a), 10) -
+      parseInt(Movie.getReleaseDate(b), 10)
     );
   });
 };
 
 export const sortByRating = films => {
   return films.sort((a, b) => {
-    return (
-      parseInt(a.film_info.total_rating, 10) -
-      parseInt(b.film_info.total_rating, 10)
-    );
+    return parseInt(Movie.getRating(a), 10) - parseInt(Movie.getRating(b), 10);
   });
 };
 
 export const filterFilms = (films, query) => {
   const formattedQuery = query.toLowerCase().replace(/[^A-Z0-9]+/gi, ``);
   return films.filter(film =>
-    film.film_info.title.toLowerCase().includes(formattedQuery)
+    Movie.getTitle(film)
+      .toLowerCase()
+      .includes(formattedQuery)
   );
 };
 
@@ -195,16 +195,14 @@ export const getStatsRank = watchedAmount => {
   }
 };
 export const countWatchedFilms = films => {
-  return films.filter(film => film.user_details.already_watched === true)
-    .length;
+  return films.filter(film => Movie.getWatched(film) === true).length;
 };
 
-export const getWatched = films =>
-  films.filter(element => element.user_details.already_watched);
+export const getWatched = films => films.filter(film => Movie.getWatched(film));
 export const getWatchlist = films =>
-  films.filter(element => element.user_details.watchlist);
+  films.filter(film => Movie.getWatchlist(film));
 export const getFavorite = films =>
-  films.filter(element => element.user_details.favorite);
+  films.filter(film => Movie.getFavorite(film));
 
 export const getDistanceInWords = (dateLeft, dateRight) => {
   const differenceinSeconds = differenceInSeconds(dateRight, dateLeft);
