@@ -1,32 +1,35 @@
 import moment from "moment";
+
 import { DEBOUNCE_TIMEOUT, DESCRIPTION_LENGTH } from "../consts";
 
 import { AbstractComponent } from "./abstractComponent";
 import { countHoursAndMins } from "../utils";
 import { debounce } from "lodash";
+import { Movie } from "../models/films";
 
 export class FilmCard extends AbstractComponent {
   constructor(film) {
     super();
-    this._title = film.film_info.title;
-    this._rating = film.film_info.total_rating;
-    this._poster = film.film_info.poster;
-    this._releaseDate = film.film_info.release.date;
+    this._title = Movie.getTitle(film);
+    this._rating = Movie.getRating(film);
+    this._poster = Movie.getPoster(film);
+    this._releaseDate = Movie.getReleaseDate(film);
 
-    [this._hours, this._minutes] = countHoursAndMins(film.film_info.runtime);
+    [this._hours, this._minutes] = countHoursAndMins(Movie.getRuntime(film));
 
-    this._genres = film.film_info.genre;
+    this._genres = Movie.getGenres(film);
     this._genre = this._genres[0] || ``;
     this._descriptionText = this._updateDescriptionText(
-      film.film_info.description
+      Movie.getDescriptionText(film)
     );
 
-    this._isWatchlist = film.user_details.watchlist;
-    this._isWatched = film.user_details.already_watched;
-    this._isFavorite = film.user_details.favorite;
+    this._isWatchlist = Movie.getWatchlist(film);
+    this._isWatched = Movie.getWatched(film);
+    this._isFavorite = Movie.getFavorite(film);
 
-    this._comments = film.comments.length;
+    this._comments = Movie.getCommentsLength(film);
   }
+
   _updateDescriptionText(text) {
     if (text.split(``).length > DESCRIPTION_LENGTH) {
       return text.slice(0, DESCRIPTION_LENGTH) + `...`;
