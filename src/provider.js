@@ -1,7 +1,3 @@
-import { ModelMovie } from "./models/films";
-import { ModelComment } from "./models/comments";
-
-
 const objectToArray = object => {
   return Object.keys(object).map(id => object[id]);
 };
@@ -15,13 +11,13 @@ export const Provider = class {
   updateFilm({ film }) {
     if (this._isOnline()) {
       return this._api.updateFilm({ film }).then(updatedFilm => {
-        this._store.setItem({ key: updatedFilm.id, item: updatedFilm.toRAW() });
+        this._store.setItem({ key: updatedFilm.id, item: updatedFilm });
         return updatedFilm;
       });
     } else {
       const currentFilm = film;
       this._store.setItem({ key: currentFilm.id, item: currentFilm });
-      return Promise.resolve(ModelMovie.parseMovie(currentFilm));
+      return Promise.resolve(film);
     }
   }
 
@@ -45,17 +41,13 @@ export const Provider = class {
   getFilms() {
     if (this._isOnline()) {
       return this._api.getFilms().then(films => {
-        films.map(film =>
-          this._store.setItem({ key: film.id, item: film.toRAW() })
-        );
+        films.map(film => this._store.setItem({ key: film.id, item: film }));
         return films;
       });
     } else {
-      const rawFilmsMap = this._store.getAll();
-      const rawFilms = objectToArray(rawFilmsMap);
-      const movies = ModelMovie.parseMovies(rawFilms);
-
-      return Promise.resolve(movies);
+      const filmsMap = this._store.getAll();
+      const films = objectToArray(filmsMap);
+      return Promise.resolve(films);
     }
   }
   _isOnline() {
