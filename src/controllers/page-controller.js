@@ -3,7 +3,7 @@ import {
   sortByDate,
   sortByDefault,
   sortByRating,
-  filterFilms,
+  filterFilmsbyTab,
   updateFilms,
   getFavorite,
   getWatched,
@@ -18,22 +18,6 @@ import { HeaderController } from "./header-controller";
 import { FilmsController } from "./films-controller";
 import { FooterController } from "./footer-controller";
 import { NavigationController } from "./navigation-controller";
-
-const filterFilmsbyTab = (navTab, allFilms) => {
-  const f = (() => {
-    if (navTab === NavTab.WATCHLIST) {
-      return getWatchlist;
-    } else if (navTab === NavTab.HISTORY) {
-      return getWatched;
-    } else if (navTab === NavTab.FAVORITES) {
-      return getFavorite;
-    } else {
-      return x => x;
-    }
-  })();
-
-  return f(allFilms);
-};
 
 export class PageController {
   constructor(headerContainer, container, films, api) {

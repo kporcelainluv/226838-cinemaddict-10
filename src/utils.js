@@ -1,5 +1,5 @@
 import { sort } from "ramda";
-import { Position, StatsFilterType, StatsRank } from "./consts";
+import { NavTab, Position, StatsFilterType, StatsRank } from "./consts";
 import { addMonths, addWeeks, addYears, isAfter, startOfToday } from "date-fns";
 import { Movie } from "./models/films";
 import {
@@ -167,13 +167,20 @@ export const sortByRating = films => {
   });
 };
 
-export const filterFilms = (films, query) => {
-  const formattedQuery = query.toLowerCase().replace(/[^A-Z0-9]+/gi, ``);
-  return films.filter(film =>
-    Movie.getTitle(film)
-      .toLowerCase()
-      .includes(formattedQuery)
-  );
+export const filterFilmsbyTab = (navTab, allFilms) => {
+  const f = (() => {
+    if (navTab === NavTab.WATCHLIST) {
+      return getWatchlist;
+    } else if (navTab === NavTab.HISTORY) {
+      return getWatched;
+    } else if (navTab === NavTab.FAVORITES) {
+      return getFavorite;
+    } else {
+      return x => x;
+    }
+  })();
+
+  return f(allFilms);
 };
 
 export const updateFilms = (films, updatedFilm) => {
