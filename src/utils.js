@@ -167,6 +167,14 @@ export const sortByRating = films => {
   });
 };
 
+export const filterFilms = (films, query) => {
+  const formattedQuery = query.toLowerCase().replace(/[^A-Z0-9]+/gi, ``);
+  return films.filter(film =>
+    Movie.getTitle(film)
+      .toLowerCase()
+      .includes(formattedQuery)
+  );
+};
 export const filterFilmsbyTab = (navTab, allFilms) => {
   const f = (() => {
     if (navTab === NavTab.WATCHLIST) {
