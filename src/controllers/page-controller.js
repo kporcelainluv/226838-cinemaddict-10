@@ -4,6 +4,7 @@ import {
   sortByDefault,
   sortByRating,
   filterFilmsbyTab,
+  filterFilms,
   updateFilms,
   getFavorite,
   getWatched,
@@ -73,7 +74,7 @@ export class PageController {
 
   _onSearchChange(query) {
     if (query.length >= SEARCH_QUERY_LENGTH) {
-      this._films = filterFilmsbyTab(this._allFilms, query);
+      this._films = filterFilms(this._allFilms, query);
       this._filmsController.hide();
       this._sortController.hide();
       this._navigationController.hide();
