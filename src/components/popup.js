@@ -3,32 +3,32 @@ import { countHoursAndMins } from "../utils";
 import moment from "moment";
 import { RATING_LENGTH, TIMEOUT, DEBOUNCE_TIMEOUT } from "../consts";
 import { debounce } from "lodash";
+import { Movie } from "../models/films";
 
 export class Popup extends AbstractComponent {
   constructor(film) {
     super();
-    this._title = film.film_info.title;
-    this._alternativeTitle = film.film_info.alternative_title;
-    this._rating = film.film_info.total_rating;
-    this._poster = film.film_info.poster;
-    this._ageRating = film.film_info.age_rating;
+    this._title = Movie.getTitle(film);
+    this._alternativeTitle = Movie.getAlternativeTitle(film);
+    this._rating = Movie.getRating(film);
+    this._poster = Movie.getPoster(film);
+    this._ageRating = Movie.getAgeRating(film);
 
-    this._director = film.film_info.director;
-    this._writers = film.film_info.writers;
-    this._actors = film.film_info.actors;
-    this._releaseDate = film.film_info.release.date;
-    this._releaseCountry = film.film_info.release.release_country;
+    this._director = Movie.getDirector(film);
+    this._writers = Movie.getWriters(film);
+    this._actors = Movie.getActors(film);
+    this._releaseDate = Movie.getReleaseDate(film);
+    this._releaseCountry = Movie.getReleaseCountry(film);
+    [this._hours, this._minutes] = countHoursAndMins(Movie.getRuntime(film));
 
-    [this._hours, this._minutes] = countHoursAndMins(film.film_info.runtime);
+    this._genre = this._createGenresString(Movie.getGenres(film));
 
-    this._genre = this._createGenresString(film.film_info.genre);
+    this._descriptionText = Movie.getDescriptionText(film);
 
-    this._descriptionText = film.film_info.description;
-
-    this._personalRating = film.user_details.personal_rating;
-    this._isWatchlist = film.user_details.watchlist;
-    this._isWatched = film.user_details.already_watched;
-    this._isFavorite = film.user_details.favorite;
+    this._personalRating = Movie.getPersonalRating(film);
+    this._isWatchlist = Movie.getWatchlist(film);
+    this._isWatched = Movie.getWatched(film);
+    this._isFavorite = Movie.getFavorite(film);
   }
 
   _createGenresString(genres) {
