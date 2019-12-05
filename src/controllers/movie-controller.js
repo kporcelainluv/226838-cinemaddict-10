@@ -3,6 +3,7 @@ import {render, unrender} from "../utils";
 import {Position, UpdateType} from "../consts";
 import {FilmCard} from "../components/filmCard";
 import {CommentsController} from "../controllers/comments-controller";
+import {Movie} from "../models/films";
 
 const body = document.getElementsByTagName(`body`)[0];
 
@@ -85,52 +86,28 @@ export class MovieController {
     });
 
     this._filmCard.onWatchlistBtnClick(() => {
-      const updatedFilm = {
-        ...this._film,
-        user_details: {
-          ...this._film.user_details,
-          watchlist: !this._film.user_details.watchlist
-        }
-      };
+      const updatedFilm = Movie.markWatchList(this._film);
       this._onFilmChange(updatedFilm, {
         updateType: UpdateType.UPDATEUSERINFO
       });
     });
 
     this._filmCard.onHistoryBtnClick(() => {
-      const updatedFilm = {
-        ...this._film,
-        user_details: {
-          ...this._film.user_details,
-          already_watched: !this._film.user_details.already_watched
-        }
-      };
+      const updatedFilm = Movie.markWatched(this._film);
       this._onFilmChange(updatedFilm, {
         updateType: UpdateType.UPDATEUSERINFO
       });
     });
 
     this._filmCard.onFavoriteBtnClick(() => {
-      const updatedFilm = {
-        ...this._film,
-        user_details: {
-          ...this._film.user_details,
-          favorite: !this._film.user_details.favorite
-        }
-      };
+      const updatedFilm = Movie.markFavorite(this._film);
       this._onFilmChange(updatedFilm, {
         updateType: UpdateType.UPDATEUSERINFO
       });
     });
 
     this._popup.onHistoryBtnClick(() => {
-      const updatedFilm = {
-        ...this._film,
-        user_details: {
-          ...this._film.user_details,
-          already_watched: !this._film.user_details.already_watched
-        }
-      };
+      const updatedFilm = Movie.markWatched(this._film);
       this._onFilmChange(updatedFilm, {
         updateType: UpdateType.UPDATEUSERINFO
       });
@@ -140,13 +117,7 @@ export class MovieController {
     });
 
     this._popup.onWatchlistBtnClick(() => {
-      const updatedFilm = {
-        ...this._film,
-        user_details: {
-          ...this._film.user_details,
-          watchlist: !this._film.user_details.watchlist
-        }
-      };
+      const updatedFilm = Movie.markWatchList(this._film);
       this._onFilmChange(updatedFilm, {
         updateType: UpdateType.UPDATEUSERINFO
       });
@@ -154,13 +125,7 @@ export class MovieController {
     });
 
     this._popup.onRatingUndoClick(() => {
-      const updatedFilm = {
-        ...this._film,
-        user_details: {
-          ...this._film.user_details,
-          already_watched: !this._film.user_details.already_watched
-        }
-      };
+      const updatedFilm = Movie.markWatched(this._film);
       this._onFilmChange(updatedFilm, {
         updateType: UpdateType.UPDATEUSERINFO
       });
@@ -171,13 +136,7 @@ export class MovieController {
     });
 
     this._popup.onFavoriteBtnClick(() => {
-      const updatedFilm = {
-        ...this._film,
-        user_details: {
-          ...this._film.user_details,
-          favorite: !this._film.user_details.favorite
-        }
-      };
+      const updatedFilm = Movie.getFavorite(this._film);
       this._onFilmChange(updatedFilm, {
         updateType: UpdateType.UPDATEUSERINFO
       });
@@ -189,13 +148,7 @@ export class MovieController {
       evt.target.checked = true;
 
       const personalRating = evt.target.value;
-      const updatedFilm = {
-        ...this._film,
-        user_details: {
-          ...this._film.user_details,
-          personal_rating: Number(personalRating)
-        }
-      };
+      const updatedFilm = Movie.markPersonalRating(this._film, personalRating);
       this._onFilmChange(updatedFilm, {
         updateType: UpdateType.UPDATEUSERINFO,
         onSuccess: () => {
