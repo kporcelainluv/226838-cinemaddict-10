@@ -107,7 +107,11 @@ export const getGenresByKeysVals = films => {
 };
 
 export const getTopGenre = films => {
+  if (films.length < 1) {
+    return "—";
+  }
   const genres = getSortedGenres(films);
+  console.log({ films, genres });
   return genres[0][0];
 };
 
