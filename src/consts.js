@@ -6,7 +6,7 @@ export const EXIT_KEY_ESCAPE = `Escape`;
 export const SEARCH_QUERY_LENGTH = 3;
 export const DEFAULT_AMOUNT_DISPLAYED = 2;
 export const TASKS_STORE_KEY = `tasks-store-key`;
-export const END_POINT = `https://htmlacademy-es-9.appspot.com/cinemaddict`;
+export const END_POINT = `https://htmlacademy-es-10.appspot.com/cinemaddict/`;
 export const AUTHORIZATION = `Basic eo0w590ik29889a=${Math.random()}`;
 export const TIMEOUT = 600;
 export const DESCRIPTION_LENGTH = 140;

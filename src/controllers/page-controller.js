@@ -1,4 +1,4 @@
-import { difference, head, pipe, sort } from "ramda";
+import {difference, head, pipe, sort} from "ramda";
 import {
   sortByDate,
   sortByDefault,
@@ -10,15 +10,15 @@ import {
   getWatched,
   getWatchlist
 } from "../utils";
-import { NavTab, SEARCH_QUERY_LENGTH, SortType, UpdateType } from "../consts";
-import { SearchResultController } from "./search-result";
-import { StatsController } from "../controllers/stats-controller";
+import {NavTab, SEARCH_QUERY_LENGTH, SortType, UpdateType} from "../consts";
+import {SearchResultController} from "./search-result";
+import {StatsController} from "../controllers/stats-controller";
 
-import { SortController } from "./sort-controller";
-import { HeaderController } from "./header-controller";
-import { FilmsController } from "./films-controller";
-import { FooterController } from "./footer-controller";
-import { NavigationController } from "./navigation-controller";
+import {SortController} from "./sort-controller";
+import {HeaderController} from "./header-controller";
+import {FilmsController} from "./films-controller";
+import {FooterController} from "./footer-controller";
+import {NavigationController} from "./navigation-controller";
 
 export class PageController {
   constructor(headerContainer, container, films, api) {
@@ -29,8 +29,8 @@ export class PageController {
     this._currentTab = NavTab.ALL;
 
     this._sortController = new SortController(
-      this._container,
-      this._onSortTypeChange.bind(this)
+        this._container,
+        this._onSortTypeChange.bind(this)
     );
     this._headerController = new HeaderController({
       onSearchChange: this._onSearchChange.bind(this)
@@ -40,8 +40,8 @@ export class PageController {
       onFilmUpdate: this._onFilmUpdate.bind(this)
     });
     this._navigationController = new NavigationController(
-      this._container,
-      this._onNavigationChange.bind(this)
+        this._container,
+        this._onNavigationChange.bind(this)
     );
 
     this._searchResultContoller = new SearchResultController({
@@ -144,39 +144,39 @@ export class PageController {
   }
   /* eslint-disable consistent-return */
   _onFilmUpdate(updatedFilm, meta) {
-    const { updateType, onSuccess, onError } = meta;
+    const {updateType, onSuccess, onError} = meta;
 
-    const rerender = newFilm => {
+    const rerender = (newFilm) => {
       this._films = updateFilms(this._films, newFilm);
       this._allFilms = updateFilms(this._allFilms, newFilm);
 
       this._filmsController.render(
-        filterFilmsbyTab(this._currentTab, this._allFilms)
+          filterFilmsbyTab(this._currentTab, this._allFilms)
       );
       this._navigationController.render(this._allFilms, this._currentTab);
     };
 
     if (updateType === UpdateType.DELETECOMMENT) {
       const deletedComment = difference(
-        this._films.find(f => f.id === updatedFilm.id).comments,
-        updatedFilm.comments
+          this._films.find((f) => f.id === updatedFilm.id).comments,
+          updatedFilm.comments
       )[0];
       return this._api
-        .deleteComment({ comment: deletedComment })
+        .deleteComment({comment: deletedComment})
         .then(() => rerender(updatedFilm))
         .then(() => onSuccess())
         .catch(() => onError());
     } else if (updateType === UpdateType.UPDATEUSERINFO) {
-      return this._api.updateFilm({ film: updatedFilm }).then(() => {
+      return this._api.updateFilm({film: updatedFilm}).then(() => {
         rerender(updatedFilm);
       });
     } else if (updateType === UpdateType.CREATECOMMENT) {
-      const initialComments = this._films.find(f => f.id === updatedFilm.id)
+      const initialComments = this._films.find((f) => f.id === updatedFilm.id)
         .comments;
       const createdComment = pipe(
-        difference(updatedFilm.comments),
-        sort((c1, c2) => c2.date - c1.date),
-        head
+          difference(updatedFilm.comments),
+          sort((c1, c2) => c2.date - c1.date),
+          head
       )(initialComments);
 
       return this._api
@@ -184,7 +184,7 @@ export class PageController {
           film: updatedFilm,
           comment: createdComment
         })
-        .then(({ comments }) => {
+        .then(({comments}) => {
           updatedFilm.comments = comments;
           onSuccess(comments);
           rerender(updatedFilm);
