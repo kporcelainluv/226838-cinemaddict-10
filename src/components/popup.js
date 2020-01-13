@@ -1,9 +1,9 @@
-import {AbstractComponent} from "./abstractComponent";
-import {countHoursAndMins} from "../utils";
+import { AbstractComponent } from "./abstractComponent";
+import { countHoursAndMins } from "../utils";
 import moment from "moment";
-import {RATING_LENGTH, TIMEOUT, DEBOUNCE_TIMEOUT} from "../consts";
-import {debounce} from "lodash";
-import {Movie} from "../models/films";
+import { RATING_LENGTH, TIMEOUT, DEBOUNCE_TIMEOUT } from "../consts";
+import { debounce } from "lodash";
+import { Movie } from "../models/films";
 
 export class Popup extends AbstractComponent {
   constructor(film) {
@@ -72,8 +72,8 @@ export class Popup extends AbstractComponent {
               <div class="film-details__title-wrap">
                 <h3 class="film-details__title">${this._title}</h3>
                 <p class="film-details__title-original">Original: ${
-  this._alternativeTitle
-}</p>
+                  this._alternativeTitle
+                }</p>
               </div>
 
               <div class="film-details__rating">
@@ -94,8 +94,8 @@ export class Popup extends AbstractComponent {
               <tr class="film-details__row">
                 <td class="film-details__term">Release Date</td>
                 <td class="film-details__cell">${moment(
-      this._releaseDate
-  ).format(`DD MMMM YYYY`)}</td>
+                  this._releaseDate
+                ).format(`DD MMMM YYYY`)}</td>
               </tr>
               <tr class="film-details__row">
                 <td class="film-details__term">Runtime</td>
@@ -108,11 +108,11 @@ export class Popup extends AbstractComponent {
               </tr>
               <tr class="film-details__row">
                 <td class="film-details__term">${this._getGenresTag(
-      this._genre
-  )}</td>
+                  this._genre
+                )}</td>
                 <td class="film-details__cell">${
-  this._genre.length === 0 ? `` : this._genre
-}</td>
+                  this._genre.length === 0 ? `` : this._genre
+                }</td>
               </tr>
             </table>
 
@@ -124,25 +124,25 @@ export class Popup extends AbstractComponent {
 
         <section class="film-details__controls">
           <input type="checkbox" class="film-details__control-input visually-hidden" id="watchlist" name="watchlist" ${
-  this._isWatchlist ? `checked` : ``
-}>
+            this._isWatchlist ? `checked` : ``
+          }>
           <label for="watchlist" class="film-details__control-label film-details__control-label--watchlist">Add to watchlist</label>
 
           <input type="checkbox" class="film-details__control-input visually-hidden" id="watched" name="watched" ${
-  this._isWatched ? `checked` : ``
-}>
+            this._isWatched ? `checked` : ``
+          }>
           <label for="watched" class="film-details__control-label film-details__control-label--watched">Already watched</label>
 
           <input type="checkbox" class="film-details__control-input visually-hidden" id="favorite" name="favorite" ${
-  this._isFavorite ? `checked` : ``
-}>
+            this._isFavorite ? `checked` : ``
+          }>
           <label for="favorite" class="film-details__control-label film-details__control-label--favorite">Add to favorites</label>
         </section>
       </div>
       <div class="form-details__middle-container ${
-  this._isWatched ? `` : `visually-hidden`
-}">
-      
+        this._isWatched ? `` : `visually-hidden`
+      }">
+
       <section class="film-details__user-rating-wrap">
         <div class="film-details__user-rating-controls">
           <button class="film-details__watched-reset" type="button">Undo</button>
@@ -151,8 +151,8 @@ export class Popup extends AbstractComponent {
         <div class="film-details__user-score">
           <div class="film-details__user-rating-poster">
             <img src="${
-  this._poster
-}" alt="film-poster" class="film-details__user-rating-img">
+              this._poster
+            }" alt="film-poster" class="film-details__user-rating-img">
           </div>
 
           <section class="film-details__user-rating-inner">
@@ -180,7 +180,7 @@ export class Popup extends AbstractComponent {
         </section>
       </div>
         <div class="form-details__bottom-container">
-      
+
     </div>
     </form>
   </section>`;
@@ -193,7 +193,7 @@ export class Popup extends AbstractComponent {
   }
   getWatchedBtnUnchecked() {
     this.getElement().querySelectorAll(
-        `.film-details__control-input`
+      `.film-details__control-input`
     )[1].checked = false;
   }
 
@@ -205,13 +205,13 @@ export class Popup extends AbstractComponent {
 
   disableForm() {
     const userRatingBtns = this.getElement().querySelectorAll(
-        `.film-details__user-rating-input`
+      `.film-details__user-rating-input`
     );
     if (userRatingBtns) {
-      userRatingBtns.forEach((elm) => (elm.disabled = true));
+      userRatingBtns.forEach(elm => (elm.disabled = true));
     }
     const commentInput = this.getElement().querySelector(
-        `.film-details__comment-input`
+      `.film-details__comment-input`
     );
     if (commentInput) {
       commentInput.disabled = true;
@@ -219,14 +219,14 @@ export class Popup extends AbstractComponent {
   }
   enableForm() {
     const userRatingBtns = this.getElement().querySelectorAll(
-        `.film-details__user-rating-input`
+      `.film-details__user-rating-input`
     );
     if (userRatingBtns) {
-      userRatingBtns.forEach((elm) => (elm.disabled = false));
+      userRatingBtns.forEach(elm => (elm.disabled = false));
     }
 
     const commentInput = this.getElement().querySelector(
-        `.film-details__comment-input`
+      `.film-details__comment-input`
     );
     if (commentInput) {
       commentInput.disabled = false;
@@ -242,9 +242,9 @@ export class Popup extends AbstractComponent {
   }
   addRedBackgroundToButton(elm) {
     const allLabels = this.getElement().querySelectorAll(
-        `.film-details__user-rating-label`
+      `.film-details__user-rating-label`
     );
-    Array.from(allLabels).forEach((label) => {
+    Array.from(allLabels).forEach(label => {
       if (label.htmlFor === `rating-${elm.value}`) {
         label.classList.add(`film-details__user-rating-label--error`);
       }
@@ -252,8 +252,8 @@ export class Popup extends AbstractComponent {
   }
   removeErrorFromButtons() {
     Array.from(
-        this.getElement().querySelectorAll(`.film-details__user-rating-label`)
-    ).forEach((elm) => {
+      this.getElement().querySelectorAll(`.film-details__user-rating-label`)
+    ).forEach(elm => {
       if (elm.classList.contains(`film-details__user-rating-label--error`)) {
         elm.classList.toggle(`film-details__user-rating-label--error`);
       }
@@ -261,7 +261,7 @@ export class Popup extends AbstractComponent {
   }
   onClosingBtnClick(callback) {
     const closingButton = this.getElement().querySelector(
-        `.film-details__close-btn`
+      `.film-details__close-btn`
     );
     closingButton.addEventListener(`click`, callback);
   }
@@ -290,6 +290,11 @@ export class Popup extends AbstractComponent {
   ratingButtonHandler(callback) {
     this.getElement()
       .querySelectorAll(`.film-details__user-rating-input`)
-      .forEach((elm) => elm.addEventListener(`keydown`, callback));
+      .forEach(elm => elm.addEventListener(`keydown`, callback));
+  }
+  resetForm() {
+    this.getElement()
+      .querySelector(`.film-details__inner`)
+      .reset();
   }
 }
