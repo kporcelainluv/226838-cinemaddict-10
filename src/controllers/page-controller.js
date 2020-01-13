@@ -78,14 +78,18 @@ export class PageController {
       this._filmsController.hide();
       this._sortController.hide();
       this._navigationController.hide();
+      this._stats.hide();
       this._searchResultContoller.render(this._films);
     } else if (query.length === 0) {
+      console.log(this._currentTab);
       this._films = this._allFilms;
       this._sortController.show();
       this._navigationController.show();
       this._searchResultContoller.unrender();
       this._filmsController.show();
+      this._stats.show();
       this._filmsController.render(this._films);
+      this._onNavigationChange(this._currentTab);
     }
   }
 
