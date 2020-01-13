@@ -1,6 +1,8 @@
 export const PER_PAGE = 5;
 export const FILMS_DISPLAYED_INITIALLY = 5;
-export const EXIT_KEY = 13;
+export const ENTER_KEY = 13;
+export const EXIT_KEY_ESC = `Esc`;
+export const EXIT_KEY_ESCAPE = `Escape`;
 export const SEARCH_QUERY_LENGTH = 3;
 export const DEFAULT_AMOUNT_DISPLAYED = 2;
 export const TASKS_STORE_KEY = `tasks-store-key`;
