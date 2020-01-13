@@ -5,8 +5,8 @@ import {
   getHoursAndMins,
   getTopGenre
 } from "../utils";
-import {StatsSummary} from "../components/statsSummary";
-import {Position} from "../consts";
+import { StatsSummary } from "../components/statsSummary";
+import { Position } from "../consts";
 
 export class StatsSummaryController {
   constructor(container) {
@@ -21,9 +21,9 @@ export class StatsSummaryController {
     const [hours, minutes] = getHoursAndMins(films);
     this._statsList = new StatsSummary(watchedFilms, hours, minutes, topGenre);
     render(
-        this._container.getElement(),
-        this._statsList.getElement(),
-        Position.BEFOREEND
+      this._container.getElement(),
+      this._statsList.getElement(),
+      Position.BEFOREEND
     );
   }
 

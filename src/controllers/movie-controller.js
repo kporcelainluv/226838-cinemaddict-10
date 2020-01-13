@@ -1,9 +1,9 @@
-import {Popup} from "../components/popup";
-import {render, unrender} from "../utils";
-import {Position, UpdateType} from "../consts";
-import {FilmCard} from "../components/filmCard";
-import {CommentsController} from "../controllers/comments-controller";
-import {Movie} from "../models/films";
+import { Popup } from "../components/popup";
+import { render, unrender } from "../utils";
+import { EXIT_KEY_ESC, EXIT_KEY_ESCAPE, Position, UpdateType } from "../consts";
+import { FilmCard } from "../components/filmCard";
+import { CommentsController } from "../controllers/comments-controller";
+import { Movie } from "../models/films";
 
 const body = document.getElementsByTagName(`body`)[0];
 
@@ -22,9 +22,9 @@ export class MovieController {
     this._filmCard = new FilmCard(this._film);
     this._popup = new Popup(this._film);
     this._comments = new CommentsController(
-        this._popup,
-        this._film.comments,
-        this.onCommentsChange
+      this._popup,
+      this._film.comments,
+      this.onCommentsChange
     );
   }
 
@@ -62,8 +62,8 @@ export class MovieController {
     window.addEventListener(`offline`, disableForms);
     window.addEventListener(`online`, enableForms);
 
-    const onEscKeyDown = (evt) => {
-      if (evt.key === `Escape` || evt.key === `Esc`) {
+    const onEscKeyDown = evt => {
+      if (evt.key === EXIT_KEY_ESCAPE || evt.key === EXIT_KEY_ESC) {
         this.closePopup();
         document.removeEventListener(`keydown`, onEscKeyDown);
       }
@@ -143,7 +143,7 @@ export class MovieController {
       this._film = updatedFilm;
     });
 
-    this._popup.ratingButtonHandler((evt) => {
+    this._popup.ratingButtonHandler(evt => {
       this._popup.removeErrorFromButtons();
       evt.target.checked = true;
 
