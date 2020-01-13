@@ -1,11 +1,11 @@
-import { StatisticsSection } from "../components/statisticsSection";
-import { UserRankController } from "./user-rank-controller";
-import { StatsFiltersController } from "./stats-filters-controller";
-import { StatsSummaryController } from "./stats-summary-controller";
-import { StatsChartController } from "./stats-chart-controller";
+import {StatisticsSection} from "../components/statisticsSection";
+import {UserRankController} from "./user-rank-controller";
+import {StatsFiltersController} from "./stats-filters-controller";
+import {StatsSummaryController} from "./stats-summary-controller";
+import {StatsChartController} from "./stats-chart-controller";
 
-import { render, getFilmsByFilter } from "../utils";
-import { Position, StatsFilterType } from "../consts";
+import {render, getFilmsByFilter} from "../utils";
+import {Position, StatsFilterType} from "../consts";
 
 export class StatsController {
   constructor(container, films) {
@@ -16,8 +16,8 @@ export class StatsController {
     this._rankController = new UserRankController(this._statsSection);
 
     this._filters = new StatsFiltersController(
-      this._statsSection,
-      this.onTabChange.bind(this)
+        this._statsSection,
+        this.onTabChange.bind(this)
     );
 
     this._statsSummary = new StatsSummaryController(this._statsSection);
@@ -27,9 +27,9 @@ export class StatsController {
   init(films) {
     this._films = films;
     render(
-      this._container,
-      this._statsSection.getElement(),
-      Position.BEFOREEND
+        this._container,
+        this._statsSection.getElement(),
+        Position.BEFOREEND
     );
   }
 
