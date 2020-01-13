@@ -5,7 +5,8 @@ import { UpdateType, Position, DeleteButtonName, ENTER_KEY } from "../consts";
 const EMOJI = {
   "emoji-smile": `smile`,
   "emoji-sleeping": `sleeping`,
-  "emoji-gpuke": `puke`
+  "emoji-gpuke": `puke`,
+  "emoji-angry": `angry`
 };
 
 export class CommentsController {
@@ -21,9 +22,6 @@ export class CommentsController {
     this._rerender = this._rerender.bind(this);
     this._unrender = this._unrender.bind(this);
     this._render = this._render.bind(this);
-  }
-  _getEmojiUrl(id) {
-    return `./images/emoji/${EMOJI[id]}.png`;
   }
 
   _render() {
@@ -83,9 +81,8 @@ export class CommentsController {
     this._commentsSection.emojiOptionHandler(evt => {
       evt.preventDefault();
       const emojiId = evt.target.id;
-
       this._currentEmoji = EMOJI[emojiId];
-      this._commentsSection.emojiOptionHandler(this._getEmojiUrl(emojiId));
+      this._commentsSection.emojiUrlUpdateHandler(this._currentEmoji);
     });
 
     const onAddComment = evt => {
