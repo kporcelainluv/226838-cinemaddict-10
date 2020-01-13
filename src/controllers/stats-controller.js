@@ -55,4 +55,10 @@ export class StatsController {
     this._statsSummary.unrender();
     this._chart.unrender();
   }
+  hide() {
+    this._statsSection.hide();
+  }
+  show() {
+    this._statsSection.show();
+  }
 }
