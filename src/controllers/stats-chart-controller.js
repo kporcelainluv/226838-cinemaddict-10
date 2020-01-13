@@ -10,7 +10,6 @@ export class StatsChartController {
 
   render(films) {
     this.unrender();
-
     this._chart = new StatsChart();
     this._chart.createChart(getGenresByKeysVals(films));
     render(

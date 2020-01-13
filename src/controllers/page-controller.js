@@ -68,7 +68,7 @@ export class PageController {
     this._headerController.initProfileStats(this._films);
     this._navigationController.initWithFilms(this._films);
     this._searchResultContoller.init(this._films);
-    this._stats.init(this._films);
+    this._stats.init(getWatched(this._allFilms));
     this._footer.init(this._films);
   }
 
@@ -78,6 +78,7 @@ export class PageController {
       this._filmsController.hide();
       this._sortController.hide();
       this._navigationController.hide();
+      this._stats.hide();
       this._searchResultContoller.render(this._films);
     } else if (query.length === 0) {
       this._films = this._allFilms;
@@ -85,7 +86,9 @@ export class PageController {
       this._navigationController.show();
       this._searchResultContoller.unrender();
       this._filmsController.show();
+      this._stats.show();
       this._filmsController.render(this._films);
+      this._onNavigationChange(this._currentTab);
     }
   }
 
@@ -119,7 +122,7 @@ export class PageController {
     } else if (navTab === NavTab.STATS) {
       this._filmsController.hide();
       this._sortController.hide();
-      this._stats.render();
+      this._stats.render(getWatched(this._allFilms));
     }
   }
 

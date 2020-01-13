@@ -40,8 +40,13 @@ export class StatsController {
     this._rankController.render(filteredFilms);
   }
 
-  render() {
+  render(films) {
+    this.unrender();
+    this._films = films;
     this._filters.render();
+    this._statsSummary.render(films);
+    this._chart.render(films);
+    this._rankController.render(films);
     this.onTabChange(StatsFilterType.ALL);
   }
   unrender() {
@@ -49,5 +54,11 @@ export class StatsController {
     this._filters.unrender();
     this._statsSummary.unrender();
     this._chart.unrender();
+  }
+  hide() {
+    this._statsSection.hide();
+  }
+  show() {
+    this._statsSection.show();
   }
 }

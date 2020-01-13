@@ -6,7 +6,8 @@ import {
   differenceInSeconds,
   differenceInMinutes,
   differenceInHours,
-  differenceInDays
+  differenceInDays,
+  parseISO
 } from "date-fns";
 export const createElement = template => {
   const newElement = document.createElement(`div`);
@@ -58,7 +59,7 @@ export const getFilmsByFilter = (films, filterType) => {
   const date = getDateByFilterType(filterType);
   return films.filter(film => {
     const watchDate = Movie.getWatchingDate(film);
-    return isAfter(watchDate, date);
+    return isAfter(parseISO(watchDate), date);
   });
 };
 
@@ -107,6 +108,9 @@ export const getGenresByKeysVals = films => {
 };
 
 export const getTopGenre = films => {
+  if (films.length < 1) {
+    return "—";
+  }
   const genres = getSortedGenres(films);
   return genres[0][0];
 };

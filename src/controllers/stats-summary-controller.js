@@ -19,7 +19,6 @@ export class StatsSummaryController {
     const topGenre = getTopGenre(films);
     const watchedFilms = getWatchedFilms(films);
     const [hours, minutes] = getHoursAndMins(films);
-
     this._statsList = new StatsSummary(watchedFilms, hours, minutes, topGenre);
     render(
         this._container.getElement(),

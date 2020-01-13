@@ -15,7 +15,7 @@ export class CommentsSection extends AbstractComponent {
   this._commentsAmount
 }</span></h3>
         <ul class="film-details__comments-list">
-        
+
         ${this._comments.reduce((acc, comment) => {
     acc += `<li class="film-details__comment">
             <span class="film-details__comment-emoji">
@@ -66,16 +66,31 @@ export class CommentsSection extends AbstractComponent {
             <label class="film-details__emoji-label" for="emoji-gpuke">
               <img src="./images/emoji/puke.png" width="30" height="30" alt="emoji">
             </label>
+            <input
+                  class="film-details__emoji-item visually-hidden"
+                  name="comment-emoji"
+                  type="radio"
+                  id="emoji-angry"
+                  value="angry"
+                />
+                <label class="film-details__emoji-label" for="emoji-angry">
+                  <img
+                    src="./images/emoji/angry.png"
+                    width="30"
+                    height="30"
+                    alt="emoji"
+                  />
+                </label>
           </div>
         </div>
       </section>
   `;
   }
 
-  EmojiUrlUpdateHandler(newUrl) {
+  emojiUrlUpdateHandler(emoji) {
     this.getElement().querySelector(
         `.film-details__add-emoji-label img`
-    ).src = newUrl;
+    ).src = `images/emoji/${emoji}.png`;
   }
 
   buttonHeadingHandler(state, index) {
@@ -141,7 +156,6 @@ export class CommentsSection extends AbstractComponent {
     const emojiOptions = this.getElement().querySelectorAll(
         `.film-details__emoji-item`
     );
-
     Array.from(emojiOptions).forEach((emoji) => {
       emoji.addEventListener(`click`, callback);
     });

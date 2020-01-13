@@ -142,7 +142,7 @@ export class Popup extends AbstractComponent {
       <div class="form-details__middle-container ${
   this._isWatched ? `` : `visually-hidden`
 }">
-      
+
       <section class="film-details__user-rating-wrap">
         <div class="film-details__user-rating-controls">
           <button class="film-details__watched-reset" type="button">Undo</button>
@@ -180,7 +180,7 @@ export class Popup extends AbstractComponent {
         </section>
       </div>
         <div class="form-details__bottom-container">
-      
+
     </div>
     </form>
   </section>`;
@@ -291,5 +291,10 @@ export class Popup extends AbstractComponent {
     this.getElement()
       .querySelectorAll(`.film-details__user-rating-input`)
       .forEach((elm) => elm.addEventListener(`keydown`, callback));
+  }
+  resetForm() {
+    this.getElement()
+      .querySelector(`.film-details__inner`)
+      .reset();
   }
 }

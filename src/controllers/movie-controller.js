@@ -1,6 +1,6 @@
 import {Popup} from "../components/popup";
 import {render, unrender} from "../utils";
-import {Position, UpdateType} from "../consts";
+import {EXIT_KEY_ESC, EXIT_KEY_ESCAPE, Position, UpdateType} from "../consts";
 import {FilmCard} from "../components/filmCard";
 import {CommentsController} from "../controllers/comments-controller";
 import {Movie} from "../models/films";
@@ -63,7 +63,7 @@ export class MovieController {
     window.addEventListener(`online`, enableForms);
 
     const onEscKeyDown = (evt) => {
-      if (evt.key === `Escape` || evt.key === `Esc`) {
+      if (evt.key === EXIT_KEY_ESCAPE || evt.key === EXIT_KEY_ESC) {
         this.closePopup();
         document.removeEventListener(`keydown`, onEscKeyDown);
       }

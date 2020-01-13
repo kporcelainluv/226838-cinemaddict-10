@@ -99,16 +99,21 @@ export class FilmsController {
           this._defaultFilmList.getElement(),
           Position.BEFOREEND
       );
-      render(
-          this._filmsContainer.getElement(),
-          this._topRatedList.getElement(),
-          Position.BEFOREEND
-      );
-      render(
-          this._filmsContainer.getElement(),
-          this._mostCommentedList.getElement(),
-          Position.BEFOREEND
-      );
+
+      if (getTopRatedFilms(films).length > 0) {
+        render(
+            this._filmsContainer.getElement(),
+            this._topRatedList.getElement(),
+            Position.BEFOREEND
+        );
+      }
+      if (getMostCommentedFilms(films).length > 0) {
+        render(
+            this._filmsContainer.getElement(),
+            this._mostCommentedList.getElement(),
+            Position.BEFOREEND
+        );
+      }
 
       this._defaultFilmListController.init();
       this._ratedFilmListController.init();
