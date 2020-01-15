@@ -1,5 +1,5 @@
-import {AbstractComponent} from "./abstractComponent";
-class ShowMoreButton extends AbstractComponent {
+import { AbstractComponent } from "./abstractComponent";
+export class ShowMoreButton extends AbstractComponent {
   constructor() {
     super();
     this.callback = undefined;
@@ -21,4 +21,3 @@ class ShowMoreButton extends AbstractComponent {
     this.getElement().removeEventListener(`click`, callback);
   }
 }
-export {ShowMoreButton};
