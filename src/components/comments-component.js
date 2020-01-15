@@ -16,8 +16,8 @@ export class CommentsSection extends AbstractComponent {
         }</span></h3>
         <ul class="film-details__comments-list">
 
-        ${this._comments.reduce((acc, comment) => {
-          acc += `<li class="film-details__comment">
+        ${this._comments.reduce((commentsList, comment) => {
+          commentsList += `<li class="film-details__comment">
             <span class="film-details__comment-emoji">
               <img src="./images/emoji/${
                 comment.emotion
@@ -37,7 +37,7 @@ export class CommentsSection extends AbstractComponent {
               </p>
             </div>
           </li>`;
-          return acc;
+          return commentsList;
         }, ``)}
         </ul>
 

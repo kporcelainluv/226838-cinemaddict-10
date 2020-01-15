@@ -68,25 +68,25 @@ export const getWatchedFilms = films => {
 };
 
 export const getHoursAndMins = films => {
-  const duration = films.reduce((acc, elm) => {
-    return acc + Movie.getRuntime(elm);
+  const duration = films.reduce((runtimeList, elm) => {
+    return runtimeList + Movie.getRuntime(elm);
   }, 0);
   const [hours, minutes] = countHoursAndMins(duration);
   return [hours, minutes];
 };
 
 const getSortedGenres = films => {
-  const genres = films.reduce((acc, elm) => {
+  const genres = films.reduce((newGenresList, elm) => {
     const genresList = Movie.getGenres(elm);
     genresList.forEach(genre => {
-      if (genre in acc) {
-        acc[genre] += 1;
+      if (genre in newGenresList) {
+        newGenresList[genre] += 1;
       } else {
-        acc[genre] = 1;
+        newGenresList[genre] = 1;
       }
     });
 
-    return acc;
+    return newGenresList;
   }, {});
 
   return Object.entries(genres).sort((a, b) => {
