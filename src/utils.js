@@ -158,16 +158,25 @@ export const sortByDefault = films => {
 
 export const sortByDate = films => {
   return films.sort((a, b) => {
-    return (
-      parseInt(Movie.getReleaseDate(a), 10) -
-      parseInt(Movie.getReleaseDate(b), 10)
-    );
+    if (parseInt(Movie.getReleaseDate(a)) > parseInt(Movie.getReleaseDate(b))) {
+      return -1;
+    } else if (
+      parseInt(Movie.getReleaseDate(a)) < parseInt(Movie.getReleaseDate(b))
+    ) {
+      return 1;
+    }
+    return 0;
   });
 };
 
 export const sortByRating = films => {
   return films.sort((a, b) => {
-    return parseInt(Movie.getRating(a), 10) - parseInt(Movie.getRating(b), 10);
+    if (parseInt(Movie.getRating(a)) > parseInt(Movie.getRating(b))) {
+      return -1;
+    } else if (parseInt(Movie.getRating(a)) < parseInt(Movie.getRating(b))) {
+      return 1;
+    }
+    return 0;
   });
 };
 
