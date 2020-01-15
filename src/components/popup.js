@@ -35,11 +35,11 @@ export class Popup extends AbstractComponent {
     if (genres.length === 1) {
       return genres;
     }
-    return genres.reduce((acc, element, index, array) => {
-      if (index === array.length - 1) {
-        return acc + element;
+    return genres.reduce((newGenresList, element, index, genresList) => {
+      if (index === genresList.length - 1) {
+        return newGenresList + element;
       }
-      return acc + element + `, `;
+      return newGenresList + element + `, `;
     }, ``);
   }
   _getGenresTag(genres) {
