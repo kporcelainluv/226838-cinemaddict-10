@@ -1,7 +1,7 @@
 import { Popup } from "../components/popup";
 import { render, unrender } from "../utils";
 import { EXIT_KEY_ESC, EXIT_KEY_ESCAPE, Position, UpdateType } from "../consts";
-import { FilmCard } from "../components/filmCard";
+import { FilmCard } from "../components/film-card";
 import { CommentsController } from "../controllers/comments-controller";
 import { Movie } from "../models/films";
 

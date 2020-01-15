@@ -1,8 +1,8 @@
 import {render, unrender} from "../utils";
 import {FilmListController} from "./film-list-controller";
-import {SearchResultHeading} from "../components/searchResultHeading";
-import {EmptySearch} from "../components/emptySearch";
-import {SearchResultContainer} from "../components/searchResultContainer";
+import {SearchResultHeading} from "../components/search-result-heading";
+import {EmptySearch} from "../components/empty-search";
+import {SearchResultContainer} from "../components/search-result-container";
 import {Position, PageType} from "../consts";
 
 export class SearchResultController {

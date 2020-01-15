@@ -1,5 +1,5 @@
 import { TIMEOUT } from "../consts";
-import { AbstractComponent } from "./abstractComponent";
+import { AbstractComponent } from "./abstract-component";
 import { getDistanceInWords } from "../utils";
 
 export class CommentsSection extends AbstractComponent {

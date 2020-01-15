@@ -1,4 +1,4 @@
-import {CommentsSection} from "../components/commentsComponent";
+import {CommentsSection} from "../components/comments-component";
 import {render, unrender} from "../utils";
 import {UpdateType, Position, DeleteButtonName, ENTER_KEY} from "../consts";
 

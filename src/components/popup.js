@@ -1,4 +1,4 @@
-import { AbstractComponent } from "./abstractComponent";
+import { AbstractComponent } from "./abstract-component";
 import { countHoursAndMins } from "../utils";
 import moment from "moment";
 import { RATING_LENGTH, TIMEOUT, DEBOUNCE_TIMEOUT } from "../consts";

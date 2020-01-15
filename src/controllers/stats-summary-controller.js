@@ -5,7 +5,7 @@ import {
   getHoursAndMins,
   getTopGenre
 } from "../utils";
-import {StatsSummary} from "../components/statsSummary";
+import {StatsSummary} from "../components/statistics-summary";
 import {Position} from "../consts";
 
 export class StatsSummaryController {

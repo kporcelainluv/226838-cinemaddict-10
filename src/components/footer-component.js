@@ -1,4 +1,4 @@
-import {AbstractComponent} from "./abstractComponent";
+import {AbstractComponent} from "./abstract-component";
 export class Footer extends AbstractComponent {
   constructor() {
     super();

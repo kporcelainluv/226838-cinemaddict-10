@@ -1,4 +1,4 @@
-import {Footer} from "../components/footerComponent";
+import {Footer} from "../components/footer-component";
 import {render} from "../utils";
 import {Position} from "../consts";
 
