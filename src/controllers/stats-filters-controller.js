@@ -1,4 +1,4 @@
-import {StatsFilters} from "../components/statsFilters";
+import {StatsFilters} from "../components/statistic-filters";
 import {render, unrender} from "../utils";
 import {Position} from "../consts";
 

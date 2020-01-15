@@ -1,5 +1,5 @@
 import {render, getStatsRank, countWatchedFilms} from "../utils";
-import {ProfileRating} from "../components/profileRating";
+import {ProfileRating} from "../components/profile-rating";
 import {SearchController} from "./search-controller";
 import {Position} from "../consts";
 

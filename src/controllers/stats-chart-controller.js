@@ -1,4 +1,4 @@
-import {StatsChart} from "../components/statsChart";
+import {StatsChart} from "../components/statistics-chart";
 import {render, unrender, getGenresByKeysVals} from "../utils";
 import {Position} from "../consts";
 

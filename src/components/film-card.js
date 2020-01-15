@@ -2,7 +2,7 @@ import moment from "moment";
 
 import {DEBOUNCE_TIMEOUT, DESCRIPTION_LENGTH} from "../consts";
 
-import {AbstractComponent} from "./abstractComponent";
+import {AbstractComponent} from "./abstract-component";
 import {countHoursAndMins} from "../utils";
 import {debounce} from "lodash";
 import {Movie} from "../models/films";

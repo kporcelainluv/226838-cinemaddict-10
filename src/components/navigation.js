@@ -1,4 +1,4 @@
-import {AbstractComponent} from "./abstractComponent";
+import {AbstractComponent} from "./abstract-component";
 import {NavTab} from "../consts";
 
 export class Navigation extends AbstractComponent {

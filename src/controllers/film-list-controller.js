@@ -1,5 +1,5 @@
 import {MovieController} from "./movie-controller";
-import {ShowMoreButton} from "../components/showMoreBtn";
+import {ShowMoreButton} from "../components/show-more-btn";
 import {render} from "../utils";
 import {
   PER_PAGE,

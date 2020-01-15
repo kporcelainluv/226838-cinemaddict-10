@@ -1,4 +1,4 @@
-import {StatisticsSection} from "../components/statisticsSection";
+import {StatisticsSection} from "../components/statistics-section";
 import {UserRankController} from "./user-rank-controller";
 import {StatsFiltersController} from "./stats-filters-controller";
 import {StatsSummaryController} from "./stats-summary-controller";
