@@ -14,11 +14,10 @@ export const Provider = class {
         this._store.setItem({ key: updatedFilm.id, item: updatedFilm });
         return updatedFilm;
       });
-    } else {
-      const currentFilm = film;
-      this._store.setItem({ key: currentFilm.id, item: currentFilm });
-      return Promise.resolve(film);
     }
+    const currentFilm = film;
+    this._store.setItem({ key: currentFilm.id, item: currentFilm });
+    return Promise.resolve(film);
   }
 
   createComment({ film, comment }) {
@@ -44,11 +43,10 @@ export const Provider = class {
         films.map(film => this._store.setItem({ key: film.id, item: film }));
         return films;
       });
-    } else {
-      const filmsMap = this._store.getAll();
-      const films = objectToArray(filmsMap);
-      return Promise.resolve(films);
     }
+    const filmsMap = this._store.getAll();
+    const films = objectToArray(filmsMap);
+    return Promise.resolve(films);
   }
   _isOnline() {
     return window.navigator.onLine;
