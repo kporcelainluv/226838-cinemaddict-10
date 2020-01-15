@@ -34,15 +34,6 @@ export class MovieController {
       this._popup.removeElement();
     }
   }
-
-  onCommentsChange(newComments, updateType) {
-    const updatedFilm = {
-      ...this._film,
-      comments: newComments
-    };
-    this._onFilmChange(updatedFilm, updateType);
-  }
-
   openPopup() {
     render(body, this._popup.getElement(), Position.BEFOREEND);
   }
@@ -162,5 +153,12 @@ export class MovieController {
       });
       this._film = updatedFilm;
     });
+  }
+  onCommentsChange(newComments, updateType) {
+    const updatedFilm = {
+      ...this._film,
+      comments: newComments
+    };
+    this._onFilmChange(updatedFilm, updateType);
   }
 }
