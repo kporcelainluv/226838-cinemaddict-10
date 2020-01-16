@@ -269,21 +269,33 @@ export class Popup extends AbstractComponent {
     closingButton.addEventListener(`click`, callback);
   }
   onWatchlistBtnClick(callback) {
+    const debouncedCallback = debounce(callback, DEBOUNCE_TIMEOUT);
     this.getElement()
       .querySelector(`.film-details__control-label--watchlist`)
-      .addEventListener(`click`, debounce(callback, DEBOUNCE_TIMEOUT));
+      .addEventListener(`click`, e => {
+        e.preventDefault();
+        debouncedCallback(e);
+      });
   }
 
   onFavoriteBtnClick(callback) {
+    const debouncedCallback = debounce(callback, DEBOUNCE_TIMEOUT);
     this.getElement()
       .querySelector(`.film-details__control-label--favorite`)
-      .addEventListener(`click`, debounce(callback, DEBOUNCE_TIMEOUT));
+      .addEventListener(`click`, e => {
+        e.preventDefault();
+        debouncedCallback(e);
+      });
   }
 
   onHistoryBtnClick(callback) {
+    const debouncedCallback = debounce(callback, DEBOUNCE_TIMEOUT);
     this.getElement()
       .querySelector(`.film-details__control-label--watched`)
-      .addEventListener(`click`, debounce(callback, DEBOUNCE_TIMEOUT));
+      .addEventListener(`click`, e => {
+        e.preventDefault();
+        debouncedCallback(e);
+      });
   }
   onRatingUndoClick(callback) {
     this.getElement()
