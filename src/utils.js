@@ -171,9 +171,11 @@ export const sortByDate = films => {
 
 export const sortByRating = films => {
   return films.sort((a, b) => {
-    if (parseInt(Movie.getRating(a)) > parseInt(Movie.getRating(b))) {
+    if (parseFloat(Movie.getRating(a)) > parseFloat(Movie.getRating(b))) {
       return -1;
-    } else if (parseInt(Movie.getRating(a)) < parseInt(Movie.getRating(b))) {
+    } else if (
+      parseFloat(Movie.getRating(a)) < parseFloat(Movie.getRating(b))
+    ) {
       return 1;
     }
     return 0;
