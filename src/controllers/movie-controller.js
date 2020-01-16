@@ -55,7 +55,9 @@ export class MovieController {
 
     const onEscKeyDown = evt => {
       if (evt.key === EXIT_KEY_ESCAPE || evt.key === EXIT_KEY_ESC) {
+        this._popup.resetForm();
         this.closePopup();
+
         document.removeEventListener(`keydown`, onEscKeyDown);
       }
     };
