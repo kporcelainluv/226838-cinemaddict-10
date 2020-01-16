@@ -1,4 +1,4 @@
-import {AbstractComponent} from "./abstractComponent";
+import {AbstractComponent} from "./abstract-component";
 import {countHoursAndMins} from "../utils";
 import moment from "moment";
 import {RATING_LENGTH, TIMEOUT, DEBOUNCE_TIMEOUT} from "../consts";
@@ -20,11 +20,8 @@ export class Popup extends AbstractComponent {
     this._releaseDate = Movie.getReleaseDate(film);
     this._releaseCountry = Movie.getReleaseCountry(film);
     [this._hours, this._minutes] = countHoursAndMins(Movie.getRuntime(film));
-
     this._genre = this._createGenresString(Movie.getGenres(film));
-
     this._descriptionText = Movie.getDescriptionText(film);
-
     this._personalRating = Movie.getPersonalRating(film);
     this._isWatchlist = Movie.getWatchlist(film);
     this._isWatched = Movie.getWatched(film);
@@ -38,11 +35,11 @@ export class Popup extends AbstractComponent {
     if (genres.length === 1) {
       return genres;
     }
-    return genres.reduce((acc, element, index, array) => {
-      if (index === array.length - 1) {
-        return acc + element;
+    return genres.reduce((newGenresList, element, index, genresList) => {
+      if (index === genresList.length - 1) {
+        return newGenresList + element;
       }
-      return acc + element + `, `;
+      return newGenresList + element + `, `;
     }, ``);
   }
   _getGenresTag(genres) {
@@ -169,7 +166,7 @@ export class Popup extends AbstractComponent {
                   class="film-details__user-rating-input visually-hidden"
                   ${v === this._personalRating ? `checked` : ``}
                   value="${v}"
-    id="rating-${v}"}
+                  id="rating-${v}"
     >
     <label class="film-details__user-rating-label" for="rating-${v}">${v}</label>
     `;
@@ -204,12 +201,12 @@ export class Popup extends AbstractComponent {
   }
 
   disableForm() {
-    const userRatingBtns = this.getElement().querySelectorAll(
-        `.film-details__user-rating-input`
-    );
-    if (userRatingBtns) {
-      userRatingBtns.forEach((elm) => (elm.disabled = true));
-    }
+    // const userRatingBtns = this.getElement().querySelectorAll(
+    //   `.film-details__user-rating-input`
+    // );
+    // if (userRatingBtns) {
+    //   userRatingBtns.forEach(elm => (elm.disabled = true));
+    // }
     const commentInput = this.getElement().querySelector(
         `.film-details__comment-input`
     );
@@ -218,12 +215,12 @@ export class Popup extends AbstractComponent {
     }
   }
   enableForm() {
-    const userRatingBtns = this.getElement().querySelectorAll(
-        `.film-details__user-rating-input`
-    );
-    if (userRatingBtns) {
-      userRatingBtns.forEach((elm) => (elm.disabled = false));
-    }
+    // const userRatingBtns = this.getElement().querySelectorAll(
+    //   `.film-details__user-rating-input`
+    // );
+    // if (userRatingBtns) {
+    //   userRatingBtns.forEach(elm => (elm.disabled = false));
+    // }
 
     const commentInput = this.getElement().querySelector(
         `.film-details__comment-input`
@@ -259,6 +256,12 @@ export class Popup extends AbstractComponent {
       }
     });
   }
+  resetForm() {
+    this.getElement()
+      .querySelector(`.film-details__inner`)
+      .reset();
+  }
+
   onClosingBtnClick(callback) {
     const closingButton = this.getElement().querySelector(
         `.film-details__close-btn`
@@ -266,21 +269,30 @@ export class Popup extends AbstractComponent {
     closingButton.addEventListener(`click`, callback);
   }
   onWatchlistBtnClick(callback) {
+    const debouncedCallback = debounce(callback, DEBOUNCE_TIMEOUT);
     this.getElement()
       .querySelector(`.film-details__control-label--watchlist`)
-      .addEventListener(`click`, debounce(callback, DEBOUNCE_TIMEOUT));
+      .addEventListener(`click`, (e) => {
+        debouncedCallback(e);
+      });
   }
 
   onFavoriteBtnClick(callback) {
+    const debouncedCallback = debounce(callback, DEBOUNCE_TIMEOUT);
     this.getElement()
       .querySelector(`.film-details__control-label--favorite`)
-      .addEventListener(`click`, debounce(callback, DEBOUNCE_TIMEOUT));
+      .addEventListener(`click`, (e) => {
+        debouncedCallback(e);
+      });
   }
 
   onHistoryBtnClick(callback) {
+    const debouncedCallback = debounce(callback, DEBOUNCE_TIMEOUT);
     this.getElement()
       .querySelector(`.film-details__control-label--watched`)
-      .addEventListener(`click`, debounce(callback, DEBOUNCE_TIMEOUT));
+      .addEventListener(`click`, (e) => {
+        debouncedCallback(e);
+      });
   }
   onRatingUndoClick(callback) {
     this.getElement()
@@ -291,10 +303,5 @@ export class Popup extends AbstractComponent {
     this.getElement()
       .querySelectorAll(`.film-details__user-rating-input`)
       .forEach((elm) => elm.addEventListener(`keydown`, callback));
-  }
-  resetForm() {
-    this.getElement()
-      .querySelector(`.film-details__inner`)
-      .reset();
   }
 }

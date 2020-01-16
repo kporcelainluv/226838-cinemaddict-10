@@ -1,4 +1,4 @@
-import {StatsRank} from "../components/statsRank";
+import {StatsRank} from "../components/statistics-rank";
 import {render, unrender, getWatchedFilms} from "../utils";
 import {getStatsRank} from "../utils";
 import {Position} from "../consts";

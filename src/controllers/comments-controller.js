@@ -1,4 +1,4 @@
-import {CommentsSection} from "../components/commentsComponent";
+import {CommentsSection} from "../components/comments-component";
 import {render, unrender} from "../utils";
 import {UpdateType, Position, DeleteButtonName, ENTER_KEY} from "../consts";
 
@@ -99,23 +99,24 @@ export class CommentsController {
           author: ``,
           date: new Date()
         };
-
-        this._commentsSection.disableCommentsSection();
-        this._comments = [...this._comments, newComment];
-        this._onCommentsChange(this._comments, {
-          updateType: UpdateType.CREATECOMMENT,
-          onSuccess: (comments) => {
-            this._commentsSection.enableCommentsSection();
-            document.removeEventListener(`keydown`, onAddComment);
-            this._rerender(comments);
-          },
-          onError: () => {
-            this._commentsSection.disableCommentsSection();
-            this._commentsSection.shakeTextarea();
-            this._commentsSection.enableCommentsSection();
-            this._commentsSection.toggleRedErrorWrap(`add`);
-          }
-        });
+        if (newComment.comment) {
+          this._commentsSection.disableCommentsSection();
+          this._comments = [...this._comments, newComment];
+          this._onCommentsChange(this._comments, {
+            updateType: UpdateType.CREATECOMMENT,
+            onSuccess: (comments) => {
+              this._commentsSection.enableCommentsSection();
+              document.removeEventListener(`keydown`, onAddComment);
+              this._rerender(comments);
+            },
+            onError: () => {
+              this._commentsSection.disableCommentsSection();
+              this._commentsSection.shakeTextarea();
+              this._commentsSection.enableCommentsSection();
+              this._commentsSection.toggleRedErrorWrap(`add`);
+            }
+          });
+        }
       }
     };
 

@@ -1,4 +1,4 @@
-import {AbstractComponent} from "./abstractComponent";
+import {AbstractComponent} from "./abstract-component";
 import {debounce} from "lodash";
 import {DEBOUNCE_TIMEOUT} from "../consts";
 

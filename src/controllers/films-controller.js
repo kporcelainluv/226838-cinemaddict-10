@@ -4,12 +4,12 @@ import {
   getMostCommentedFilms,
   getTopRatedFilms
 } from "../utils";
-import {DefaultFilmList} from "../components/defaultFilmList";
-import {FilmsContainer} from "../components/filmContainter";
+import {DefaultFilmList} from "../components/default-film-list";
+import {FilmsContainer} from "../components/film-containter";
 import {FilmListController} from "./film-list-controller";
-import {AdditionalFilmList} from "../components/additionalFilmBlocks";
+import {AdditionalFilmList} from "../components/additional-film-blocks";
 import {Loading} from "../components/loading";
-import {EmptyFilms} from "../components/emptyFilms";
+import {EmptyFilms} from "../components/empty-films";
 import {PageType, Position} from "../consts";
 
 export class FilmsController {

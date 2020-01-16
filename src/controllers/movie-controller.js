@@ -1,7 +1,7 @@
 import {Popup} from "../components/popup";
 import {render, unrender} from "../utils";
 import {EXIT_KEY_ESC, EXIT_KEY_ESCAPE, Position, UpdateType} from "../consts";
-import {FilmCard} from "../components/filmCard";
+import {FilmCard} from "../components/film-card";
 import {CommentsController} from "../controllers/comments-controller";
 import {Movie} from "../models/films";
 
@@ -34,15 +34,6 @@ export class MovieController {
       this._popup.removeElement();
     }
   }
-
-  onCommentsChange(newComments, updateType) {
-    const updatedFilm = {
-      ...this._film,
-      comments: newComments
-    };
-    this._onFilmChange(updatedFilm, updateType);
-  }
-
   openPopup() {
     render(body, this._popup.getElement(), Position.BEFOREEND);
   }
@@ -51,12 +42,12 @@ export class MovieController {
     render(this._container, this._filmCard.getElement(), Position.BEFOREEND);
 
     const disableForms = () => {
-      this._popup.disableForm();
+      // this._popup.disableForm();
       this._comments.blockForm();
     };
 
     const enableForms = () => {
-      this._popup.enableForm();
+      // this._popup.enableForm();
       this._comments.enableForm();
     };
     window.addEventListener(`offline`, disableForms);
@@ -64,7 +55,9 @@ export class MovieController {
 
     const onEscKeyDown = (evt) => {
       if (evt.key === EXIT_KEY_ESCAPE || evt.key === EXIT_KEY_ESC) {
+        this._popup.resetForm();
         this.closePopup();
+
         document.removeEventListener(`keydown`, onEscKeyDown);
       }
     };
@@ -85,22 +78,26 @@ export class MovieController {
       unrender(this._popup.getElement());
     });
 
-    this._filmCard.onWatchlistBtnClick(() => {
+    this._filmCard.onWatchlistBtnClick((event) => {
+      event.preventDefault();
       const updatedFilm = Movie.markWatchList(this._film);
       this._onFilmChange(updatedFilm, {
         updateType: UpdateType.UPDATEUSERINFO
       });
     });
 
-    this._filmCard.onHistoryBtnClick(() => {
+    this._filmCard.onHistoryBtnClick((event) => {
+      event.preventDefault();
       const updatedFilm = Movie.markWatched(this._film);
       this._onFilmChange(updatedFilm, {
         updateType: UpdateType.UPDATEUSERINFO
       });
     });
 
-    this._filmCard.onFavoriteBtnClick(() => {
+    this._filmCard.onFavoriteBtnClick((event) => {
+      event.preventDefault();
       const updatedFilm = Movie.markFavorite(this._film);
+
       this._onFilmChange(updatedFilm, {
         updateType: UpdateType.UPDATEUSERINFO
       });
@@ -136,7 +133,7 @@ export class MovieController {
     });
 
     this._popup.onFavoriteBtnClick(() => {
-      const updatedFilm = Movie.getFavorite(this._film);
+      const updatedFilm = Movie.markFavorite(this._film);
       this._onFilmChange(updatedFilm, {
         updateType: UpdateType.UPDATEUSERINFO
       });
@@ -162,5 +159,12 @@ export class MovieController {
       });
       this._film = updatedFilm;
     });
+  }
+  onCommentsChange(newComments, updateType) {
+    const updatedFilm = {
+      ...this._film,
+      comments: newComments
+    };
+    this._onFilmChange(updatedFilm, updateType);
   }
 }

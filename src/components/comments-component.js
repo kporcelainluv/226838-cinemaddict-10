@@ -1,5 +1,5 @@
 import {TIMEOUT} from "../consts";
-import {AbstractComponent} from "./abstractComponent";
+import {AbstractComponent} from "./abstract-component";
 import {getDistanceInWords} from "../utils";
 
 export class CommentsSection extends AbstractComponent {
@@ -16,8 +16,8 @@ export class CommentsSection extends AbstractComponent {
 }</span></h3>
         <ul class="film-details__comments-list">
 
-        ${this._comments.reduce((acc, comment) => {
-    acc += `<li class="film-details__comment">
+        ${this._comments.reduce((commentsList, comment) => {
+    commentsList += `<li class="film-details__comment">
             <span class="film-details__comment-emoji">
               <img src="./images/emoji/${
   comment.emotion
@@ -37,7 +37,7 @@ export class CommentsSection extends AbstractComponent {
               </p>
             </div>
           </li>`;
-    return acc;
+    return commentsList;
   }, ``)}
         </ul>
 
@@ -146,11 +146,6 @@ export class CommentsSection extends AbstractComponent {
       .querySelectorAll(`.film-details__comment-delete`)
       .forEach((elm) => (elm.disabled = false));
   }
-  onInputFocus(callback) {
-    this.getElement()
-      .querySelector(`.film-details__comment-input`)
-      .addEventListener(`focus`, callback);
-  }
 
   emojiOptionHandler(callback) {
     const emojiOptions = this.getElement().querySelectorAll(
@@ -174,5 +169,10 @@ export class CommentsSection extends AbstractComponent {
         callback(index);
       });
     });
+  }
+  onInputFocus(callback) {
+    this.getElement()
+      .querySelector(`.film-details__comment-input`)
+      .addEventListener(`focus`, callback);
   }
 }

@@ -1,4 +1,4 @@
-import {AbstractComponent} from "./abstractComponent";
+import {AbstractComponent} from "./abstract-component";
 
 export class StatsSummary extends AbstractComponent {
   constructor(watched, hours, minutes, topGenre) {

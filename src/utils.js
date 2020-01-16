@@ -68,25 +68,25 @@ export const getWatchedFilms = films => {
 };
 
 export const getHoursAndMins = films => {
-  const duration = films.reduce((acc, elm) => {
-    return acc + Movie.getRuntime(elm);
+  const duration = films.reduce((runtimeList, elm) => {
+    return runtimeList + Movie.getRuntime(elm);
   }, 0);
   const [hours, minutes] = countHoursAndMins(duration);
   return [hours, minutes];
 };
 
 const getSortedGenres = films => {
-  const genres = films.reduce((acc, elm) => {
+  const genres = films.reduce((newGenresList, elm) => {
     const genresList = Movie.getGenres(elm);
     genresList.forEach(genre => {
-      if (genre in acc) {
-        acc[genre] += 1;
+      if (genre in newGenresList) {
+        newGenresList[genre] += 1;
       } else {
-        acc[genre] = 1;
+        newGenresList[genre] = 1;
       }
     });
 
-    return acc;
+    return newGenresList;
   }, {});
 
   return Object.entries(genres).sort((a, b) => {
@@ -158,16 +158,27 @@ export const sortByDefault = films => {
 
 export const sortByDate = films => {
   return films.sort((a, b) => {
-    return (
-      parseInt(Movie.getReleaseDate(a), 10) -
-      parseInt(Movie.getReleaseDate(b), 10)
-    );
+    if (parseInt(Movie.getReleaseDate(a)) > parseInt(Movie.getReleaseDate(b))) {
+      return -1;
+    } else if (
+      parseInt(Movie.getReleaseDate(a)) < parseInt(Movie.getReleaseDate(b))
+    ) {
+      return 1;
+    }
+    return 0;
   });
 };
 
 export const sortByRating = films => {
   return films.sort((a, b) => {
-    return parseInt(Movie.getRating(a), 10) - parseInt(Movie.getRating(b), 10);
+    if (parseFloat(Movie.getRating(a)) > parseFloat(Movie.getRating(b))) {
+      return -1;
+    } else if (
+      parseFloat(Movie.getRating(a)) < parseFloat(Movie.getRating(b))
+    ) {
+      return 1;
+    }
+    return 0;
   });
 };
 

@@ -2,7 +2,7 @@ import moment from "moment";
 
 import {DEBOUNCE_TIMEOUT, DESCRIPTION_LENGTH} from "../consts";
 
-import {AbstractComponent} from "./abstractComponent";
+import {AbstractComponent} from "./abstract-component";
 import {countHoursAndMins} from "../utils";
 import {debounce} from "lodash";
 import {Movie} from "../models/films";
@@ -91,20 +91,32 @@ export class FilmCard extends AbstractComponent {
   }
 
   onWatchlistBtnClick(callback) {
+    const debouncedCallback = debounce(callback, DEBOUNCE_TIMEOUT);
     this.getElement()
       .querySelector(`.film-card__controls-item--add-to-watchlist`)
-      .addEventListener(`click`, debounce(callback, DEBOUNCE_TIMEOUT));
+      .addEventListener(`click`, (e) => {
+        e.preventDefault();
+        debouncedCallback(e);
+      });
   }
 
   onFavoriteBtnClick(callback) {
+    const debouncedCallback = debounce(callback, DEBOUNCE_TIMEOUT);
     this.getElement()
       .querySelector(`.film-card__controls-item--favorite`)
-      .addEventListener(`click`, debounce(callback, DEBOUNCE_TIMEOUT));
+      .addEventListener(`click`, (e) => {
+        e.preventDefault();
+        debouncedCallback(e);
+      });
   }
 
   onHistoryBtnClick(callback) {
+    const debouncedCallback = debounce(callback, DEBOUNCE_TIMEOUT);
     this.getElement()
       .querySelector(`.film-card__controls-item--mark-as-watched`)
-      .addEventListener(`click`, debounce(callback, DEBOUNCE_TIMEOUT));
+      .addEventListener(`click`, (e) => {
+        e.preventDefault();
+        debouncedCallback(e);
+      });
   }
 }

@@ -11,7 +11,7 @@ export const AUTHORIZATION = `Basic eo0w590ik29889a=${Math.random()}`;
 export const TIMEOUT = 600;
 export const DESCRIPTION_LENGTH = 140;
 export const RATING_LENGTH = 9;
-export const DEBOUNCE_TIMEOUT = 500;
+export const DEBOUNCE_TIMEOUT = 300;
 
 export const NavTab = {
   ALL: `#all`,

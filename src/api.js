@@ -1,4 +1,5 @@
 import { Method } from "./consts";
+import { Movie } from "./models/films";
 
 const checkStatus = response => {
   if (response.status >= 200 && response.status < 300) {
@@ -32,9 +33,9 @@ const formatFilmData = film => {
   return {
     ...film,
     comments: film.comments.map(f => f.id),
-    user_details: {
-      ...film.user_details,
-      watching_date: new Date()
+    [Movie.getUserDetails(film)]: {
+      ...Movie.getUserDetails(film),
+      [Movie.getWatchingDate(film)]: new Date()
     }
   };
 };
