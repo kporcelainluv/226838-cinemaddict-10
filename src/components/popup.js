@@ -201,12 +201,12 @@ export class Popup extends AbstractComponent {
   }
 
   disableForm() {
-    const userRatingBtns = this.getElement().querySelectorAll(
-      `.film-details__user-rating-input`
-    );
-    if (userRatingBtns) {
-      userRatingBtns.forEach(elm => (elm.disabled = true));
-    }
+    // const userRatingBtns = this.getElement().querySelectorAll(
+    //   `.film-details__user-rating-input`
+    // );
+    // if (userRatingBtns) {
+    //   userRatingBtns.forEach(elm => (elm.disabled = true));
+    // }
     const commentInput = this.getElement().querySelector(
       `.film-details__comment-input`
     );
@@ -215,12 +215,12 @@ export class Popup extends AbstractComponent {
     }
   }
   enableForm() {
-    const userRatingBtns = this.getElement().querySelectorAll(
-      `.film-details__user-rating-input`
-    );
-    if (userRatingBtns) {
-      userRatingBtns.forEach(elm => (elm.disabled = false));
-    }
+    // const userRatingBtns = this.getElement().querySelectorAll(
+    //   `.film-details__user-rating-input`
+    // );
+    // if (userRatingBtns) {
+    //   userRatingBtns.forEach(elm => (elm.disabled = false));
+    // }
 
     const commentInput = this.getElement().querySelector(
       `.film-details__comment-input`
@@ -273,7 +273,6 @@ export class Popup extends AbstractComponent {
     this.getElement()
       .querySelector(`.film-details__control-label--watchlist`)
       .addEventListener(`click`, e => {
-        e.preventDefault();
         debouncedCallback(e);
       });
   }
@@ -283,7 +282,6 @@ export class Popup extends AbstractComponent {
     this.getElement()
       .querySelector(`.film-details__control-label--favorite`)
       .addEventListener(`click`, e => {
-        e.preventDefault();
         debouncedCallback(e);
       });
   }
@@ -293,7 +291,6 @@ export class Popup extends AbstractComponent {
     this.getElement()
       .querySelector(`.film-details__control-label--watched`)
       .addEventListener(`click`, e => {
-        e.preventDefault();
         debouncedCallback(e);
       });
   }
