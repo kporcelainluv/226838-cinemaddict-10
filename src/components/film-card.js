@@ -1,11 +1,11 @@
 import moment from "moment";
 
-import { DEBOUNCE_TIMEOUT, DESCRIPTION_LENGTH } from "../consts";
+import {DEBOUNCE_TIMEOUT, DESCRIPTION_LENGTH} from "../consts";
 
-import { AbstractComponent } from "./abstract-component";
-import { countHoursAndMins } from "../utils";
-import { debounce } from "lodash";
-import { Movie } from "../models/films";
+import {AbstractComponent} from "./abstract-component";
+import {countHoursAndMins} from "../utils";
+import {debounce} from "lodash";
+import {Movie} from "../models/films";
 
 export class FilmCard extends AbstractComponent {
   constructor(film) {
@@ -20,7 +20,7 @@ export class FilmCard extends AbstractComponent {
     this._genres = Movie.getGenres(film);
     this._genre = this._genres[0] || ``;
     this._descriptionText = this._updateDescriptionText(
-      Movie.getDescriptionText(film)
+        Movie.getDescriptionText(film)
     );
 
     this._isWatchlist = Movie.getWatchlist(film);
@@ -43,8 +43,8 @@ export class FilmCard extends AbstractComponent {
           <p class="film-card__rating">${this._rating}</p>
           <p class="film-card__info">
             <span class="film-card__year">${moment(this._releaseDate).format(
-              `YYYY`
-            )}</span>
+      `YYYY`
+  )}</span>
             <span class="film-card__duration">${this._hours}h
                 ${this._minutes}m</span>
             <span class="film-card__genre">${this._genre}</span>
@@ -54,14 +54,14 @@ export class FilmCard extends AbstractComponent {
           <a class="film-card__comments">${this._comments} comments</a>
           <form class="film-card__controls">
             <button class="film-card__controls-item button film-card__controls-item--add-to-watchlist ${this._getActiveClass(
-              this._isWatchlist
-            )}">Add to watchlist</button>
+      this._isWatchlist
+  )}">Add to watchlist</button>
             <button class="film-card__controls-item button film-card__controls-item--mark-as-watched ${this._getActiveClass(
-              this._isWatched
-            )}">Mark as watched</button>
+      this._isWatched
+  )}">Mark as watched</button>
             <button class="film-card__controls-item button film-card__controls-item--favorite ${this._getActiveClass(
-              this._isFavorite
-            )}">Mark as favorite</button>
+      this._isFavorite
+  )}">Mark as favorite</button>
           </form>
         </article>
         `;
@@ -73,7 +73,7 @@ export class FilmCard extends AbstractComponent {
 
   onCommentsBtnClick(callback) {
     const commentsButton = this.getElement().querySelector(
-      `.film-card__comments`
+        `.film-card__comments`
     );
 
     commentsButton.addEventListener(`click`, callback);
@@ -94,7 +94,7 @@ export class FilmCard extends AbstractComponent {
     const debouncedCallback = debounce(callback, DEBOUNCE_TIMEOUT);
     this.getElement()
       .querySelector(`.film-card__controls-item--add-to-watchlist`)
-      .addEventListener(`click`, e => {
+      .addEventListener(`click`, (e) => {
         e.preventDefault();
         debouncedCallback(e);
       });
@@ -104,7 +104,7 @@ export class FilmCard extends AbstractComponent {
     const debouncedCallback = debounce(callback, DEBOUNCE_TIMEOUT);
     this.getElement()
       .querySelector(`.film-card__controls-item--favorite`)
-      .addEventListener(`click`, e => {
+      .addEventListener(`click`, (e) => {
         e.preventDefault();
         debouncedCallback(e);
       });
@@ -114,7 +114,7 @@ export class FilmCard extends AbstractComponent {
     const debouncedCallback = debounce(callback, DEBOUNCE_TIMEOUT);
     this.getElement()
       .querySelector(`.film-card__controls-item--mark-as-watched`)
-      .addEventListener(`click`, e => {
+      .addEventListener(`click`, (e) => {
         e.preventDefault();
         debouncedCallback(e);
       });
