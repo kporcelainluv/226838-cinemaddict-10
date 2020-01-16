@@ -76,22 +76,26 @@ export class MovieController {
       unrender(this._popup.getElement());
     });
 
-    this._filmCard.onWatchlistBtnClick(() => {
+    this._filmCard.onWatchlistBtnClick(event => {
+      event.preventDefault();
       const updatedFilm = Movie.markWatchList(this._film);
       this._onFilmChange(updatedFilm, {
         updateType: UpdateType.UPDATEUSERINFO
       });
     });
 
-    this._filmCard.onHistoryBtnClick(() => {
+    this._filmCard.onHistoryBtnClick(event => {
+      event.preventDefault();
       const updatedFilm = Movie.markWatched(this._film);
       this._onFilmChange(updatedFilm, {
         updateType: UpdateType.UPDATEUSERINFO
       });
     });
 
-    this._filmCard.onFavoriteBtnClick(() => {
+    this._filmCard.onFavoriteBtnClick(event => {
+      event.preventDefault();
       const updatedFilm = Movie.markFavorite(this._film);
+
       this._onFilmChange(updatedFilm, {
         updateType: UpdateType.UPDATEUSERINFO
       });
@@ -127,7 +131,7 @@ export class MovieController {
     });
 
     this._popup.onFavoriteBtnClick(() => {
-      const updatedFilm = Movie.getFavorite(this._film);
+      const updatedFilm = Movie.markFavorite(this._film);
       this._onFilmChange(updatedFilm, {
         updateType: UpdateType.UPDATEUSERINFO
       });
