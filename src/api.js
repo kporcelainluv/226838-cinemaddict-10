@@ -1,5 +1,7 @@
 import { Method } from "./consts";
 import { Movie } from "./models/films";
+import { ModelMovie } from "./models/model-movie";
+import { ModelComment } from "./models/model-comments";
 
 const checkStatus = response => {
   if (response.status >= 200 && response.status < 300) {
@@ -52,7 +54,20 @@ export class API {
       endpoint: this._endPoint,
       authorization: this._authorization,
       method: Method.GET
-    }).then(toJSON);
+    })
+      .then(toJSON)
+      .then(ModelMovie.parseMovies);
+  }
+
+  _getComments(url) {
+    return fetchWrapper({
+      url,
+      endpoint: this._endPoint,
+      authorization: this._authorization,
+      method: Method.GET
+    })
+      .then(toJSON)
+      .then(ModelComment.parseComments);
   }
 
   _update(url, body) {
@@ -62,7 +77,9 @@ export class API {
       authorization: this._authorization,
       method: Method.PUT,
       body
-    }).then(toJSON);
+    })
+      .then(toJSON)
+      .then(ModelMovie.parseMovie);
   }
 
   _create(url, body) {
@@ -72,7 +89,9 @@ export class API {
       authorization: this._authorization,
       method: Method.POST,
       body
-    }).then(toJSON);
+    })
+      .then(toJSON)
+      .then(ModelComment.parseComment);
   }
 
   _delete(url) {
@@ -87,9 +106,11 @@ export class API {
   async getFilms() {
     const films = await this._get(`movies`);
 
+    console.log({ films });
+
     const commentsPromises = films
       .map(f => f.id)
-      .map(id => this._get(`comments/${id}`));
+      .map(id => this._getComments(`comments/${id}`));
 
     const allFilmsComments = await Promise.all(commentsPromises);
     films.forEach((elm, index) => {

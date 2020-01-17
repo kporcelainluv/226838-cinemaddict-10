@@ -1,4 +1,5 @@
 import { sort } from "ramda";
+import DOMPurify from "dompurify";
 import { NavTab, Position, StatsFilterType, StatsRank } from "./consts";
 import { addMonths, addWeeks, addYears, isAfter, startOfToday } from "date-fns";
 import { Movie } from "./models/films";
@@ -253,4 +254,11 @@ export const getDistanceInWords = (dateLeft, dateRight) => {
   } else if (differenceinSeconds >= 0 && differenceinSeconds < 60) {
     return `now`;
   }
+};
+
+export const handleScreening = array => {
+  if (array.length === 0) {
+    return [];
+  }
+  return array.map(elem => DOMPurify.sanitize(elem));
 };

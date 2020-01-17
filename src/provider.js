@@ -1,3 +1,5 @@
+import { ModelMovie } from "./models/model-movie";
+
 const objectToArray = object => {
   return Object.keys(object).map(id => object[id]);
 };
@@ -17,7 +19,7 @@ export const Provider = class {
     }
     const currentFilm = film;
     this._store.setItem({ key: currentFilm.id, item: currentFilm });
-    return Promise.resolve(film);
+    return Promise.resolve(ModelMovie.parseMovies(currentFilm));
   }
 
   createComment({ film, comment }) {
@@ -45,7 +47,8 @@ export const Provider = class {
       });
     }
     const filmsMap = this._store.getAll();
-    const films = objectToArray(filmsMap);
+    const rawMovies = objectToArray(filmsMap);
+    const films = ModelMovie.parseMovies(rawMovies);
     return Promise.resolve(films);
   }
   _isOnline() {
