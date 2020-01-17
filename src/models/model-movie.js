@@ -28,7 +28,7 @@ export class ModelMovie {
       Number(movie[`user_details`][`personal_rating`]) || null;
     this.isFavorite = Boolean(movie[`user_details`][`favorite`]);
     this.isWatchlist = Boolean(movie[`user_details`][`watchlist`]);
-    this.isViewed = Boolean(movie[`user_details`][`already_watched`]);
+    this.isWatched = Boolean(movie[`user_details`][`already_watched`]);
     this.viewedDate = movie[`user_details`][`watching_date`];
     this.comments = movie[`comments`];
   }
@@ -72,7 +72,7 @@ export class ModelMovie {
         [`personal_rating`]: Number(this.personalRating),
         favorite: Boolean(this.isFavorite),
         watchlist: Boolean(this.isWatchlist),
-        [`already_watched`]: Boolean(this.isViewed),
+        [`already_watched`]: Boolean(this.isWatched),
         [`watching_date`]: new Date(this.viewedDate)
       },
       comments: {
