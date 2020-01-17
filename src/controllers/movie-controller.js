@@ -1,9 +1,15 @@
-import {Popup} from "../components/popup";
-import {render, unrender} from "../utils";
-import {EXIT_KEY_ESC, EXIT_KEY_ESCAPE, Position, UpdateType} from "../consts";
-import {FilmCard} from "../components/film-card";
-import {CommentsController} from "../controllers/comments-controller";
-import {Movie} from "../models/films";
+import { Popup } from "../components/popup";
+import {
+  render,
+  unrender,
+  markFavorite,
+  markPersonalRating,
+  markWatched,
+  markWatchList
+} from "../utils";
+import { EXIT_KEY_ESC, EXIT_KEY_ESCAPE, Position, UpdateType } from "../consts";
+import { FilmCard } from "../components/film-card";
+import { CommentsController } from "../controllers/comments-controller";
 
 const body = document.getElementsByTagName(`body`)[0];
 
@@ -22,9 +28,9 @@ export class MovieController {
     this._filmCard = new FilmCard(this._film);
     this._popup = new Popup(this._film);
     this._comments = new CommentsController(
-        this._popup,
-        this._film.comments,
-        this.onCommentsChange
+      this._popup,
+      this._film.comments,
+      this.onCommentsChange
     );
   }
 
@@ -53,7 +59,7 @@ export class MovieController {
     window.addEventListener(`offline`, disableForms);
     window.addEventListener(`online`, enableForms);
 
-    const onEscKeyDown = (evt) => {
+    const onEscKeyDown = evt => {
       if (evt.key === EXIT_KEY_ESCAPE || evt.key === EXIT_KEY_ESC) {
         this._popup.resetForm();
         this.closePopup();
@@ -78,25 +84,25 @@ export class MovieController {
       unrender(this._popup.getElement());
     });
 
-    this._filmCard.onWatchlistBtnClick((event) => {
+    this._filmCard.onWatchlistBtnClick(event => {
       event.preventDefault();
-      const updatedFilm = Movie.markWatchList(this._film);
+      const updatedFilm = markWatchList(this._film);
       this._onFilmChange(updatedFilm, {
         updateType: UpdateType.UPDATEUSERINFO
       });
     });
 
-    this._filmCard.onHistoryBtnClick((event) => {
+    this._filmCard.onHistoryBtnClick(event => {
       event.preventDefault();
-      const updatedFilm = Movie.markWatched(this._film);
+      const updatedFilm = markWatched(this._film);
       this._onFilmChange(updatedFilm, {
         updateType: UpdateType.UPDATEUSERINFO
       });
     });
 
-    this._filmCard.onFavoriteBtnClick((event) => {
+    this._filmCard.onFavoriteBtnClick(event => {
       event.preventDefault();
-      const updatedFilm = Movie.markFavorite(this._film);
+      const updatedFilm = markFavorite(this._film);
 
       this._onFilmChange(updatedFilm, {
         updateType: UpdateType.UPDATEUSERINFO
@@ -104,7 +110,7 @@ export class MovieController {
     });
 
     this._popup.onHistoryBtnClick(() => {
-      const updatedFilm = Movie.markWatched(this._film);
+      const updatedFilm = markWatched(this._film);
       this._onFilmChange(updatedFilm, {
         updateType: UpdateType.UPDATEUSERINFO
       });
@@ -114,7 +120,7 @@ export class MovieController {
     });
 
     this._popup.onWatchlistBtnClick(() => {
-      const updatedFilm = Movie.markWatchList(this._film);
+      const updatedFilm = markWatchList(this._film);
       this._onFilmChange(updatedFilm, {
         updateType: UpdateType.UPDATEUSERINFO
       });
@@ -122,7 +128,7 @@ export class MovieController {
     });
 
     this._popup.onRatingUndoClick(() => {
-      const updatedFilm = Movie.markWatched(this._film);
+      const updatedFilm = markWatched(this._film);
       this._onFilmChange(updatedFilm, {
         updateType: UpdateType.UPDATEUSERINFO
       });
@@ -133,19 +139,19 @@ export class MovieController {
     });
 
     this._popup.onFavoriteBtnClick(() => {
-      const updatedFilm = Movie.markFavorite(this._film);
+      const updatedFilm = markFavorite(this._film);
       this._onFilmChange(updatedFilm, {
         updateType: UpdateType.UPDATEUSERINFO
       });
       this._film = updatedFilm;
     });
 
-    this._popup.ratingButtonHandler((evt) => {
+    this._popup.ratingButtonHandler(evt => {
       this._popup.removeErrorFromButtons();
       evt.target.checked = true;
 
       const personalRating = evt.target.value;
-      const updatedFilm = Movie.markPersonalRating(this._film, personalRating);
+      const updatedFilm = markPersonalRating(this._film, personalRating);
       this._onFilmChange(updatedFilm, {
         updateType: UpdateType.UPDATEUSERINFO,
         onSuccess: () => {

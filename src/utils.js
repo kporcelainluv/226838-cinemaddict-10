@@ -255,26 +255,34 @@ export const handleScreening = array => {
 };
 
 export const markWatched = film => {
+  const currentViewDate = film.viewedDate ? film.viewedDate : new Date();
   return {
     ...film,
-    isWatched: !film.isWatched
+    isWatched: !film.isWatched,
+    viewedDate: currentViewDate
   };
 };
 export const markWatchList = film => {
+  const currentViewDate = film.viewedDate ? film.viewedDate : new Date();
   return {
     ...film,
-    isWatchlist: !film.isWatchlist
+    isWatchlist: !film.isWatchlist,
+    viewedDate: currentViewDate
   };
 };
 export const markFavorite = film => {
+  const currentViewDate = film.viewedDate ? film.viewedDate : new Date();
   return {
     ...film,
-    isFavorite: !film.isFavorite
+    isFavorite: !film.isFavorite,
+    viewedDate: currentViewDate
   };
 };
 export const markPersonalRating = (film, personalRating) => {
+  const currentViewDate = film.viewedDate ? film.viewedDate : new Date();
   return {
     ...film,
-    personalRating: Number(personalRating)
+    personalRating: Number(personalRating),
+    viewedDate: currentViewDate
   };
 };
