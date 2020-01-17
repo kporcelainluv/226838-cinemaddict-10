@@ -206,12 +206,12 @@ export class Popup extends AbstractComponent {
     // if (userRatingBtns) {
     //   userRatingBtns.forEach(elm => (elm.disabled = true));
     // }
-    const commentInput = this.getElement().querySelector(
-      `.film-details__comment-input`
-    );
-    if (commentInput) {
-      commentInput.disabled = true;
-    }
+    // const commentInput = this.getElement().querySelector(
+    //   `.film-details__comment-input`
+    // );
+    // if (commentInput) {
+    //   commentInput.disabled = true;
+    // }
   }
   enableForm() {
     // const userRatingBtns = this.getElement().querySelectorAll(
@@ -220,13 +220,12 @@ export class Popup extends AbstractComponent {
     // if (userRatingBtns) {
     //   userRatingBtns.forEach(elm => (elm.disabled = false));
     // }
-
-    const commentInput = this.getElement().querySelector(
-      `.film-details__comment-input`
-    );
-    if (commentInput) {
-      commentInput.disabled = false;
-    }
+    // const commentInput = this.getElement().querySelector(
+    //   `.film-details__comment-input`
+    // );
+    // if (commentInput) {
+    //   commentInput.disabled = false;
+    // }
   }
 
   shakePopup() {

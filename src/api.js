@@ -1,5 +1,4 @@
 import { Method } from "./consts";
-import { Movie } from "./models/films";
 import { ModelMovie } from "./models/model-movie";
 import { ModelComment } from "./models/model-comments";
 
@@ -29,17 +28,6 @@ const fetchWrapper = ({
   return fetch(`${endpoint}/${url}`, { method, body, headers }).then(
     checkStatus
   );
-};
-
-const formatFilmData = film => {
-  return {
-    ...film,
-    comments: film.comments.map(f => f.id),
-    [Movie.getUserDetails(film)]: {
-      ...Movie.getUserDetails(film),
-      [Movie.getWatchingDate(film)]: new Date()
-    }
-  };
 };
 
 export class API {
