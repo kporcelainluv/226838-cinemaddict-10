@@ -253,3 +253,28 @@ export const handleScreening = array => {
   }
   return array.map(elem => DOMPurify.sanitize(elem));
 };
+
+export const markWatched = film => {
+  return {
+    ...film,
+    isWatched: !film.isWatched
+  };
+};
+export const markWatchList = film => {
+  return {
+    ...film,
+    isWatchlist: !film.isWatchlist
+  };
+};
+export const markFavorite = film => {
+  return {
+    ...film,
+    isFavorite: !film.isFavorite
+  };
+};
+export const markPersonalRating = (film, personalRating) => {
+  return {
+    ...film,
+    personalRating: Number(personalRating)
+  };
+};
