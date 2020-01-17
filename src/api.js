@@ -89,9 +89,7 @@ export class API {
       authorization: this._authorization,
       method: Method.POST,
       body
-    })
-      .then(toJSON)
-      .then(ModelComment.parseComment);
+    }).then(toJSON);
   }
 
   _delete(url) {
@@ -105,8 +103,6 @@ export class API {
 
   async getFilms() {
     const films = await this._get(`movies`);
-
-    console.log({ films });
 
     const commentsPromises = films
       .map(f => f.id)
@@ -123,18 +119,22 @@ export class API {
   updateFilm({ film }) {
     return this._update(
       `movies/${film.id}`,
-      JSON.stringify(formatFilmData(film))
+      JSON.stringify(ModelMovie.toRAW1(film))
     );
   }
 
   createComment({ film, comment }) {
-    return this._create(`comments/${film.id}`, JSON.stringify(comment));
+    return this._create(
+      `comments/${film.id}`,
+      JSON.stringify(ModelComment.toRAW1(comment))
+    );
   }
 
   deleteComment({ comment }) {
     return this._delete(`comments/${comment.id}`);
   }
   syncFilms({ films }) {
+    console.log("syncFilms", { films });
     return fetchWrapper({
       url: `movies/sync`,
       method: Method.POST,

@@ -75,13 +75,38 @@ export class ModelMovie {
         [`already_watched`]: Boolean(this.isWatched),
         [`watching_date`]: new Date(this.viewedDate)
       },
-      comments: {
-        id: this.comments.id,
-        author: this.comments.author,
-        comment: this.comments.comment,
-        date: this.comments.date,
-        emotion: this.comments.emotion
-      }
+      comments: this.comments.map(comment => comment.id)
+    };
+  }
+
+  static toRAW1(film) {
+    return {
+      id: film.id,
+      film_info: {
+        title: film.title,
+        alternative_title: film.originalTitle,
+        poster: film.poster,
+        description: film.description,
+        total_rating: Number(film.rating),
+        genre: film.genres,
+        age_rating: Number(film.ageRate),
+        runtime: Number(film.runtime),
+        release: {
+          date: new Date(film.date),
+          release_country: film.country
+        },
+        director: film.director,
+        writers: film.writers,
+        actors: film.actors
+      },
+      user_details: {
+        [`personal_rating`]: Number(film.personalRating),
+        favorite: Boolean(film.isFavorite),
+        watchlist: Boolean(film.isWatchlist),
+        [`already_watched`]: Boolean(film.isWatched),
+        [`watching_date`]: new Date(film.viewedDate)
+      },
+      comments: film.comments.map(comment => comment.id)
     };
   }
 }

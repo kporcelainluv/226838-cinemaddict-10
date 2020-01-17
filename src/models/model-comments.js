@@ -17,6 +17,15 @@ export class ModelComment {
   static parseComments(comment) {
     return comment.map(ModelComment.parseComment);
   }
+  static toRAW1(comment) {
+    return {
+      id: comment.id,
+      author: comment.author,
+      comment: comment.comment,
+      date: comment.date,
+      emotion: comment.emotion
+    };
+  }
 
   toRAW() {
     return {
