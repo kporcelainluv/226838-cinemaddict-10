@@ -107,22 +107,20 @@ export class API {
   updateFilm({ film }) {
     return this._update(
       `movies/${film.id}`,
-      JSON.stringify(ModelMovie.toRAW1(film))
+      JSON.stringify(ModelMovie)
+      // toRAW1(film)
     );
   }
 
   createComment({ film, comment }) {
-    return this._create(
-      `comments/${film.id}`,
-      JSON.stringify(ModelComment.toRAW1(comment))
-    );
+    return this._create(`comments/${film.id}`, JSON.stringify(ModelComment));
+    // .toRAW1(comment)
   }
 
   deleteComment({ comment }) {
     return this._delete(`comments/${comment.id}`);
   }
   syncFilms({ films }) {
-    console.log("syncFilms", { films });
     return fetchWrapper({
       url: `movies/sync`,
       method: Method.POST,
