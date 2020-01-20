@@ -21,9 +21,9 @@ import { FooterController } from "./footer-controller";
 import { NavigationController } from "./navigation-controller";
 
 export class PageController {
-  constructor(headerContainer, container, films, api) {
+  constructor(headerContainer, container, films, provider) {
     this._container = container;
-    this._api = api;
+    this._provider = provider;
     this._films = films;
     this._allFilms = films;
     this._currentTab = NavTab.ALL;
@@ -164,13 +164,13 @@ export class PageController {
         this._films.find(f => f.id === updatedFilm.id).comments,
         updatedFilm.comments
       )[0];
-      return this._api
+      return this._provider
         .deleteComment({ comment: deletedComment })
         .then(() => rerender(updatedFilm))
         .then(() => onSuccess())
         .catch(() => onError());
     } else if (updateType === UpdateType.UPDATEUSERINFO) {
-      return this._api.updateFilm({ film: updatedFilm }).then(() => {
+      return this._provider.updateFilm({ film: updatedFilm }).then(() => {
         rerender(updatedFilm);
       });
     } else if (updateType === UpdateType.CREATECOMMENT) {
@@ -182,7 +182,7 @@ export class PageController {
         head
       )(initialComments);
 
-      return this._api
+      return this._provider
         .createComment({
           film: updatedFilm,
           comment: createdComment
