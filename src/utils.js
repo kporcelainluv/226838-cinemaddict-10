@@ -286,3 +286,8 @@ export const markPersonalRating = (film, personalRating) => {
     viewedDate: currentViewDate
   };
 };
+export const getRandomId = () => {
+  return Math.random()
+    .toString(36)
+    .substr(2, 9);
+};
