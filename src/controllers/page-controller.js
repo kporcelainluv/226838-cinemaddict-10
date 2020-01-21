@@ -165,7 +165,11 @@ export class PageController {
         updatedFilm.comments
       )[0];
       return this._provider
-        .deleteComment({ comment: deletedComment, films: updatedFilm })
+        .deleteComment({
+          comment: deletedComment,
+          film: updatedFilm,
+          films: this._films
+        })
         .then(() => rerender(updatedFilm))
         .then(() => onSuccess())
         .catch(() => onError());

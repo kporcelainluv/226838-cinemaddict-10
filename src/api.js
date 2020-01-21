@@ -69,7 +69,7 @@ export class API {
       authorization: this._authorization,
       method: Method.POST,
       body
-    });
+    }).then(toJSON);
   }
 
   _delete(url) {
@@ -107,13 +107,22 @@ export class API {
   deleteComment({ comment }) {
     return this._delete(`comments/${comment.id}`);
   }
-  syncFilms({ films }) {
+  syncFilms(films) {
+    console.log(films);
     return fetchWrapper({
       url: `movies/sync`,
       method: Method.POST,
       body: JSON.stringify(films),
       endpoint: this._endPoint,
       authorization: this._authorization
+    }).then(toJSON);
+  }
+  static getComments(id) {
+    return fetchWrapper({
+      url: `comments/${id}`,
+      endpoint: `https://htmlacademy-es-10.appspot.com/cinemaddict/`,
+      authorization: `Basic eo0w590ik29889a=${Math.random()}`,
+      method: Method.GET
     }).then(toJSON);
   }
 }
