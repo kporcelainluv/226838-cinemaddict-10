@@ -61,7 +61,6 @@ export class PageController {
   }
 
   initWithFilms(films) {
-    console.log({ films });
     this._films = films;
     this._allFilms = films;
 
@@ -149,7 +148,6 @@ export class PageController {
   /* eslint-disable consistent-return */
   _onFilmUpdate(updatedFilm, meta) {
     const { updateType, onSuccess, onError } = meta;
-    console.log({ updatedFilm });
 
     const rerender = newFilm => {
       this._films = updateFilms(this._films, newFilm);
@@ -163,11 +161,11 @@ export class PageController {
 
     if (updateType === UpdateType.DELETECOMMENT) {
       const deletedComment = difference(
-        this._films.find(f => f.id === updatedFilm.id).comments,
+        this._films.find(film => film.id === updatedFilm.id).comments,
         updatedFilm.comments
       )[0];
       return this._provider
-        .deleteComment({ comment: deletedComment })
+        .deleteComment({ comment: deletedComment, films: updatedFilm })
         .then(() => rerender(updatedFilm))
         .then(() => onSuccess())
         .catch(() => onError());
@@ -187,9 +185,10 @@ export class PageController {
       return this._provider
         .createComment({
           film: updatedFilm,
-          comment: createdComment
+          comment: createdComment,
+          films: this._films
         })
-        .then(({ comments }) => {
+        .then(comments => {
           updatedFilm.comments = comments;
           onSuccess(comments);
           rerender(updatedFilm);
