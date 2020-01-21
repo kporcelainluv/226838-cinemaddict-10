@@ -61,6 +61,7 @@ export class PageController {
   }
 
   initWithFilms(films) {
+    console.log({ films });
     this._films = films;
     this._allFilms = films;
 
@@ -148,6 +149,7 @@ export class PageController {
   /* eslint-disable consistent-return */
   _onFilmUpdate(updatedFilm, meta) {
     const { updateType, onSuccess, onError } = meta;
+    console.log({ updatedFilm });
 
     const rerender = newFilm => {
       this._films = updateFilms(this._films, newFilm);
@@ -192,7 +194,7 @@ export class PageController {
           onSuccess(comments);
           rerender(updatedFilm);
         })
-        .catch(() => onError());
+        .catch(() => onError(err => console.log(err, "error on adding")));
     }
   }
 }

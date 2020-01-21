@@ -3,6 +3,7 @@ import { handleScreening } from "../utils";
 
 export class ModelMovie {
   constructor(movie) {
+    console.log({ movie });
     this.id = movie[`id`];
     this.title = DOMPurify.sanitize(movie[`film_info`][`title`]);
     this.originalTitle =

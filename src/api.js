@@ -1,6 +1,4 @@
 import { Method } from "./consts";
-import { ModelMovie } from "./models/model-movie";
-import { ModelComment } from "./models/model-comments";
 
 const checkStatus = response => {
   if (response.status >= 200 && response.status < 300) {
@@ -42,9 +40,7 @@ export class API {
       endpoint: this._endPoint,
       authorization: this._authorization,
       method: Method.GET
-    })
-      .then(toJSON)
-      .then(ModelMovie.parseMovies);
+    }).then(toJSON);
   }
 
   _getComments(url) {
@@ -53,9 +49,7 @@ export class API {
       endpoint: this._endPoint,
       authorization: this._authorization,
       method: Method.GET
-    })
-      .then(toJSON)
-      .then(ModelComment.parseComments);
+    }).then(toJSON);
   }
 
   _update(url, body) {
@@ -65,9 +59,7 @@ export class API {
       authorization: this._authorization,
       method: Method.PUT,
       body
-    })
-      .then(toJSON)
-      .then(ModelMovie.parseMovie);
+    }).then(toJSON);
   }
 
   _create(url, body) {
@@ -77,7 +69,7 @@ export class API {
       authorization: this._authorization,
       method: Method.POST,
       body
-    }).then(toJSON);
+    });
   }
 
   _delete(url) {
@@ -105,16 +97,11 @@ export class API {
   }
 
   updateFilm({ film }) {
-    return this._update(
-      `movies/${film.id}`,
-      JSON.stringify(ModelMovie)
-      // toRAW1(film)
-    );
+    return this._update(`movies/${film.id}`, JSON.stringify(film));
   }
 
   createComment({ film, comment }) {
-    return this._create(`comments/${film.id}`, JSON.stringify(ModelComment));
-    // .toRAW1(comment)
+    return this._create(`comments/${film.id}`, JSON.stringify(comment));
   }
 
   deleteComment({ comment }) {

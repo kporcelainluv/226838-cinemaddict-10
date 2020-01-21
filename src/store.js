@@ -7,20 +7,34 @@ export const Store = class {
   setItem({ key, item }) {
     const items = this.getAll();
     items[key] = item;
-
     this._storage.setItem(this._storeKey, JSON.stringify(items));
   }
 
+  removeComment({ key }) {
+    const films = this.getAll();
+    const comments = films.slice(0).map(film => film.comments);
+    const newComments = comments.map(comment => {
+      if (comment.includes(key)) {
+        return comment.filter(commentId => commentId !== key);
+      }
+    });
+    const newFilms = films.map(
+      (film, index) => (film.comments = newComments[index])
+    );
+
+    this._storage.setItem(this._storeKey, JSON.stringify(newFilms));
+  }
   getItem({ key }) {
     const items = this.getAll();
     return items[key];
   }
 
-  removeItem({ key }) {
-    const items = this.getAll();
-    delete items[key];
-
-    this._storage.setItem(this._storeKey, JSON.stringify(items));
+  addComments({ key, comments }) {
+    const films = this.getAll();
+    const newFilms = films.map(
+      (film, index) => (film.comments = comments[index])
+    );
+    this._storage.setItem(this._storeKey, JSON.stringify(newFilms));
   }
 
   getAll() {
@@ -37,5 +51,8 @@ export const Store = class {
       console.error(`Error parse items. Error: ${e}. Items: ${items}`);
       return emptyItems;
     }
+  }
+  updateAllFilms({ key, films }) {
+    this._storage.setItem(this._storeKey, JSON.stringify(films));
   }
 };
