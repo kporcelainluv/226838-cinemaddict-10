@@ -157,7 +157,6 @@ export class PageController {
   }
 
   rerenderAll(films) {
-    console.log("rerendering after sync");
     this._films = updateFilms(this._films, films);
     this._allFilms = updateFilms(this._allFilms, films);
 
@@ -192,20 +191,6 @@ export class PageController {
       const initialComments = this._films.find(f => f.id === updatedFilm.id)
         .comments;
 
-      console.log({
-        initialComments,
-        comments: updatedFilm.comments
-      });
-
-      const createdComment1 = updatedFilm.comments.filter(
-        comment => comment.author === "Your comment"
-      );
-      console.log({ createdComment1 });
-
-      const createdComment2 = createdComment1.sort(
-        (c1, c2) => c1.date - c2.date
-      );
-
       const createdComment = pipe(
         difference(updatedFilm.comments),
         sort((c1, c2) => c1.date - c2.date),
@@ -215,7 +200,7 @@ export class PageController {
       return this._provider
         .createComment({
           film: updatedFilm,
-          comment: createdComment2[createdComment2.length - 1],
+          comment: createdComment,
           films: this._films
         })
         .then(comments => {
