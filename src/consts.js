@@ -69,3 +69,8 @@ export const DeleteButtonName = {
   DELETING: `deleting`,
   DELETE: `delete`
 };
+
+export const ConnectionStatus = {
+  OFFLINE: `offline`,
+  ONLINE: `online`
+};
