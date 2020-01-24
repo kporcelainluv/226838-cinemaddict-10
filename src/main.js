@@ -27,7 +27,13 @@ window.addEventListener(`offline`, () => {
 });
 window.addEventListener(`online`, () => {
   document.title = document.title.split(`[OFFLINE]`)[0];
-  provider.syncFilms().then(films => page.initWithFilms(films));
+  console.log(!provider.isSynchronized);
+  if (provider.isSynchronized) {
+    console.log("here");
+    provider.syncFilms().then(updatedFilms => {
+      page.rerenderAll(updatedFilms);
+    });
+  }
 });
 
 provider.getFilms().then(films => page.initWithFilms(films));

@@ -1,4 +1,4 @@
-import { difference, head, pipe, sort } from "ramda";
+import { difference, head, pipe, sort, tap } from "ramda";
 import {
   sortByDate,
   sortByDefault,
@@ -145,19 +145,30 @@ export class PageController {
 
     this._searchResultContoller.render(this._films);
   }
+
+  rerender(newFilm) {
+    this._films = updateFilms(this._films, newFilm);
+    this._allFilms = updateFilms(this._allFilms, newFilm);
+
+    this._filmsController.render(
+      filterFilmsbyTab(this._currentTab, this._allFilms)
+    );
+    this._navigationController.render(this._allFilms, this._currentTab);
+  }
+
+  rerenderAll(films) {
+    console.log("rerendering after sync");
+    this._films = updateFilms(this._films, films);
+    this._allFilms = updateFilms(this._allFilms, films);
+
+    this._filmsController.render(
+      filterFilmsbyTab(this._currentTab, this._allFilms)
+    );
+    this._navigationController.render(this._allFilms, this._currentTab);
+  }
   /* eslint-disable consistent-return */
   _onFilmUpdate(updatedFilm, meta) {
     const { updateType, onSuccess, onError } = meta;
-
-    const rerender = newFilm => {
-      this._films = updateFilms(this._films, newFilm);
-      this._allFilms = updateFilms(this._allFilms, newFilm);
-
-      this._filmsController.render(
-        filterFilmsbyTab(this._currentTab, this._allFilms)
-      );
-      this._navigationController.render(this._allFilms, this._currentTab);
-    };
 
     if (updateType === UpdateType.DELETECOMMENT) {
       const deletedComment = difference(
@@ -170,32 +181,47 @@ export class PageController {
           film: updatedFilm,
           films: this._films
         })
-        .then(() => rerender(updatedFilm))
+        .then(() => this.rerender(updatedFilm))
         .then(() => onSuccess())
         .catch(() => onError());
     } else if (updateType === UpdateType.UPDATEUSERINFO) {
       return this._provider.updateFilm({ film: updatedFilm }).then(() => {
-        rerender(updatedFilm);
+        this.rerender(updatedFilm);
       });
     } else if (updateType === UpdateType.CREATECOMMENT) {
       const initialComments = this._films.find(f => f.id === updatedFilm.id)
         .comments;
+
+      console.log({
+        initialComments,
+        comments: updatedFilm.comments
+      });
+
+      const createdComment1 = updatedFilm.comments.filter(
+        comment => comment.author === "Your comment"
+      );
+      console.log({ createdComment1 });
+
+      const createdComment2 = createdComment1.sort(
+        (c1, c2) => c1.date - c2.date
+      );
+
       const createdComment = pipe(
         difference(updatedFilm.comments),
-        sort((c1, c2) => c2.date - c1.date),
+        sort((c1, c2) => c1.date - c2.date),
         head
       )(initialComments);
 
       return this._provider
         .createComment({
           film: updatedFilm,
-          comment: createdComment,
+          comment: createdComment2[createdComment2.length - 1],
           films: this._films
         })
         .then(comments => {
           updatedFilm.comments = comments;
           onSuccess(comments);
-          rerender(updatedFilm);
+          this.rerender(updatedFilm);
         })
         .catch(() => onError(err => console.log(err, "error on adding")));
     }

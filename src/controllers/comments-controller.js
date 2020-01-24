@@ -62,6 +62,7 @@ export class CommentsController {
         ...this._comments.slice(index + 1)
       ];
       this._render();
+
       this._onCommentsChange(this._comments, {
         updateType: UpdateType.DELETECOMMENT,
         onSuccess: () => {
@@ -97,11 +98,12 @@ export class CommentsController {
           emotion: this._currentEmoji || `smile`,
           comment: formData.get(`comment`),
           author: `Your comment`,
-          date: new Date()
+          date: new Date().toISOString()
         };
         if (newComment.comment) {
           this._commentsSection.disableCommentsSection();
           this._comments = [...this._comments, newComment];
+
           this._onCommentsChange(this._comments, {
             updateType: UpdateType.CREATECOMMENT,
             onSuccess: comments => {

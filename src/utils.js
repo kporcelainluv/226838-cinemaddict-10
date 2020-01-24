@@ -291,3 +291,21 @@ export const getRandomId = () => {
     .toString(36)
     .substr(2, 9);
 };
+
+export const updateFilm = (id, film) => {
+  const index = this._films.findIndex(it => it.id === id);
+
+  if (index === -1) {
+    return false;
+  }
+
+  film.comments = this._films[index].comments.slice();
+
+  this._films = [].concat(
+    this._films.slice(0, index),
+    film,
+    this._films.slice(index + 1)
+  );
+
+  return true;
+};
