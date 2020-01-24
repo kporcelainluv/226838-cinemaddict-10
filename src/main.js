@@ -2,7 +2,12 @@ import { PageController } from "./controllers/page-controller";
 import { API } from "./api";
 import { Provider } from "./provider";
 import { Store } from "./store";
-import { AUTHORIZATION, TASKS_STORE_KEY, END_POINT } from "./consts";
+import {
+  AUTHORIZATION,
+  TASKS_STORE_KEY,
+  END_POINT,
+  ConnectionStatus
+} from "./consts";
 
 const headerSearchContainer = document.querySelector(`.header`);
 const mainPageContainer = document.querySelector(`.main`);
@@ -22,14 +27,12 @@ const page = new PageController(
 );
 page.init();
 
-window.addEventListener(`offline`, () => {
+window.addEventListener(ConnectionStatus.ONLINE, () => {
   document.title = `${document.title}[OFFLINE]`;
 });
-window.addEventListener(`online`, () => {
+window.addEventListener(ConnectionStatus.ONLINE, () => {
   document.title = document.title.split(`[OFFLINE]`)[0];
-  console.log(!provider.isSynchronized);
   if (provider.isSynchronized) {
-    console.log("here");
     provider.syncFilms().then(updatedFilms => {
       page.rerenderAll(updatedFilms);
     });

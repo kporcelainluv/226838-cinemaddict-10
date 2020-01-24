@@ -155,7 +155,6 @@ export const sortByDefault = films => {
     return 0;
   });
 };
-// TODO: CHECK CORRECTNESS
 export const sortByDate = films => {
   return films.sort((a, b) => {
     if (a.date > b.date) {
@@ -290,22 +289,4 @@ export const getRandomId = () => {
   return Math.random()
     .toString(36)
     .substr(2, 9);
-};
-
-export const updateFilm = (id, film) => {
-  const index = this._films.findIndex(it => it.id === id);
-
-  if (index === -1) {
-    return false;
-  }
-
-  film.comments = this._films[index].comments.slice();
-
-  this._films = [].concat(
-    this._films.slice(0, index),
-    film,
-    this._films.slice(index + 1)
-  );
-
-  return true;
 };
