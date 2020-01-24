@@ -1,7 +1,6 @@
 import { ModelMovie } from "./models/model-movie";
 import { ModelComment } from "./models/model-comments";
 import { getRandomId, updateFilms } from "./utils";
-import { API } from "./api";
 
 const objectToArray = object => {
   return Object.keys(object).map(id => object[id]);
@@ -14,11 +13,10 @@ export const Provider = class {
     this._isSynchronized = true;
   }
 
-  // done
   updateFilm({ film }) {
     if (this._isOnline()) {
       return this._api
-        .updateFilm({ film: ModelMovie.toRAW1(film) })
+        .updateFilm({ film: ModelMovie.toRAW(film) })
         .then(updatedFilm => ModelMovie.parseMovie(updatedFilm))
         .then(updatedFilm => {
           this._store.setItem({
@@ -40,7 +38,7 @@ export const Provider = class {
   createComment({ film, comment, films }) {
     if (this._isOnline()) {
       return this._api
-        .createComment({ film, comment: ModelComment.toRAW1(comment) })
+        .createComment({ film, comment: ModelComment.toRAW(comment) })
         .then(response => {
           const updatedFilm = ModelMovie.parseMovie({
             ...response.movie,
@@ -80,7 +78,7 @@ export const Provider = class {
   deleteComment({ comment, film, films }) {
     if (this._isOnline()) {
       return this._api
-        .deleteComment({ comment: ModelComment.toRAW1(comment) })
+        .deleteComment({ comment: ModelComment.toRAW(comment) })
         .then(() => {
           this._isSynchronized = false;
           const updatedFilms = updateFilms(films, film);
@@ -148,7 +146,7 @@ export const Provider = class {
     const commentsRaw = films.map(film => {
       return film.comments;
     });
-    const filmsRaw = films.map(film => ModelMovie.toRAW1(film));
+    const filmsRaw = films.map(film => ModelMovie.toRAW(film));
     filmsRaw.forEach((elm, index) => {
       elm.comments = commentsRaw[index];
     });

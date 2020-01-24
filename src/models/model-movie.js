@@ -33,13 +33,6 @@ export class ModelMovie {
     this.comments = movie[`comments`];
   }
 
-  // {
-  //   id: movie[`comments`][`id`],
-  //   author: movie[`comments`][`author`],
-  //   comment: movie[`comments`][`comment`],
-  //   date: movie[`comments`][`date`],
-  //   emotion: movie[`comments`][`emotion`]
-  // };
   static parseMovie(movie) {
     return new ModelMovie(movie);
   }
@@ -48,38 +41,7 @@ export class ModelMovie {
     return movie.map(ModelMovie.parseMovie);
   }
 
-  toRAW() {
-    return {
-      id: this.id,
-      film_info: {
-        title: this.title,
-        alternative_title: this.originalTitle,
-        poster: this.poster,
-        description: this.description,
-        total_rating: Number(this.rating),
-        genre: this.genres,
-        age_rating: Number(this.ageRate),
-        runtime: Number(this.runtime),
-        release: {
-          date: new Date(this.date),
-          release_country: this.country
-        },
-        director: this.director,
-        writers: this.writers,
-        actors: this.actors
-      },
-      user_details: {
-        [`personal_rating`]: Number(this.personalRating),
-        favorite: Boolean(this.isFavorite),
-        watchlist: Boolean(this.isWatchlist),
-        [`already_watched`]: Boolean(this.isWatched),
-        [`watching_date`]: new Date(this.viewedDate)
-      },
-      comments: this.comments.map(comment => comment.id)
-    };
-  }
-
-  static toRAW1(film) {
+  static toRAW(film) {
     return {
       id: film.id,
       film_info: {

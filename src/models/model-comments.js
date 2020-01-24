@@ -1,4 +1,3 @@
-import moment from "moment";
 import DOMPurify from "dompurify";
 
 export class ModelComment {
@@ -17,23 +16,13 @@ export class ModelComment {
   static parseComments(comment) {
     return comment.map(ModelComment.parseComment);
   }
-  static toRAW1(comment) {
+  static toRAW(comment) {
     return {
       id: comment.id,
       author: comment.author,
       comment: comment.comment,
       date: comment.date,
       emotion: comment.emotion
-    };
-  }
-
-  toRAW() {
-    return {
-      id: this.id,
-      author: this.author,
-      comment: this.comment,
-      date: this.date,
-      emotion: this.emotion
     };
   }
 }
