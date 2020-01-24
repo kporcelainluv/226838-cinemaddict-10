@@ -48,13 +48,13 @@ export class MovieController {
     render(this._container, this._filmCard.getElement(), Position.BEFOREEND);
 
     const disableForms = () => {
-      // this._popup.disableForm();
-      // this._comments.blockForm();
+      this._popup.disableForm();
+      this._comments.blockForm();
     };
 
     const enableForms = () => {
-      // this._popup.enableForm();
-      // this._comments.enableForm();
+      this._popup.enableForm();
+      this._comments.enableForm();
     };
     window.addEventListener(`offline`, disableForms);
     window.addEventListener(`online`, enableForms);

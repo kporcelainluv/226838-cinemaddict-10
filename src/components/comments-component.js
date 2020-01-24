@@ -107,14 +107,14 @@ export class CommentsSection extends AbstractComponent {
     }
   }
   disableCommentsSection() {
-    // this.getElement().querySelector(
-    //   `.film-details__comment-input`
-    // ).disabled = true;
+    this.getElement().querySelector(
+      `.film-details__comment-input`
+    ).disabled = true;
   }
   enableCommentsSection() {
-    // this.getElement().querySelector(
-    //   `.film-details__comment-input`
-    // ).disabled = false;
+    this.getElement().querySelector(
+      `.film-details__comment-input`
+    ).disabled = false;
   }
   shakeTextarea() {
     const textarea = this.getElement().querySelector(
@@ -137,14 +137,14 @@ export class CommentsSection extends AbstractComponent {
     }
   }
   disableDeleteButtons() {
-    // this.getElement()
-    //   .querySelectorAll(`.film-details__comment-delete`)
-    //   .forEach((elm) => (elm.disabled = true));
+    this.getElement()
+      .querySelectorAll(`.film-details__comment-delete`)
+      .forEach(elm => (elm.disabled = true));
   }
   enableDeleteButtons() {
-    // this.getElement()
-    //   .querySelectorAll(`.film-details__comment-delete`)
-    //   .forEach((elm) => (elm.disabled = false));
+    this.getElement()
+      .querySelectorAll(`.film-details__comment-delete`)
+      .forEach((elm) => (elm.disabled = false));
   }
 
   emojiOptionHandler(callback) {
