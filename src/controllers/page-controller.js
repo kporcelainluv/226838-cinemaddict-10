@@ -100,28 +100,37 @@ export class PageController {
       this._stats.unrender();
       this._sortController.show();
       this._filmsController.show();
+      this._sortController.handleReturningToDefault();
+      this._films = sortByDefault(this._films);
       this._filmsController.renderFilmsContainer(this._films);
     } else if (navTab === NavTab.WATCHLIST) {
       this._films = getWatchlist(this._allFilms);
       this._stats.unrender();
       this._sortController.show();
       this._filmsController.show();
+      this._sortController.handleReturningToDefault();
+      this._films = sortByDefault(this._films);
       this._filmsController.renderFilmsContainer(this._films);
     } else if (navTab === NavTab.HISTORY) {
       this._films = getWatched(this._allFilms);
       this._stats.unrender();
       this._sortController.show();
       this._filmsController.show();
+      this._sortController.handleReturningToDefault();
+      this._films = sortByDefault(this._films);
       this._filmsController.renderFilmsContainer(this._films);
     } else if (navTab === NavTab.FAVORITES) {
       this._films = getFavorite(this._allFilms);
       this._stats.unrender();
       this._sortController.show();
       this._filmsController.show();
+      this._films = sortByDefault(this._films);
+      this._sortController.handleReturningToDefault();
       this._filmsController.renderFilmsContainer(this._films);
     } else if (navTab === NavTab.STATS) {
       this._filmsController.hide();
       this._sortController.hide();
+      this._films = sortByDefault(this._films);
       this._stats.render(getWatched(this._allFilms));
     }
   }
