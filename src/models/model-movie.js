@@ -2,6 +2,7 @@ import DOMPurify from "dompurify";
 import { handleScreening } from "../utils";
 
 export class ModelMovie {
+  /* eslint-disable camelcase */
   constructor(movie) {
     this.id = movie[`id`];
     this.title = DOMPurify.sanitize(movie[`film_info`][`title`]);
