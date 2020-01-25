@@ -27,7 +27,7 @@ const page = new PageController(
 );
 page.init();
 
-window.addEventListener(ConnectionStatus.ONLINE, () => {
+window.addEventListener(ConnectionStatus.OFFLINE, () => {
   document.title = `${document.title}[OFFLINE]`;
 });
 window.addEventListener(ConnectionStatus.ONLINE, () => {

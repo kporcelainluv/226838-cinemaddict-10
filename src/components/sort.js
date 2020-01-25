@@ -36,7 +36,4 @@ export class Sort extends AbstractComponent {
       button.addEventListener(`click`, callback)
     );
   }
-  onChangeDefaultButtonActive(){
-
-  }
 }

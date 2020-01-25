@@ -25,14 +25,13 @@ export const Provider = class {
           });
           return updatedFilm;
         });
-    } else {
-      this._isSynchronized = false;
-      this._store.setItem({
-        key: film.id,
-        item: film
-      });
-      return Promise.resolve(film);
     }
+    this._isSynchronized = false;
+    this._store.setItem({
+      key: film.id,
+      item: film
+    });
+    return Promise.resolve(film);
   }
 
   createComment({ film, comment, films }) {
@@ -53,26 +52,25 @@ export const Provider = class {
           });
           return ModelComment.parseComments(response.comments);
         });
-    } else {
-      comment.id = getRandomId();
-      const newComment = ModelComment.parseComment(comment);
-      this._isSynchronized = false;
-      let filmComments = Object.values(films).filter(currentFilm => {
-        return currentFilm.id === film.id;
-      })[0].comments;
-      filmComments = [...filmComments, newComment];
-      const updatedFilm = { ...film, comments: filmComments };
-
-      const updatedFilms = updateFilms(films, updatedFilm);
-      updatedFilms.map(film => {
-        this._store.setItem({
-          key: film.id,
-          item: film
-        });
-      });
-
-      return Promise.resolve(filmComments);
     }
+    comment.id = getRandomId();
+    const newComment = ModelComment.parseComment(comment);
+    this._isSynchronized = false;
+    let filmComments = Object.values(films).filter(currentFilm => {
+      return currentFilm.id === film.id;
+    })[0].comments;
+    filmComments = [...filmComments, newComment];
+    const updatedFilm = { ...film, comments: filmComments };
+
+    const updatedFilms = updateFilms(films, updatedFilm);
+    updatedFilms.map(film => {
+      this._store.setItem({
+        key: film.id,
+        item: film
+      });
+    });
+
+    return Promise.resolve(filmComments);
   }
 
   deleteComment({ comment, film, films }) {
@@ -89,18 +87,17 @@ export const Provider = class {
             });
           });
         });
-    } else {
-      const updatedFilms = updateFilms(films, film);
-      this._isSynchronized = false;
-      updatedFilms.map(film => {
-        this._store.setItem({
-          key: film.id,
-          item: film
-        });
-      });
-
-      return Promise.resolve(updatedFilms);
     }
+    const updatedFilms = updateFilms(films, film);
+    this._isSynchronized = false;
+    updatedFilms.map(film => {
+      this._store.setItem({
+        key: film.id,
+        item: film
+      });
+    });
+
+    return Promise.resolve(updatedFilms);
   }
 
   getFilms() {
@@ -116,21 +113,19 @@ export const Provider = class {
             item: newFilm
           });
         });
-        const newFilms = films.slice(0).map(film => {
+        return films.slice(0).map(film => {
           return {
             ...ModelMovie.parseMovie(film),
             comments: ModelComment.parseComments(film.comments)
           };
         });
-        return newFilms;
       });
-    } else {
-      const rawFilmsMap = this._store.getAll();
-      const rawFilms = objectToArray(rawFilmsMap);
-      const films = ModelMovie.parseMovies(rawFilms);
-
-      return Promise.resolve(films);
     }
+    const rawFilmsMap = this._store.getAll();
+    const rawFilms = objectToArray(rawFilmsMap);
+    const films = ModelMovie.parseMovies(rawFilms);
+
+    return Promise.resolve(films);
   }
 
   _isOnline() {
