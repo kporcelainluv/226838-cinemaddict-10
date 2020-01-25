@@ -1,12 +1,6 @@
-import {
-  render,
-  unrender,
-  getWatched,
-  getWatchlist,
-  getFavorite
-} from "../utils";
-import {Navigation} from "../components/navigation";
-import {Position} from "../consts";
+import Utils from "../utils.js";
+import { Navigation } from "../components/navigation";
+import { Position } from "../consts";
 
 export class NavigationController {
   constructor(container, onNavigationChange) {
@@ -15,20 +9,28 @@ export class NavigationController {
     this._navigation = new Navigation(0, 0, 0);
   }
   init() {
-    render(this._container, this._navigation.getElement(), Position.AFTERBEGIN);
+    Utils.render(
+      this._container,
+      this._navigation.getElement(),
+      Position.AFTERBEGIN
+    );
   }
   initWithFilms(films) {
-    unrender(this._navigation.getElement());
+    Utils.unrender(this._navigation.getElement());
     this._navigation.removeElement();
 
     this._navigation = new Navigation(
-        getWatched(films).length,
-        getWatchlist(films).length,
-        getFavorite(films).length
+      Utils.getWatched(films).length,
+      Utils.getWatchlist(films).length,
+      Utils.getFavorite(films).length
     );
 
-    render(this._container, this._navigation.getElement(), Position.AFTERBEGIN);
-    this._navigation.onNavigationItemClick((hash) => {
+    Utils.render(
+      this._container,
+      this._navigation.getElement(),
+      Position.AFTERBEGIN
+    );
+    this._navigation.onNavigationItemClick(hash => {
       this._navigation.makeButtonActive(hash);
       this._onNavigationChange(hash);
     });

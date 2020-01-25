@@ -1,15 +1,8 @@
-import {Popup} from "../components/popup";
-import {
-  render,
-  unrender,
-  markFavorite,
-  markPersonalRating,
-  markWatched,
-  markWatchList
-} from "../utils";
-import {EXIT_KEY_ESC, EXIT_KEY_ESCAPE, Position, UpdateType} from "../consts";
-import {FilmCard} from "../components/film-card";
-import {CommentsController} from "../controllers/comments-controller";
+import { Popup } from "../components/popup";
+import Utils from "../utils.js";
+import { EXIT_KEY_ESC, EXIT_KEY_ESCAPE, Position, UpdateType } from "../consts";
+import { FilmCard } from "../components/film-card";
+import { CommentsController } from "../controllers/comments-controller";
 
 const body = document.getElementsByTagName(`body`)[0];
 
@@ -28,24 +21,28 @@ export class MovieController {
     this._filmCard = new FilmCard(this._film);
     this._popup = new Popup(this._film);
     this._comments = new CommentsController(
-        this._popup,
-        this._film.comments,
-        this.onCommentsChange
+      this._popup,
+      this._film.comments,
+      this.onCommentsChange
     );
   }
 
   closePopup() {
     if (body.contains(this._popup.getElement())) {
-      unrender(this._popup.getElement());
+      Utils.unrender(this._popup.getElement());
       this._popup.removeElement();
     }
   }
   openPopup() {
-    render(body, this._popup.getElement(), Position.BEFOREEND);
+    Utils.render(body, this._popup.getElement(), Position.BEFOREEND);
   }
 
   init() {
-    render(this._container, this._filmCard.getElement(), Position.BEFOREEND);
+    Utils.render(
+      this._container,
+      this._filmCard.getElement(),
+      Position.BEFOREEND
+    );
 
     const disableForms = () => {
       this._comments.blockForm();
@@ -57,7 +54,7 @@ export class MovieController {
     window.addEventListener(`offline`, disableForms);
     window.addEventListener(`online`, enableForms);
 
-    const onEscKeyDown = (evt) => {
+    const onEscKeyDown = evt => {
       if (evt.key === EXIT_KEY_ESCAPE || evt.key === EXIT_KEY_ESC) {
         this._popup.resetForm();
         this.closePopup();
@@ -79,28 +76,28 @@ export class MovieController {
     this._filmCard.onPosterClick(openPopup);
     this._filmCard.onTitleClick(openPopup);
     this._popup.onClosingBtnClick(() => {
-      unrender(this._popup.getElement());
+      Utils.unrender(this._popup.getElement());
     });
 
-    this._filmCard.onWatchlistBtnClick((event) => {
+    this._filmCard.onWatchlistBtnClick(event => {
       event.preventDefault();
-      const updatedFilm = markWatchList(this._film);
+      const updatedFilm = Utils.markWatchList(this._film);
       this._onFilmChange(updatedFilm, {
         updateType: UpdateType.UPDATEUSERINFO
       });
     });
 
-    this._filmCard.onHistoryBtnClick((event) => {
+    this._filmCard.onHistoryBtnClick(event => {
       event.preventDefault();
-      const updatedFilm = markWatched(this._film);
+      const updatedFilm = Utils.markWatched(this._film);
       this._onFilmChange(updatedFilm, {
         updateType: UpdateType.UPDATEUSERINFO
       });
     });
 
-    this._filmCard.onFavoriteBtnClick((event) => {
+    this._filmCard.onFavoriteBtnClick(event => {
       event.preventDefault();
-      const updatedFilm = markFavorite(this._film);
+      const updatedFilm = Utils.markFavorite(this._film);
 
       this._onFilmChange(updatedFilm, {
         updateType: UpdateType.UPDATEUSERINFO
@@ -108,7 +105,7 @@ export class MovieController {
     });
 
     this._popup.onHistoryBtnClick(() => {
-      const updatedFilm = markWatched(this._film);
+      const updatedFilm = Utils.markWatched(this._film);
       this._onFilmChange(updatedFilm, {
         updateType: UpdateType.UPDATEUSERINFO
       });
@@ -118,7 +115,7 @@ export class MovieController {
     });
 
     this._popup.onWatchlistBtnClick(() => {
-      const updatedFilm = markWatchList(this._film);
+      const updatedFilm = Utils.markWatchList(this._film);
       this._onFilmChange(updatedFilm, {
         updateType: UpdateType.UPDATEUSERINFO
       });
@@ -126,7 +123,7 @@ export class MovieController {
     });
 
     this._popup.onRatingUndoClick(() => {
-      const updatedFilm = markWatched(this._film);
+      const updatedFilm = Utils.markWatched(this._film);
       this._onFilmChange(updatedFilm, {
         updateType: UpdateType.UPDATEUSERINFO
       });
@@ -137,19 +134,19 @@ export class MovieController {
     });
 
     this._popup.onFavoriteBtnClick(() => {
-      const updatedFilm = markFavorite(this._film);
+      const updatedFilm = Utils.markFavorite(this._film);
       this._onFilmChange(updatedFilm, {
         updateType: UpdateType.UPDATEUSERINFO
       });
       this._film = updatedFilm;
     });
 
-    this._popup.ratingButtonHandler((evt) => {
+    this._popup.ratingButtonHandler(evt => {
       this._popup.removeErrorFromButtons();
       evt.target.checked = true;
 
       const personalRating = evt.target.value;
-      const updatedFilm = markPersonalRating(this._film, personalRating);
+      const updatedFilm = Utils.markPersonalRating(this._film, personalRating);
       this._onFilmChange(updatedFilm, {
         updateType: UpdateType.UPDATEUSERINFO,
         onSuccess: () => {

@@ -1,6 +1,6 @@
-import {MovieController} from "./movie-controller";
-import {ShowMoreButton} from "../components/show-more-btn";
-import {render} from "../utils";
+import { MovieController } from "./movie-controller";
+import { ShowMoreButton } from "../components/show-more-btn";
+import Utils from "../utils.js";
 import {
   PER_PAGE,
   Position,
@@ -39,10 +39,10 @@ export class FilmListController {
   }
   _renderFilmCard(container, film) {
     const movieController = new MovieController(
-        container,
-        film,
-        this._onFilmUpdate,
-        this._onTogglePopup
+      container,
+      film,
+      this._onFilmUpdate,
+      this._onTogglePopup
     );
 
     movieController.init();
@@ -53,7 +53,7 @@ export class FilmListController {
   }
   render(films) {
     if (films.length > 0) {
-      films.slice(0, this._filmsDisplayed || 0).forEach((film) => {
+      films.slice(0, this._filmsDisplayed || 0).forEach(film => {
         this._renderFilmCard(this._container, film);
       });
 
@@ -61,10 +61,10 @@ export class FilmListController {
         films.length > this._filmsDisplayed &&
         this._type === PageType.DEFAULT
       ) {
-        render(
-            this._container,
-            this._showMoreBtn.getElement(),
-            Position.BEFOREEND
+        Utils.render(
+          this._container,
+          this._showMoreBtn.getElement(),
+          Position.BEFOREEND
         );
         const callback = () => {
           this.unrender();

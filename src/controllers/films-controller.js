@@ -1,19 +1,14 @@
-import {
-  render,
-  unrender,
-  getMostCommentedFilms,
-  getTopRatedFilms
-} from "../utils";
-import {DefaultFilmList} from "../components/default-film-list";
-import {FilmsContainer} from "../components/film-containter";
-import {FilmListController} from "./film-list-controller";
-import {AdditionalFilmList} from "../components/additional-film-blocks";
-import {Loading} from "../components/loading";
-import {EmptyFilms} from "../components/empty-films";
-import {PageType, Position} from "../consts";
+import Utils from "../utils.js";
+import { DefaultFilmList } from "../components/default-film-list";
+import { FilmsContainer } from "../components/film-containter";
+import { FilmListController } from "./film-list-controller";
+import { AdditionalFilmList } from "../components/additional-film-blocks";
+import { Loading } from "../components/loading";
+import { EmptyFilms } from "../components/empty-films";
+import { PageType, Position } from "../consts";
 
 export class FilmsController {
-  constructor({container, onFilmUpdate}) {
+  constructor({ container, onFilmUpdate }) {
     this._container = container;
     this._subscriptions = [];
     this._filmsContainer = new FilmsContainer();
@@ -29,7 +24,7 @@ export class FilmsController {
     this._onFilmUpdate = onFilmUpdate;
   }
   _onTogglePopup() {
-    this._subscriptions.forEach((subscription) => subscription());
+    this._subscriptions.forEach(subscription => subscription());
   }
 
   _onRenderFilmCard(closePopup) {
@@ -42,29 +37,29 @@ export class FilmsController {
     this._commentedFilmListController.unrender();
   }
   init() {
-    render(
-        this._container,
-        this._filmsContainer.getElement(),
-        Position.BEFOREEND
+    Utils.render(
+      this._container,
+      this._filmsContainer.getElement(),
+      Position.BEFOREEND
     );
-    render(
-        this._filmsContainer.getElement(),
-        this._loadingComponent.getElement(),
-        Position.AFTERBEGIN
+    Utils.render(
+      this._filmsContainer.getElement(),
+      this._loadingComponent.getElement(),
+      Position.AFTERBEGIN
     );
   }
 
   initWithFilms(films) {
     if (films.length === 0) {
-      unrender(this._loadingComponent.getElement());
+      Utils.unrender(this._loadingComponent.getElement());
       this._loadingComponent.removeElement();
-      render(
-          this._filmsContainer.getElement(),
-          this._emptyFilmsComponent.getElement(),
-          Position.BEFOREEND
+      Utils.render(
+        this._filmsContainer.getElement(),
+        this._emptyFilmsComponent.getElement(),
+        Position.BEFOREEND
       );
     } else {
-      unrender(this._loadingComponent.getElement());
+      Utils.unrender(this._loadingComponent.getElement());
       this._loadingComponent.removeElement();
 
       this._defaultFilmListController = new FilmListController({
@@ -78,7 +73,7 @@ export class FilmsController {
 
       this._ratedFilmListController = new FilmListController({
         container: this._topRatedList.getElementToRenderFilmsTo(),
-        films: getTopRatedFilms(films),
+        films: Utils.getTopRatedFilms(films),
         onFilmUpdate: this._onFilmUpdate,
         onTogglePopup: this._onTogglePopup,
         onRenderFilmCard: this._onRenderFilmCard,
@@ -87,31 +82,31 @@ export class FilmsController {
 
       this._commentedFilmListController = new FilmListController({
         container: this._mostCommentedList.getElementToRenderFilmsTo(),
-        films: getMostCommentedFilms(films),
+        films: Utils.getMostCommentedFilms(films),
         onFilmUpdate: this._onFilmUpdate,
         onTogglePopup: this._onTogglePopup,
         onRenderFilmCard: this._onRenderFilmCard,
         type: PageType.MOST_COMMENTED
       });
 
-      render(
-          this._filmsContainer.getElement(),
-          this._defaultFilmList.getElement(),
-          Position.BEFOREEND
+      Utils.render(
+        this._filmsContainer.getElement(),
+        this._defaultFilmList.getElement(),
+        Position.BEFOREEND
       );
 
-      if (getTopRatedFilms(films).length > 0) {
-        render(
-            this._filmsContainer.getElement(),
-            this._topRatedList.getElement(),
-            Position.BEFOREEND
+      if (Utils.getTopRatedFilms(films).length > 0) {
+        Utils.render(
+          this._filmsContainer.getElement(),
+          this._topRatedList.getElement(),
+          Position.BEFOREEND
         );
       }
-      if (getMostCommentedFilms(films).length > 0) {
-        render(
-            this._filmsContainer.getElement(),
-            this._mostCommentedList.getElement(),
-            Position.BEFOREEND
+      if (Utils.getMostCommentedFilms(films).length > 0) {
+        Utils.render(
+          this._filmsContainer.getElement(),
+          this._mostCommentedList.getElement(),
+          Position.BEFOREEND
         );
       }
 
@@ -124,16 +119,20 @@ export class FilmsController {
   render(films) {
     this._unrender();
     this._defaultFilmListController.render(films);
-    this._ratedFilmListController.render(getTopRatedFilms(films));
-    this._commentedFilmListController.render(getMostCommentedFilms(films));
+    this._ratedFilmListController.render(Utils.getTopRatedFilms(films));
+    this._commentedFilmListController.render(
+      Utils.getMostCommentedFilms(films)
+    );
   }
 
   renderFilmsContainer(films) {
     this._unrender();
 
     this._defaultFilmListController.renderDefault(films);
-    this._ratedFilmListController.render(getTopRatedFilms(films));
-    this._commentedFilmListController.render(getMostCommentedFilms(films));
+    this._ratedFilmListController.render(Utils.getTopRatedFilms(films));
+    this._commentedFilmListController.render(
+      Utils.getMostCommentedFilms(films)
+    );
   }
 
   hide() {

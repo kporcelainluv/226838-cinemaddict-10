@@ -1,6 +1,6 @@
-import {StatsChart} from "../components/statistics-chart";
-import {render, unrender, getGenresByKeysVals} from "../utils";
-import {Position} from "../consts";
+import { StatsChart } from "../components/statistics-chart";
+import Utils from "../utils.js";
+import { Position } from "../consts";
 
 export class StatsChartController {
   constructor(container) {
@@ -11,15 +11,15 @@ export class StatsChartController {
   render(films) {
     this.unrender();
     this._chart = new StatsChart();
-    this._chart.createChart(getGenresByKeysVals(films));
-    render(
-        this._container.getElement(),
-        this._chart.getElement(),
-        Position.BEFOREEND
+    this._chart.createChart(Utils.getGenresByKeysVals(films));
+    Utils.render(
+      this._container.getElement(),
+      this._chart.getElement(),
+      Position.BEFOREEND
     );
   }
   unrender() {
-    unrender(this._chart.getElement());
+    Utils.unrender(this._chart.getElement());
     this._chart.removeElement();
   }
 }

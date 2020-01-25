@@ -1,6 +1,6 @@
 import { ModelMovie } from "./models/model-movie";
 import { ModelComment } from "./models/model-comments";
-import { getRandomId, updateFilms } from "./utils";
+import Utils from "./utils.js";
 
 const objectToArray = object => {
   return Object.keys(object).map(id => object[id]);
@@ -43,7 +43,7 @@ export const Provider = class {
             ...response.movie,
             comments: response.comments
           });
-          const newFilms = updateFilms(films, updatedFilm);
+          const newFilms = Utils.updateFilms(films, updatedFilm);
           newFilms.map(film => {
             this._store.setItem({
               key: film.id,
@@ -53,7 +53,7 @@ export const Provider = class {
           return ModelComment.parseComments(response.comments);
         });
     }
-    comment.id = getRandomId();
+    comment.id = Utils.getRandomId();
     const newComment = ModelComment.parseComment(comment);
     this._isSynchronized = false;
     let filmComments = Object.values(films).filter(currentFilm => {
@@ -62,7 +62,7 @@ export const Provider = class {
     filmComments = [...filmComments, newComment];
     const updatedFilm = { ...film, comments: filmComments };
 
-    const updatedFilms = updateFilms(films, updatedFilm);
+    const updatedFilms = Utils.updateFilms(films, updatedFilm);
     updatedFilms.map(film => {
       this._store.setItem({
         key: film.id,
@@ -79,7 +79,7 @@ export const Provider = class {
         .deleteComment({ comment: ModelComment.toRAW(comment) })
         .then(() => {
           this._isSynchronized = false;
-          const updatedFilms = updateFilms(films, film);
+          const updatedFilms = Utils.updateFilms(films, film);
           updatedFilms.map(film => {
             this._store.setItem({
               key: film.id,
@@ -88,7 +88,7 @@ export const Provider = class {
           });
         });
     }
-    const updatedFilms = updateFilms(films, film);
+    const updatedFilms = Utils.updateFilms(films, film);
     this._isSynchronized = false;
     updatedFilms.map(film => {
       this._store.setItem({

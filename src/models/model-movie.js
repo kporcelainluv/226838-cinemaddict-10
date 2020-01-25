@@ -1,5 +1,5 @@
 import DOMPurify from "dompurify";
-import {handleScreening} from "../utils";
+import Utils from "../utils.js";
 
 export class ModelMovie {
   /* eslint-disable camelcase */
@@ -12,18 +12,18 @@ export class ModelMovie {
     this.description = DOMPurify.sanitize(movie[`film_info`][`description`]);
     this.rating = Number(movie[`film_info`][`total_rating`]);
     this.date = movie[`film_info`][`release`][`date`];
-    this.genres = handleScreening(movie[`film_info`][`genre`]);
+    this.genres = Utils.handleScreening(movie[`film_info`][`genre`]);
     this.ageRate = Number(movie[`film_info`][`age_rating`]);
     this.runtime = Number(movie[`film_info`][`runtime`]);
-    this.comments = handleScreening(movie[`comments`]);
+    this.comments = Utils.handleScreening(movie[`comments`]);
     this.director = DOMPurify.sanitize(movie[`film_info`][`director`]);
-    this.writers = handleScreening(movie[`film_info`][`writers`]);
-    this.actors = handleScreening(movie[`film_info`][`actors`]);
+    this.writers = Utils.handleScreening(movie[`film_info`][`writers`]);
+    this.actors = Utils.handleScreening(movie[`film_info`][`actors`]);
     this.runtime = Number(movie[`film_info`][`runtime`]);
     this.country = DOMPurify.sanitize(
-        movie[`film_info`][`release`][`release_country`]
+      movie[`film_info`][`release`][`release_country`]
     );
-    this.genres = handleScreening(movie[`film_info`][`genre`]);
+    this.genres = Utils.handleScreening(movie[`film_info`][`genre`]);
 
     this.personalRating =
       Number(movie[`user_details`][`personal_rating`]) || null;
@@ -69,7 +69,7 @@ export class ModelMovie {
         [`already_watched`]: Boolean(film.isWatched),
         [`watching_date`]: new Date(film.viewedDate)
       },
-      comments: film.comments.map((comment) => comment.id)
+      comments: film.comments.map(comment => comment.id)
     };
   }
 }

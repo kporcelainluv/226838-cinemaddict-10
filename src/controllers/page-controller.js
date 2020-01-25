@@ -1,24 +1,14 @@
-import {difference, head, pipe, sort} from "ramda";
-import {
-  sortByDate,
-  sortByDefault,
-  sortByRating,
-  filterFilmsbyTab,
-  filterFilms,
-  updateFilms,
-  getFavorite,
-  getWatched,
-  getWatchlist
-} from "../utils";
-import {NavTab, SEARCH_QUERY_LENGTH, SortType, UpdateType} from "../consts";
-import {SearchResultController} from "./search-result";
-import {StatsController} from "../controllers/stats-controller";
+import { difference, head, pipe, sort } from "ramda";
+import Utils from "../utils.js";
+import { NavTab, SEARCH_QUERY_LENGTH, SortType, UpdateType } from "../consts";
+import { SearchResultController } from "./search-result";
+import { StatsController } from "../controllers/stats-controller";
 
-import {SortController} from "./sort-controller";
-import {HeaderController} from "./header-controller";
-import {FilmsController} from "./films-controller";
-import {FooterController} from "./footer-controller";
-import {NavigationController} from "./navigation-controller";
+import { SortController } from "./sort-controller";
+import { HeaderController } from "./header-controller";
+import { FilmsController } from "./films-controller";
+import { FooterController } from "./footer-controller";
+import { NavigationController } from "./navigation-controller";
 
 export class PageController {
   constructor(headerContainer, container, films, provider) {
@@ -29,8 +19,8 @@ export class PageController {
     this._currentTab = NavTab.ALL;
 
     this._sortController = new SortController(
-        this._container,
-        this._onSortTypeChange.bind(this)
+      this._container,
+      this._onSortTypeChange.bind(this)
     );
     this._headerController = new HeaderController({
       onSearchChange: this._onSearchChange.bind(this)
@@ -40,8 +30,8 @@ export class PageController {
       onFilmUpdate: this._onFilmUpdate.bind(this)
     });
     this._navigationController = new NavigationController(
-        this._container,
-        this._onNavigationChange.bind(this)
+      this._container,
+      this._onNavigationChange.bind(this)
     );
 
     this._searchResultContoller = new SearchResultController({
@@ -68,13 +58,13 @@ export class PageController {
     this._headerController.initProfileStats(this._films);
     this._navigationController.initWithFilms(this._films);
     this._searchResultContoller.init(this._films);
-    this._stats.init(getWatched(this._allFilms));
+    this._stats.init(Utils.getWatched(this._allFilms));
     this._footer.init(this._films);
   }
 
   _onSearchChange(query) {
     if (query.length >= SEARCH_QUERY_LENGTH) {
-      this._films = filterFilms(this._allFilms, query);
+      this._films = Utils.filterFilms(this._allFilms, query);
       this._filmsController.hide();
       this._sortController.hide();
       this._navigationController.hide();
@@ -101,87 +91,87 @@ export class PageController {
       this._sortController.show();
       this._filmsController.show();
       this._sortController.handleReturningToDefault();
-      this._films = sortByDefault(this._films);
+      this._films = Utils.sortByDefault(this._films);
       this._filmsController.renderFilmsContainer(this._films);
     } else if (navTab === NavTab.WATCHLIST) {
-      this._films = getWatchlist(this._allFilms);
+      this._films = Utils.getWatchlist(this._allFilms);
       this._stats.unrender();
       this._sortController.show();
       this._filmsController.show();
       this._sortController.handleReturningToDefault();
-      this._films = sortByDefault(this._films);
+      this._films = Utils.sortByDefault(this._films);
       this._filmsController.renderFilmsContainer(this._films);
     } else if (navTab === NavTab.HISTORY) {
-      this._films = getWatched(this._allFilms);
+      this._films = Utils.getWatched(this._allFilms);
       this._stats.unrender();
       this._sortController.show();
       this._filmsController.show();
       this._sortController.handleReturningToDefault();
-      this._films = sortByDefault(this._films);
+      this._films = Utils.sortByDefault(this._films);
       this._filmsController.renderFilmsContainer(this._films);
     } else if (navTab === NavTab.FAVORITES) {
-      this._films = getFavorite(this._allFilms);
+      this._films = Utils.getFavorite(this._allFilms);
       this._stats.unrender();
       this._sortController.show();
       this._filmsController.show();
-      this._films = sortByDefault(this._films);
+      this._films = Utils.sortByDefault(this._films);
       this._sortController.handleReturningToDefault();
       this._filmsController.renderFilmsContainer(this._films);
     } else if (navTab === NavTab.STATS) {
       this._filmsController.hide();
       this._sortController.hide();
-      this._films = sortByDefault(this._films);
-      this._stats.render(getWatched(this._allFilms));
+      this._films = Utils.sortByDefault(this._films);
+      this._stats.render(Utils.getWatched(this._allFilms));
     }
   }
 
   _onSortTypeChange(sortType) {
     if (sortType === SortType.DEFAULT) {
-      this._films = sortByDefault(this._films);
+      this._films = Utils.sortByDefault(this._films);
       this._filmsController.render(this._films);
     } else if (sortType === SortType.DATE) {
-      this._films = sortByDate(this._films);
+      this._films = Utils.sortByDate(this._films);
       this._filmsController.render(this._films);
     } else if (sortType === SortType.RATING) {
-      this._films = sortByRating(this._films);
+      this._films = Utils.sortByRating(this._films);
       this._filmsController.render(this._films);
     }
   }
 
   _onFilmUpdateSearchResult(updatedFilm) {
-    this._films = updateFilms(this._films, updatedFilm);
-    this._allFilms = updateFilms(this._allFilms, updatedFilm);
+    this._films = Utils.updateFilms(this._films, updatedFilm);
+    this._allFilms = Utils.updateFilms(this._allFilms, updatedFilm);
 
     this._searchResultContoller.render(this._films);
   }
 
   rerender(newFilm) {
-    this._films = updateFilms(this._films, newFilm);
-    this._allFilms = updateFilms(this._allFilms, newFilm);
+    this._films = Utils.updateFilms(this._films, newFilm);
+    this._allFilms = Utils.updateFilms(this._allFilms, newFilm);
 
     this._filmsController.render(
-        filterFilmsbyTab(this._currentTab, this._allFilms)
+      Utils.filterFilmsbyTab(this._currentTab, this._allFilms)
     );
     this._navigationController.render(this._allFilms, this._currentTab);
   }
 
   rerenderAll(films) {
-    this._films = updateFilms(this._films, films);
-    this._allFilms = updateFilms(this._allFilms, films);
+    this._films = Utils.updateFilms(this._films, films);
+    this._allFilms = Utils.updateFilms(this._allFilms, films);
 
     this._filmsController.render(
-        filterFilmsbyTab(this._currentTab, this._allFilms)
+      Utils.filterFilmsbyTab(this._currentTab, this._allFilms)
     );
     this._navigationController.render(this._allFilms, this._currentTab);
   }
   /* eslint-disable consistent-return */
   _onFilmUpdate(updatedFilm, meta) {
-    const {updateType, onSuccess, onError} = meta;
+    const { updateType, onSuccess, onError } = meta;
 
     if (updateType === UpdateType.DELETECOMMENT) {
       const deletedComment = difference(
-          this._films.find((film) => film.id === updatedFilm.id).comments,
-          updatedFilm.comments
+        this._films.find(film => film.id === updatedFilm.id).comments,
+        updatedFilm.comments
       )[0];
       return this._provider
         .deleteComment({
@@ -193,18 +183,18 @@ export class PageController {
         .then(() => onSuccess())
         .catch(() => onError());
     } else if (updateType === UpdateType.UPDATEUSERINFO) {
-      return this._provider.updateFilm({film: updatedFilm}).then(() => {
+      return this._provider.updateFilm({ film: updatedFilm }).then(() => {
         this.rerender(updatedFilm);
       });
     } else if (updateType === UpdateType.CREATECOMMENT) {
       const initialComments = this._films.find(
-          (film) => film.id === updatedFilm.id
+        film => film.id === updatedFilm.id
       ).comments;
 
       const createdComment = pipe(
-          difference(updatedFilm.comments),
-          sort((comment1, comment2) => comment1.date - comment2.date),
-          head
+        difference(updatedFilm.comments),
+        sort((comment1, comment2) => comment1.date - comment2.date),
+        head
       )(initialComments);
 
       return this._provider
@@ -213,7 +203,7 @@ export class PageController {
           comment: createdComment,
           films: this._films
         })
-        .then((comments) => {
+        .then(comments => {
           updatedFilm.comments = comments;
           onSuccess(comments);
           this.rerender(updatedFilm);

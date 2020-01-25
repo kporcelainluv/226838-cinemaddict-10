@@ -1,6 +1,6 @@
-import {Footer} from "../components/footer-component";
-import {render} from "../utils";
-import {Position} from "../consts";
+import { Footer } from "../components/footer-component";
+import Utils from "../utils.js";
+import { Position } from "../consts";
 
 export class FooterController {
   constructor() {
@@ -10,6 +10,6 @@ export class FooterController {
 
   init(films) {
     this._footer.updateFilmsAmount(films.length);
-    render(this._body, this._footer.getElement(), Position.BEFOREEND);
+    Utils.render(this._body, this._footer.getElement(), Position.BEFOREEND);
   }
 }

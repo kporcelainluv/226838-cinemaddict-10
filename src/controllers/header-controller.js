@@ -1,7 +1,7 @@
-import {render, getStatsRank, countWatchedFilms} from "../utils";
-import {ProfileRating} from "../components/profile-rating";
-import {SearchController} from "./search-controller";
-import {Position} from "../consts";
+import Utils from "../utils.js";
+import { ProfileRating } from "../components/profile-rating";
+import { SearchController } from "./search-controller";
+import { Position } from "../consts";
 
 const headerElement = document.querySelector(`.header`);
 
@@ -14,19 +14,19 @@ const createHeading = () => {
 };
 
 export class HeaderController {
-  constructor({onSearchChange}) {
+  constructor({ onSearchChange }) {
     this._search = new SearchController(headerElement, onSearchChange);
   }
 
   init() {
     const heading = createHeading();
     this._search.init();
-    render(headerElement, heading, Position.AFTERBEGIN);
+    Utils.render(headerElement, heading, Position.AFTERBEGIN);
   }
 
   initProfileStats(films) {
-    this._profileStats = getStatsRank(countWatchedFilms(films));
+    this._profileStats = Utils.getStatsRank(Utils.countWatchedFilms(films));
     this._profile = new ProfileRating(this._profileStats);
-    render(headerElement, this._profile.getElement(), Position.BEFOREEND);
+    Utils.render(headerElement, this._profile.getElement(), Position.BEFOREEND);
   }
 }

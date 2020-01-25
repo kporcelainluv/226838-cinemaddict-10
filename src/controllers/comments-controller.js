@@ -1,5 +1,5 @@
-import {CommentsSection} from "../components/comments-component";
-import {render, unrender} from "../utils";
+import { CommentsSection } from "../components/comments-component";
+import Utils from "../utils.js";
 import {
   UpdateType,
   Position,
@@ -31,15 +31,15 @@ export class CommentsController {
   }
 
   _render() {
-    render(
-        this._popup.getCommentsContainer(),
-        this._commentsSection.getElement(),
-        Position.BEFOREEND
+    Utils.render(
+      this._popup.getCommentsContainer(),
+      this._commentsSection.getElement(),
+      Position.BEFOREEND
     );
   }
 
   _unrender() {
-    unrender(this._commentsSection.getElement());
+    Utils.unrender(this._commentsSection.getElement());
     this._commentsSection.removeElement();
   }
 
@@ -58,10 +58,10 @@ export class CommentsController {
       this._commentsSection.enableCommentsSection();
     });
 
-    this._commentsSection.onEachDeleteButtonsClick((index) => {
+    this._commentsSection.onEachDeleteButtonsClick(index => {
       this._commentsSection.buttonHeadingHandler(
-          DeleteButtonName.DELETING,
-          index
+        DeleteButtonName.DELETING,
+        index
       );
       this._comments = [
         ...this._comments.slice(0, index),
@@ -76,8 +76,8 @@ export class CommentsController {
         },
         onError: () => {
           this._commentsSection.buttonHeadingHandler(
-              DeleteButtonName.DELETE,
-              index
+            DeleteButtonName.DELETE,
+            index
           );
         }
       });
@@ -85,14 +85,14 @@ export class CommentsController {
 
     this._render();
 
-    this._commentsSection.emojiOptionHandler((evt) => {
+    this._commentsSection.emojiOptionHandler(evt => {
       evt.preventDefault();
       const emojiId = evt.target.id;
       this._currentEmoji = EMOJI[emojiId];
       this._commentsSection.emojiUrlUpdateHandler(this._currentEmoji);
     });
 
-    const onAddComment = (evt) => {
+    const onAddComment = evt => {
       if (
         (evt.ctrlKey && evt.keyCode === ENTER_KEY) ||
         (evt.keyCode === ENTER_KEY && evt.metaKey)
@@ -112,7 +112,7 @@ export class CommentsController {
 
           this._onCommentsChange(this._comments, {
             updateType: UpdateType.CREATECOMMENT,
-            onSuccess: (comments) => {
+            onSuccess: comments => {
               this._commentsSection.enableCommentsSection();
               document.removeEventListener(`keydown`, onAddComment);
               this._rerender(comments);
@@ -128,7 +128,7 @@ export class CommentsController {
       }
     };
 
-    this._commentsSection.onInputFocus((evt) => {
+    this._commentsSection.onInputFocus(evt => {
       evt.preventDefault();
       document.addEventListener(`keydown`, onAddComment);
     });

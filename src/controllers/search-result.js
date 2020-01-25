@@ -1,12 +1,12 @@
-import {render, unrender} from "../utils";
-import {FilmListController} from "./film-list-controller";
-import {SearchResultHeading} from "../components/search-result-heading";
-import {EmptySearch} from "../components/empty-search";
-import {SearchResultContainer} from "../components/search-result-container";
-import {Position, PageType} from "../consts";
+import Utils from "../utils.js";
+import { FilmListController } from "./film-list-controller";
+import { SearchResultHeading } from "../components/search-result-heading";
+import { EmptySearch } from "../components/empty-search";
+import { SearchResultContainer } from "../components/search-result-container";
+import { Position, PageType } from "../consts";
 
 export class SearchResultController {
-  constructor({container, onFilmUpdate}) {
+  constructor({ container, onFilmUpdate }) {
     this._container = container;
     this._subscriptions = [];
 
@@ -21,17 +21,17 @@ export class SearchResultController {
     this._filmListController = undefined;
   }
   _onTogglePopup() {
-    this._subscriptions.forEach((subscription) => subscription());
+    this._subscriptions.forEach(subscription => subscription());
   }
 
   _onRenderFilmCard(closePopup) {
     this._subscriptions.push(closePopup);
   }
   init(films) {
-    render(
-        this._container,
-        this._searchResultContainer.getElement(),
-        Position.BEFOREEND
+    Utils.render(
+      this._container,
+      this._searchResultContainer.getElement(),
+      Position.BEFOREEND
     );
     this._filmListController = new FilmListController({
       container: this._searchResultContainer.getElement(),
@@ -48,24 +48,24 @@ export class SearchResultController {
 
     if (films.length > 0) {
       this._searchResultHeading = new SearchResultHeading(films.length);
-      render(
-          this._searchResultContainer.getElement(),
-          this._searchResultHeading.getElement(),
-          Position.AFTERBEGIN
+      Utils.render(
+        this._searchResultContainer.getElement(),
+        this._searchResultHeading.getElement(),
+        Position.AFTERBEGIN
       );
       this._filmListController.render(films);
     } else {
-      render(
-          this._searchResultContainer.getElement(),
-          this._emptySearch.getElement(),
-          Position.AFTERBEGIN
+      Utils.render(
+        this._searchResultContainer.getElement(),
+        this._emptySearch.getElement(),
+        Position.AFTERBEGIN
       );
     }
   }
 
   unrender() {
-    unrender(this._searchResultHeading.getElement());
-    unrender(this._emptySearch.getElement());
+    Utils.unrender(this._searchResultHeading.getElement());
+    Utils.unrender(this._emptySearch.getElement());
     this._filmListController.unrender();
   }
 }
