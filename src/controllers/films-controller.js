@@ -61,7 +61,7 @@ export class FilmsController {
       render(
           this._filmsContainer.getElement(),
           this._emptyFilmsComponent.getElement(),
-          `beforeend`
+          Position.BEFOREEND
       );
     } else {
       unrender(this._loadingComponent.getElement());

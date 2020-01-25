@@ -1,6 +1,6 @@
 import {render} from "../utils";
 import {Sort} from "../components/sort";
-import {Position} from "../consts";
+import {Position, SortType} from "../consts";
 
 export class SortController {
   constructor(container, onSortChange) {
@@ -25,6 +25,6 @@ export class SortController {
     this._sort.show();
   }
   handleReturningToDefault() {
-    this._sort.makeButtonStateActive(`default`);
+    this._sort.makeButtonStateActive(SortType.DEFAULT);
   }
 }

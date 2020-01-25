@@ -199,35 +199,6 @@ export class Popup extends AbstractComponent {
       .classList.toggle(`visually-hidden`);
   }
 
-  disableForm() {
-    // const userRatingBtns = this.getElement().querySelectorAll(
-    //   `.film-details__user-rating-input`
-    // );
-    // if (userRatingBtns) {
-    //   userRatingBtns.forEach(elm => (elm.disabled = true));
-    // }
-    // const commentInput = this.getElement().querySelector(
-    //   `.film-details__comment-input`
-    // );
-    // if (commentInput) {
-    //   commentInput.disabled = true;
-    // }
-  }
-  enableForm() {
-    // const userRatingBtns = this.getElement().querySelectorAll(
-    //   `.film-details__user-rating-input`
-    // );
-    // if (userRatingBtns) {
-    //   userRatingBtns.forEach(elm => (elm.disabled = false));
-    // }
-    // const commentInput = this.getElement().querySelector(
-    //   `.film-details__comment-input`
-    // );
-    // if (commentInput) {
-    //   commentInput.disabled = false;
-    // }
-  }
-
   shakePopup() {
     const form = this.getFormElement();
     form.style.animation = `shake 0.6s`;

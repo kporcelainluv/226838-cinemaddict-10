@@ -1,6 +1,12 @@
 import {CommentsSection} from "../components/comments-component";
 import {render, unrender} from "../utils";
-import {UpdateType, Position, DeleteButtonName, ENTER_KEY} from "../consts";
+import {
+  UpdateType,
+  Position,
+  DeleteButtonName,
+  ENTER_KEY,
+  ConnectionStatus
+} from "../consts";
 
 const EMOJI = {
   "emoji-smile": `smile`,
@@ -45,10 +51,10 @@ export class CommentsController {
   }
 
   init() {
-    window.addEventListener(`offline`, () => {
+    window.addEventListener(ConnectionStatus.OFFLINE, () => {
       this._commentsSection.disableCommentsSection();
     });
-    window.addEventListener(`online`, () => {
+    window.addEventListener(ConnectionStatus.ONLINE, () => {
       this._commentsSection.enableCommentsSection();
     });
 
