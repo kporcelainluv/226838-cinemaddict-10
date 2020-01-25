@@ -89,8 +89,8 @@ export class API {
       .map(id => this._getComments(`comments/${id}`));
 
     const allFilmsComments = await Promise.all(commentsPromises);
-    films.forEach((elm, index) => {
-      elm.comments = allFilmsComments[index];
+    films.forEach((film, index) => {
+      film.comments = allFilmsComments[index];
     });
 
     return films;

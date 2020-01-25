@@ -1,5 +1,5 @@
 import DOMPurify from "dompurify";
-import { handleScreening } from "../utils";
+import {handleScreening} from "../utils";
 
 export class ModelMovie {
   /* eslint-disable camelcase */
@@ -21,7 +21,7 @@ export class ModelMovie {
     this.actors = handleScreening(movie[`film_info`][`actors`]);
     this.runtime = Number(movie[`film_info`][`runtime`]);
     this.country = DOMPurify.sanitize(
-      movie[`film_info`][`release`][`release_country`]
+        movie[`film_info`][`release`][`release_country`]
     );
     this.genres = handleScreening(movie[`film_info`][`genre`]);
 
@@ -69,7 +69,7 @@ export class ModelMovie {
         [`already_watched`]: Boolean(film.isWatched),
         [`watching_date`]: new Date(film.viewedDate)
       },
-      comments: film.comments.map(comment => comment.id)
+      comments: film.comments.map((comment) => comment.id)
     };
   }
 }

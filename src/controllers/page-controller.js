@@ -197,12 +197,13 @@ export class PageController {
         this.rerender(updatedFilm);
       });
     } else if (updateType === UpdateType.CREATECOMMENT) {
-      const initialComments = this._films.find((f) => f.id === updatedFilm.id)
-        .comments;
+      const initialComments = this._films.find(
+          (film) => film.id === updatedFilm.id
+      ).comments;
 
       const createdComment = pipe(
           difference(updatedFilm.comments),
-          sort((c1, c2) => c1.date - c2.date),
+          sort((comment1, comment2) => comment1.date - comment2.date),
           head
       )(initialComments);
 
