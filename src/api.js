@@ -85,8 +85,12 @@ export default class API {
     const films = await this._get(`movies`);
 
     const commentsPromises = films
-      .map(f => f.id)
-      .map(id => this._getComments(`comments/${id}`));
+      .map(f => {
+        return f.id;
+      })
+      .map(id => {
+        return this._getComments(`comments/${id}`);
+      });
 
     const allFilmsComments = await Promise.all(commentsPromises);
     films.forEach((film, index) => {
