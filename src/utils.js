@@ -146,10 +146,10 @@ export default class Utils {
   static sortByDefault(films) {
     return films.sort((a, b) => {
       // eslint-disable-next-line radix
-      if (parseInt(a.id) > parseInt(b.id)) {
+      if (parseInt(a.id, 10) > parseInt(b.id, 10)) {
         return 1;
         // eslint-disable-next-line radix
-      } else if (parseInt(a.id) < parseInt(b.id)) {
+      } else if (parseInt(a.id,10) < parseInt(b.id,10)) {
         return -1;
       }
       return 0;

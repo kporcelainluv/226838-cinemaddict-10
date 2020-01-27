@@ -2,23 +2,23 @@ import ModelMovie from "./models/model-movie.js";
 import ModelComment from "./models/model-comments.js";
 import Utils from "./utils.js";
 
-const objectToArray = object => {
-  return Object.keys(object).map(id => object[id]);
+const objectToArray = (object) => {
+  return Object.keys(object).map((id) => object[id]);
 };
 
 export default class Provider {
-  constructor({ api, store }) {
+  constructor({api, store}) {
     this._api = api;
     this._store = store;
     this._isSynchronized = true;
   }
 
-  updateFilm({ film }) {
+  updateFilm({film}) {
     if (this._isOnline()) {
       return this._api
-        .updateFilm({ film: ModelMovie.toRAW(film) })
-        .then(updatedFilm => ModelMovie.parseMovie(updatedFilm))
-        .then(updatedFilm => {
+        .updateFilm({film: ModelMovie.toRAW(film)})
+        .then((updatedFilm) => ModelMovie.parseMovie(updatedFilm))
+        .then((updatedFilm) => {
           this._store.setItem({
             key: updatedFilm.id,
             item: updatedFilm
@@ -34,19 +34,19 @@ export default class Provider {
     return Promise.resolve(film);
   }
 
-  createComment({ film, comment, films }) {
+  createComment({film, comment, films}) {
     if (this._isOnline()) {
       return this._api
-        .createComment({ film, comment: ModelComment.toRAW(comment) })
-        .then(response => {
+        .createComment({film, comment: ModelComment.toRAW(comment)})
+        .then((response) => {
           const movie = Object.assign({}, response.movie);
-          movie[`comments`]=response.comments
+          movie[`comments`] = response.comments;
           const updatedFilm = ModelMovie.parseMovie(movie);
           const newFilms = Utils.updateFilms(films, updatedFilm);
-          newFilms.map(film => {
+          newFilms.map((newFilm) => {
             this._store.setItem({
-              key: film.id,
-              item: film
+              key: newFilm.id,
+              item: newFilm
             });
           });
           return ModelComment.parseComments(response.comments);
@@ -55,7 +55,7 @@ export default class Provider {
     comment.id = Utils.getRandomId();
     const newComment = ModelComment.parseComment(comment);
     this._isSynchronized = false;
-    let filmComments = Object.values(films).filter(currentFilm => {
+    let filmComments = Object.values(films).filter((currentFilm) => {
       return currentFilm.id === film.id;
     })[0].comments;
     filmComments = [...filmComments, newComment];
@@ -63,37 +63,37 @@ export default class Provider {
     updatedFilm[`comments`] = filmComments;
 
     const updatedFilms = Utils.updateFilms(films, updatedFilm);
-    updatedFilms.map(film => {
+    updatedFilms.map((newFilm) => {
       this._store.setItem({
-        key: film.id,
-        item: film
+        key: newFilm.id,
+        item: newFilm
       });
     });
 
     return Promise.resolve(filmComments);
   }
 
-  deleteComment({ comment, film, films }) {
+  deleteComment({comment, film, films}) {
     if (this._isOnline()) {
       return this._api
-        .deleteComment({ comment: ModelComment.toRAW(comment) })
+        .deleteComment({comment: ModelComment.toRAW(comment)})
         .then(() => {
           this._isSynchronized = false;
           const updatedFilms = Utils.updateFilms(films, film);
-          updatedFilms.map(film => {
+          updatedFilms.map((newFilm) => {
             this._store.setItem({
-              key: film.id,
-              item: film
+              key: newFilm.id,
+              item: newFilm
             });
           });
         });
     }
     const updatedFilms = Utils.updateFilms(films, film);
     this._isSynchronized = false;
-    updatedFilms.map(film => {
+    updatedFilms.map((newFilm) => {
       this._store.setItem({
-        key: film.id,
-        item: film
+        key: newFilm.id,
+        item: newFilm
       });
     });
 
@@ -102,22 +102,19 @@ export default class Provider {
 
   getFilms() {
     if (this._isOnline()) {
-      return this._api.getFilms().then(films => {
-        films.map(film => {
-          const newFilm = {
-            ...ModelMovie.parseMovie(film),
-            comments: ModelComment.parseComments(film.comments)
-          };
+      return this._api.getFilms().then((films) => {
+        films.map((film) => {
+          const newFilm = Object.assign({}, film);
+          newFilm[`comments`] = ModelComment.parseComments(film.comments);
           this._store.setItem({
             key: newFilm.id,
             item: newFilm
           });
         });
-        return films.slice(0).map(film => {
-          return {
-            ...ModelMovie.parseMovie(film),
-            comments: ModelComment.parseComments(film.comments)
-          };
+        return films.slice(0).map((film) => {
+          const newFilm = Object.assign({}, film);
+          newFilm[`comments`] = ModelComment.parseComments(film.comments);
+          return newFilm;
         });
       });
     }
@@ -138,20 +135,21 @@ export default class Provider {
 
   syncFilms() {
     const films = Object.values(this._store.getAll());
-    const commentsRaw = films.map(film => {
+    const commentsRaw = films.map((film) => {
       return film.comments;
     });
-    const filmsRaw = films.map(film => ModelMovie.toRAW(film));
+    const filmsRaw = films.map((film) => ModelMovie.toRAW(film));
     filmsRaw.forEach((elm, index) => {
       elm.comments = commentsRaw[index];
     });
-    return this._api.syncFilms(filmsRaw).then(async result => {
+    // eslint-disable-next-line consistent-return
+    return this._api.syncFilms(filmsRaw).then((result) => {
       const updatedResult = result.updated;
       this._isSynchronized = true;
       if (result) {
-        const films = ModelMovie.parseMovies(Object.values(updatedResult));
+        const newFilms = ModelMovie.parseMovies(Object.values(updatedResult));
 
-        return Promise.resolve(films);
+        return Promise.resolve(newFilms);
       }
     });
   }
