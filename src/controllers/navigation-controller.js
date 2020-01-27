@@ -2,7 +2,7 @@ import Utils from "../utils.js";
 import Navigation from "../components/navigation.js";
 import { Position } from "../consts";
 
-export class NavigationController {
+export default class NavigationController {
   constructor(container, onNavigationChange) {
     this._onNavigationChange = onNavigationChange;
     this._container = container;
