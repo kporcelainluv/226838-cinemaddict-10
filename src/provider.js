@@ -59,7 +59,8 @@ export default class Provider {
       return currentFilm.id === film.id;
     })[0].comments;
     filmComments = [...filmComments, newComment];
-    const updatedFilm = { ...film, comments: filmComments };
+    const updatedFilm = Object.assign({}, film);
+    updatedFilm[`comments`] = filmComments;
 
     const updatedFilms = Utils.updateFilms(films, updatedFilm);
     updatedFilms.map(film => {

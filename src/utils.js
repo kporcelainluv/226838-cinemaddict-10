@@ -267,27 +267,25 @@ export default class Utils {
   }
   static markWatchList(film) {
     const currentViewDate = film.viewedDate ? film.viewedDate : new Date();
-    return {
-      ...film,
-      isWatchlist: !film.isWatchlist,
-      viewedDate: currentViewDate
-    };
+    const updatedFilm = Object.assign({}, film);
+    updatedFilm.isWatchlist = !film.isWatchlist;
+    updatedFilm.viewedDate = currentViewDate;
+    return updatedFilm;
+
   }
   static markFavorite(film) {
     const currentViewDate = film.viewedDate ? film.viewedDate : new Date();
-    return {
-      ...film,
-      isFavorite: !film.isFavorite,
-      viewedDate: currentViewDate
-    };
+    const updatedFilm = Object.assign({}, film);
+    updatedFilm.isFavorite = !film.isFavorite;
+    updatedFilm.viewedDate = currentViewDate;
+    return updatedFilm;
   }
   static markPersonalRating(film, personalRating) {
     const currentViewDate = film.viewedDate ? film.viewedDate : new Date();
-    return {
-      ...film,
-      personalRating: Number(personalRating),
-      viewedDate: currentViewDate
-    };
+    const updatedFilm = Object.assign({}, film);
+    updatedFilm.personalRating = Number(personalRating);
+    updatedFilm.viewedDate = currentViewDate;
+    return updatedFilm;
   }
   static getRandomId() {
     return Math.random()
