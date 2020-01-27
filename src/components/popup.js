@@ -1,4 +1,4 @@
-import { AbstractComponent } from "./abstract-component";
+import AbstractComponent from "./abstract-component.js";
 import Utils from "../utils.js";
 import moment from "moment";
 import { RATING_LENGTH, TIMEOUT, DEBOUNCE_TIMEOUT } from "../consts";

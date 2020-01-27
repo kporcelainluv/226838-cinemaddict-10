@@ -1,4 +1,4 @@
-import {AbstractComponent} from "./abstract-component";
+import AbstractComponent from "./abstract-component.js";
 export class Footer extends AbstractComponent {
   constructor() {
     super();
@@ -14,7 +14,7 @@ export class Footer extends AbstractComponent {
 
   updateFilmsAmount(amount) {
     this.getElement().querySelector(
-        `.footer__statistics p`
+      `.footer__statistics p`
     ).innerHTML = `${amount} movies inside`;
   }
 }

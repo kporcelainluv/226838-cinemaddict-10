@@ -1,4 +1,4 @@
-import {AbstractComponent} from "./abstract-component";
+import AbstractComponent from './abstract-component.js';
 export class EmptyFilms extends AbstractComponent {
   constructor() {
     super();

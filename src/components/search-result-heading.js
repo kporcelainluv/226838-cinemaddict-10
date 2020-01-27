@@ -1,5 +1,4 @@
-import {AbstractComponent} from "./abstract-component";
-
+import AbstractComponent from "./abstract-component.js";
 export class SearchResultHeading extends AbstractComponent {
   constructor(amount) {
     super();

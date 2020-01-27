@@ -1,5 +1,5 @@
 import Utils from "../utils.js";
-class AbstractComponent {
+export default class AbstractComponent {
   constructor() {
     this._element = null;
     if (new.target === AbstractComponent) {
@@ -23,4 +23,3 @@ class AbstractComponent {
     this._element = null;
   }
 }
-export { AbstractComponent };

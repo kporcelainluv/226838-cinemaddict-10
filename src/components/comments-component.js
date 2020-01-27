@@ -1,5 +1,5 @@
 import { TIMEOUT } from "../consts";
-import { AbstractComponent } from "./abstract-component";
+import AbstractComponent from "./abstract-component.js";
 
 import Utils from "../utils.js";
 

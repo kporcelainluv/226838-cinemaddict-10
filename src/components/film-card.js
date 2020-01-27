@@ -1,8 +1,6 @@
 import moment from "moment";
-
 import { DEBOUNCE_TIMEOUT, DESCRIPTION_LENGTH } from "../consts";
-
-import { AbstractComponent } from "./abstract-component";
+import AbstractComponent from "./abstract-component.js";
 import Utils from "../utils.js";
 import { debounce } from "lodash";
 

@@ -1,4 +1,4 @@
-import {AbstractComponent} from "./abstract-component";
+import AbstractComponent from "./abstract-component.js";
 
 export class StatisticsSection extends AbstractComponent {
   constructor() {
