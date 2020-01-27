@@ -184,9 +184,17 @@ export default class PageController {
 
       const createdComment = pipe(
         difference(updatedFilm.comments),
-        sort((comment1, comment2) => comment1.date - comment2.date),
+        sort((comment1, comment2) => {
+          if (comment1.date > comment2.date) {
+            return -1;
+          } else if (comment1.date > comment2.date) {
+            return 1;
+          }
+          return 0;
+        }),
         head
       )(initialComments);
+      console.log({ createdComment });
 
       return this._provider
         .createComment({
