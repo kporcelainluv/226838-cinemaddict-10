@@ -1,7 +1,7 @@
-import { sort } from "ramda";
+import {sort} from "ramda";
 import DOMPurify from "dompurify";
-import { NavTab, Position, StatsFilterType, StatsRank } from "./consts";
-import { addMonths, addWeeks, addYears, isAfter, startOfToday } from "date-fns";
+import {NavTab, Position, StatsFilterType, StatsRank} from "./consts";
+import {addMonths, addWeeks, addYears, isAfter, startOfToday} from "date-fns";
 import {
   differenceInSeconds,
   differenceInMinutes,
@@ -57,7 +57,7 @@ export default class Utils {
 
   static getFilmsByFilter(films, filterType) {
     const date = this.getDateByFilterType(filterType);
-    return films.filter(film => {
+    return films.filter((film) => {
       const watchDate = film.viewedDate;
       return isAfter(parseISO(watchDate), date);
     });
@@ -78,7 +78,7 @@ export default class Utils {
   static getSortedGenres(films) {
     const genres = films.reduce((newGenresList, elm) => {
       const genresList = elm.genres;
-      genresList.forEach(genre => {
+      genresList.forEach((genre) => {
         if (genre in newGenresList) {
           newGenresList[genre] += 1;
         } else {
@@ -102,20 +102,20 @@ export default class Utils {
   static getGenresByKeysVals(films) {
     const genres = this.getSortedGenres(films);
 
-    const keys = genres.map(elm => elm[0]);
-    const values = genres.map(elm => elm[1]);
+    const keys = genres.map((elm) => elm[0]);
+    const values = genres.map((elm) => elm[1]);
     return [keys, values];
   }
 
   static getTopGenre(films) {
     if (films.length < 1) {
-      return "—";
+      return `—`;
     }
     const genres = this.getSortedGenres(films);
     return genres[0][0];
   }
   static getTopRatedFilms(films) {
-    if (films.every(film => film.rating === 0)) {
+    if (films.every((film) => film.rating === 0)) {
       return 0;
     }
     return sort((a, b) => {
@@ -130,7 +130,7 @@ export default class Utils {
   }
 
   static getMostCommentedFilms(films) {
-    if (films.every(film => film.comments.length === 0)) {
+    if (films.every((film) => film.comments.length === 0)) {
       return false;
     }
     return sort((a, b) => {
@@ -145,8 +145,10 @@ export default class Utils {
   }
   static sortByDefault(films) {
     return films.sort((a, b) => {
+      // eslint-disable-next-line radix
       if (parseInt(a.id) > parseInt(b.id)) {
         return 1;
+        // eslint-disable-next-line radix
       } else if (parseInt(a.id) < parseInt(b.id)) {
         return -1;
       }
@@ -177,7 +179,7 @@ export default class Utils {
   }
   static filterFilms(films, query) {
     const formattedQuery = query.toLowerCase().replace(/[^A-Z0-9]+/gi, ``);
-    return films.filter(film =>
+    return films.filter((film) =>
       film.title.toLowerCase().includes(formattedQuery)
     );
   }
@@ -191,7 +193,7 @@ export default class Utils {
       } else if (navTab === NavTab.FAVORITES) {
         return this.getFavorite;
       } else {
-        return x => x;
+        return (x) => x;
       }
     })();
 
@@ -215,19 +217,20 @@ export default class Utils {
     } else if (watchedAmount >= 20) {
       return StatsRank.MOVIEBUFF;
     }
+    return true;
   }
   static countWatchedFilms(films) {
-    return films.filter(film => film.isWatched === true).length;
+    return films.filter((film) => film.isWatched === true).length;
   }
 
   static getWatched(films) {
-    return films.filter(film => film.isWatched);
+    return films.filter((film) => film.isWatched);
   }
   static getWatchlist(films) {
-    return films.filter(film => film.isWatchlist);
+    return films.filter((film) => film.isWatchlist);
   }
   static getFavorite(films) {
-    return films.filter(film => film.isFavorite);
+    return films.filter((film) => film.isFavorite);
   }
 
   static getDistanceInWords(dateLeft, dateRight) {
@@ -249,13 +252,14 @@ export default class Utils {
     } else if (differenceinSeconds >= 0 && differenceinSeconds < 60) {
       return `now`;
     }
+    return true;
   }
 
   static handleScreening(array) {
     if (array.length === 0) {
       return [];
     }
-    return array.map(elem => DOMPurify.sanitize(elem));
+    return array.map((elem) => DOMPurify.sanitize(elem));
   }
 
   static markWatched(film) {
@@ -263,7 +267,7 @@ export default class Utils {
     const updatedFilm = Object.assign({}, film);
     updatedFilm.isWatched = !film.isWatched;
     updatedFilm.viewedDate = currentViewDate;
-    return updatedFilm
+    return updatedFilm;
   }
   static markWatchList(film) {
     const currentViewDate = film.viewedDate ? film.viewedDate : new Date();
