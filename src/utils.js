@@ -260,11 +260,10 @@ export default class Utils {
 
   static markWatched(film) {
     const currentViewDate = film.viewedDate ? film.viewedDate : new Date();
-    return {
-      ...film,
-      isWatched: !film.isWatched,
-      viewedDate: currentViewDate
-    };
+    const updatedFilm = Object.assign({}, film);
+    updatedFilm.isWatched = !film.isWatched;
+    updatedFilm.viewedDate = currentViewDate;
+    return updatedFilm
   }
   static markWatchList(film) {
     const currentViewDate = film.viewedDate ? film.viewedDate : new Date();

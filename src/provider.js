@@ -39,11 +39,9 @@ export default class Provider {
       return this._api
         .createComment({ film, comment: ModelComment.toRAW(comment) })
         .then(response => {
-          const movie = response.movie;
-          const updatedFilm = ModelMovie.parseMovie({
-            ...movie,
-            comments: response.comments
-          });
+          const movie = Object.assign({}, response.movie);
+          movie[`comments`]=response.comments
+          const updatedFilm = ModelMovie.parseMovie(movie);
           const newFilms = Utils.updateFilms(films, updatedFilm);
           newFilms.map(film => {
             this._store.setItem({

@@ -162,11 +162,8 @@ export default class MovieController {
     });
   }
   onCommentsChange(newComments, updateType) {
-    const film = this._film;
-    const updatedFilm = {
-      ...film,
-      comments: newComments
-    };
+    const updatedFilm = Object.assign({}, this._film);
+    updatedFilm[`comments`] = newComments;
     this._onFilmChange(updatedFilm, updateType);
   }
 }
