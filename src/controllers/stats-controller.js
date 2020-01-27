@@ -4,7 +4,7 @@ import StatsFiltersController from "./stats-filters-controller.js";
 import StatsSummaryController from "./stats-summary-controller.js";
 import StatsChartController from "./stats-chart-controller.js";
 import Utils from "../utils.js";
-import { Position, StatsFilterType } from "../consts";
+import {Position, StatsFilterType} from "../consts";
 
 export default class StatsController {
   constructor(container, films) {
@@ -15,8 +15,8 @@ export default class StatsController {
     this._rankController = new UserRankController(this._statsSection);
 
     this._filters = new StatsFiltersController(
-      this._statsSection,
-      this.onTabChange.bind(this)
+        this._statsSection,
+        this.onTabChange.bind(this)
     );
 
     this._statsSummary = new StatsSummaryController(this._statsSection);
@@ -26,9 +26,9 @@ export default class StatsController {
   init(films) {
     this._films = films;
     Utils.render(
-      this._container,
-      this._statsSection.getElement(),
-      Position.BEFOREEND
+        this._container,
+        this._statsSection.getElement(),
+        Position.BEFOREEND
     );
   }
 

@@ -1,6 +1,6 @@
 import StatsRank from "../components/statistics-rank.js";
 import Utils from "../utils.js";
-import { Position } from "../consts";
+import {Position} from "../consts";
 
 export default class UserRankController {
   constructor(container) {
@@ -14,9 +14,9 @@ export default class UserRankController {
 
     this._statsRank = new StatsRank(Utils.getStatsRank(watched));
     Utils.render(
-      this._container.getElement(),
-      this._statsRank.getElement(),
-      Position.AFTERBEGIN
+        this._container.getElement(),
+        this._statsRank.getElement(),
+        Position.AFTERBEGIN
     );
   }
   unrender() {

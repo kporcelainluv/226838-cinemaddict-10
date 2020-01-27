@@ -1,6 +1,6 @@
 import Utils from "../utils.js";
 import Navigation from "../components/navigation.js";
-import { Position } from "../consts";
+import {Position} from "../consts";
 
 export default class NavigationController {
   constructor(container, onNavigationChange) {
@@ -10,9 +10,9 @@ export default class NavigationController {
   }
   init() {
     Utils.render(
-      this._container,
-      this._navigation.getElement(),
-      Position.AFTERBEGIN
+        this._container,
+        this._navigation.getElement(),
+        Position.AFTERBEGIN
     );
   }
   initWithFilms(films) {
@@ -20,17 +20,17 @@ export default class NavigationController {
     this._navigation.removeElement();
 
     this._navigation = new Navigation(
-      Utils.getWatched(films).length,
-      Utils.getWatchlist(films).length,
-      Utils.getFavorite(films).length
+        Utils.getWatched(films).length,
+        Utils.getWatchlist(films).length,
+        Utils.getFavorite(films).length
     );
 
     Utils.render(
-      this._container,
-      this._navigation.getElement(),
-      Position.AFTERBEGIN
+        this._container,
+        this._navigation.getElement(),
+        Position.AFTERBEGIN
     );
-    this._navigation.onNavigationItemClick(hash => {
+    this._navigation.onNavigationItemClick((hash) => {
       this._navigation.makeButtonActive(hash);
       this._onNavigationChange(hash);
     });

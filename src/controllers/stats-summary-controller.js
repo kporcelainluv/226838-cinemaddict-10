@@ -1,6 +1,6 @@
 import Utils from "../utils.js";
 import StatsSummary from "../components/statistics-summary.js";
-import { Position } from "../consts";
+import {Position} from "../consts";
 
 export default class StatsSummaryController {
   constructor(container) {
@@ -15,9 +15,9 @@ export default class StatsSummaryController {
     const [hours, minutes] = Utils.getHoursAndMins(films);
     this._statsList = new StatsSummary(watchedFilms, hours, minutes, topGenre);
     Utils.render(
-      this._container.getElement(),
-      this._statsList.getElement(),
-      Position.BEFOREEND
+        this._container.getElement(),
+        this._statsList.getElement(),
+        Position.BEFOREEND
     );
   }
 

@@ -3,10 +3,10 @@ import FilmListController from "./film-list-controller.js";
 import SearchResultHeading from "../components/search-result-heading.js";
 import EmptySearch from "../components/empty-search.js";
 import SearchResultContainer from "../components/search-result-container.js";
-import { Position, PageType } from "../consts";
+import {Position, PageType} from "../consts";
 
 export default class SearchResultController {
-  constructor({ container, onFilmUpdate }) {
+  constructor({container, onFilmUpdate}) {
     this._container = container;
     this._subscriptions = [];
 
@@ -21,7 +21,7 @@ export default class SearchResultController {
     this._filmListController = undefined;
   }
   _onTogglePopup() {
-    this._subscriptions.forEach(subscription => subscription());
+    this._subscriptions.forEach((subscription) => subscription());
   }
 
   _onRenderFilmCard(closePopup) {
@@ -29,9 +29,9 @@ export default class SearchResultController {
   }
   init(films) {
     Utils.render(
-      this._container,
-      this._searchResultContainer.getElement(),
-      Position.BEFOREEND
+        this._container,
+        this._searchResultContainer.getElement(),
+        Position.BEFOREEND
     );
     this._filmListController = new FilmListController({
       container: this._searchResultContainer.getElement(),
@@ -49,16 +49,16 @@ export default class SearchResultController {
     if (films.length > 0) {
       this._searchResultHeading = new SearchResultHeading(films.length);
       Utils.render(
-        this._searchResultContainer.getElement(),
-        this._searchResultHeading.getElement(),
-        Position.AFTERBEGIN
+          this._searchResultContainer.getElement(),
+          this._searchResultHeading.getElement(),
+          Position.AFTERBEGIN
       );
       this._filmListController.render(films);
     } else {
       Utils.render(
-        this._searchResultContainer.getElement(),
-        this._emptySearch.getElement(),
-        Position.AFTERBEGIN
+          this._searchResultContainer.getElement(),
+          this._emptySearch.getElement(),
+          Position.AFTERBEGIN
       );
     }
   }

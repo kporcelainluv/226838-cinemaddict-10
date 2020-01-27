@@ -19,7 +19,7 @@ export default class Sort extends AbstractComponent {
 
     const sortButtons = this.getElement().querySelectorAll(`.sort__button`);
     const index = Array.from(sortButtons).findIndex(
-      button => button.dataset.sortType === type
+        (button) => button.dataset.sortType === type
     );
     sortButtons[index].classList.add(`sort__button--active`);
   }
@@ -32,7 +32,7 @@ export default class Sort extends AbstractComponent {
   onSortBtnClick(callback) {
     const sortButtons = this.getElement().querySelectorAll(`.sort__button`);
 
-    Array.from(sortButtons).forEach(button =>
+    Array.from(sortButtons).forEach((button) =>
       button.addEventListener(`click`, callback)
     );
   }

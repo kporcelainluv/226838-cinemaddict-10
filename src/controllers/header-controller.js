@@ -1,7 +1,7 @@
 import Utils from "../utils.js";
 import ProfileRating from "../components/profile-rating.js";
 import SearchController from "./search-controller.js";
-import { Position } from "../consts";
+import {Position} from "../consts";
 
 const headerElement = document.querySelector(`.header`);
 
@@ -14,7 +14,7 @@ const createHeading = () => {
 };
 
 export default class HeaderController {
-  constructor({ onSearchChange }) {
+  constructor({onSearchChange}) {
     this._search = new SearchController(headerElement, onSearchChange);
   }
 

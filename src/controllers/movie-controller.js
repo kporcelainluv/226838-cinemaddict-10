@@ -1,6 +1,6 @@
 import Popup from "../components/popup.js";
 import Utils from "../utils.js";
-import { EXIT_KEY_ESC, EXIT_KEY_ESCAPE, Position, UpdateType } from "../consts";
+import {EXIT_KEY_ESC, EXIT_KEY_ESCAPE, Position, UpdateType} from "../consts";
 import FilmCard from "../components/film-card.js";
 import CommentsController from "../controllers/comments-controller.js";
 
@@ -21,9 +21,9 @@ export default class MovieController {
     this._filmCard = new FilmCard(this._film);
     this._popup = new Popup(this._film);
     this._comments = new CommentsController(
-      this._popup,
-      this._film.comments,
-      this.onCommentsChange
+        this._popup,
+        this._film.comments,
+        this.onCommentsChange
     );
   }
 
@@ -39,9 +39,9 @@ export default class MovieController {
 
   init() {
     Utils.render(
-      this._container,
-      this._filmCard.getElement(),
-      Position.BEFOREEND
+        this._container,
+        this._filmCard.getElement(),
+        Position.BEFOREEND
     );
 
     const disableForms = () => {
@@ -54,7 +54,7 @@ export default class MovieController {
     window.addEventListener(`offline`, disableForms);
     window.addEventListener(`online`, enableForms);
 
-    const onEscKeyDown = evt => {
+    const onEscKeyDown = (evt) => {
       if (evt.key === EXIT_KEY_ESCAPE || evt.key === EXIT_KEY_ESC) {
         this._popup.resetForm();
         this.closePopup();
@@ -79,7 +79,7 @@ export default class MovieController {
       Utils.unrender(this._popup.getElement());
     });
 
-    this._filmCard.onWatchlistBtnClick(event => {
+    this._filmCard.onWatchlistBtnClick((event) => {
       event.preventDefault();
       const updatedFilm = Utils.markWatchList(this._film);
       this._onFilmChange(updatedFilm, {
@@ -87,7 +87,7 @@ export default class MovieController {
       });
     });
 
-    this._filmCard.onHistoryBtnClick(event => {
+    this._filmCard.onHistoryBtnClick((event) => {
       event.preventDefault();
       const updatedFilm = Utils.markWatched(this._film);
       this._onFilmChange(updatedFilm, {
@@ -95,7 +95,7 @@ export default class MovieController {
       });
     });
 
-    this._filmCard.onFavoriteBtnClick(event => {
+    this._filmCard.onFavoriteBtnClick((event) => {
       event.preventDefault();
       const updatedFilm = Utils.markFavorite(this._film);
 
@@ -141,7 +141,7 @@ export default class MovieController {
       this._film = updatedFilm;
     });
 
-    this._popup.ratingButtonHandler(evt => {
+    this._popup.ratingButtonHandler((evt) => {
       this._popup.removeErrorFromButtons();
       evt.target.checked = true;
 

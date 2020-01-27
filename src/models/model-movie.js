@@ -21,7 +21,7 @@ export default class ModelMovie {
     this.actors = Utils.handleScreening(movie[`film_info`][`actors`]);
     this.runtime = Number(movie[`film_info`][`runtime`]);
     this.country = DOMPurify.sanitize(
-      movie[`film_info`][`release`][`release_country`]
+        movie[`film_info`][`release`][`release_country`]
     );
     this.genres = Utils.handleScreening(movie[`film_info`][`genre`]);
 
@@ -69,7 +69,7 @@ export default class ModelMovie {
         [`already_watched`]: Boolean(film.isWatched),
         [`watching_date`]: new Date(film.viewedDate)
       },
-      comments: film.comments.map(comment => comment.id)
+      comments: film.comments.map((comment) => comment.id)
     };
   }
 }

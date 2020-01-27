@@ -1,6 +1,6 @@
 import Footer from "../components/footer-component.js";
 import Utils from "../utils.js";
-import { Position } from "../consts";
+import {Position} from "../consts";
 
 export default class FooterController {
   constructor() {

@@ -14,7 +14,7 @@ export default class Footer extends AbstractComponent {
 
   updateFilmsAmount(amount) {
     this.getElement().querySelector(
-      `.footer__statistics p`
+        `.footer__statistics p`
     ).innerHTML = `${amount} movies inside`;
   }
 }

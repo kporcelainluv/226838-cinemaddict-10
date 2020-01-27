@@ -1,6 +1,6 @@
 import Search from "../components/search.js";
 import Utils from "../utils.js";
-import { Position } from "../consts";
+import {Position} from "../consts";
 
 export default class SearchController {
   constructor(container, onSearchChange) {
@@ -11,12 +11,12 @@ export default class SearchController {
 
   init() {
     Utils.render(
-      this._container,
-      this._search.getElement(),
-      Position.BEFOREEND
+        this._container,
+        this._search.getElement(),
+        Position.BEFOREEND
     );
 
-    this._search.inputChangeHandler(evt => {
+    this._search.inputChangeHandler((evt) => {
       this._onSearchChange(evt.target.value);
     });
 

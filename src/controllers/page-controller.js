@@ -1,6 +1,6 @@
-import { difference, head, pipe, sort } from "ramda";
+import {difference, head, pipe, sort} from "ramda";
 import Utils from "../utils.js";
-import { NavTab, SEARCH_QUERY_LENGTH, SortType, UpdateType } from "../consts";
+import {NavTab, SEARCH_QUERY_LENGTH, SortType, UpdateType} from "../consts";
 import SearchResultController from "./search-result.js";
 import StatsController from "../controllers/stats-controller.js";
 
@@ -19,8 +19,8 @@ export default class PageController {
     this._currentTab = NavTab.ALL;
 
     this._sortController = new SortController(
-      this._container,
-      this._onSortTypeChange.bind(this)
+        this._container,
+        this._onSortTypeChange.bind(this)
     );
     this._headerController = new HeaderController({
       onSearchChange: this._onSearchChange.bind(this)
@@ -30,8 +30,8 @@ export default class PageController {
       onFilmUpdate: this._onFilmUpdate.bind(this)
     });
     this._navigationController = new NavigationController(
-      this._container,
-      this._onNavigationChange.bind(this)
+        this._container,
+        this._onNavigationChange.bind(this)
     );
 
     this._searchResultContoller = new SearchResultController({
@@ -150,19 +150,19 @@ export default class PageController {
     this._allFilms = Utils.updateFilms(this._allFilms, newFilm);
 
     this._filmsController.render(
-      Utils.filterFilmsbyTab(this._currentTab, this._allFilms)
+        Utils.filterFilmsbyTab(this._currentTab, this._allFilms)
     );
     this._navigationController.render(this._allFilms, this._currentTab);
   }
 
   /* eslint-disable consistent-return */
   _onFilmUpdate(updatedFilm, meta) {
-    const { updateType, onSuccess, onError } = meta;
+    const {updateType, onSuccess, onError} = meta;
 
     if (updateType === UpdateType.DELETECOMMENT) {
       const deletedComment = difference(
-        this._films.find(film => film.id === updatedFilm.id).comments,
-        updatedFilm.comments
+          this._films.find((film) => film.id === updatedFilm.id).comments,
+          updatedFilm.comments
       )[0];
       return this._provider
         .deleteComment({
@@ -174,27 +174,26 @@ export default class PageController {
         .then(() => onSuccess())
         .catch(() => onError());
     } else if (updateType === UpdateType.UPDATEUSERINFO) {
-      return this._provider.updateFilm({ film: updatedFilm }).then(() => {
+      return this._provider.updateFilm({film: updatedFilm}).then(() => {
         this.rerender(updatedFilm);
       });
     } else if (updateType === UpdateType.CREATECOMMENT) {
       const initialComments = this._films.find(
-        film => film.id === updatedFilm.id
+          (film) => film.id === updatedFilm.id
       ).comments;
 
       const createdComment = pipe(
-        difference(updatedFilm.comments),
-        sort((comment1, comment2) => {
-          if (comment1.date > comment2.date) {
-            return -1;
-          } else if (comment1.date > comment2.date) {
-            return 1;
-          }
-          return 0;
-        }),
-        head
+          difference(updatedFilm.comments),
+          sort((comment1, comment2) => {
+            if (comment1.date > comment2.date) {
+              return -1;
+            } else if (comment1.date > comment2.date) {
+              return 1;
+            }
+            return 0;
+          }),
+          head
       )(initialComments);
-      console.log({ createdComment });
 
       return this._provider
         .createComment({
@@ -202,7 +201,7 @@ export default class PageController {
           comment: createdComment,
           films: this._films
         })
-        .then(comments => {
+        .then((comments) => {
           updatedFilm.comments = comments;
           onSuccess(comments);
           this.rerender(updatedFilm);

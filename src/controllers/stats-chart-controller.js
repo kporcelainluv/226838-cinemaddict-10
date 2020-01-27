@@ -1,6 +1,6 @@
 import StatsChart from "../components/statistics-chart.js";
 import Utils from "../utils.js";
-import { Position } from "../consts";
+import {Position} from "../consts";
 
 export default class StatsChartController {
   constructor(container) {
@@ -13,9 +13,9 @@ export default class StatsChartController {
     this._chart = new StatsChart();
     this._chart.createChart(Utils.getGenresByKeysVals(films));
     Utils.render(
-      this._container.getElement(),
-      this._chart.getElement(),
-      Position.BEFOREEND
+        this._container.getElement(),
+        this._chart.getElement(),
+        Position.BEFOREEND
     );
   }
   unrender() {

@@ -1,6 +1,6 @@
 import StatsFilters from "../components/statistic-filters.js";
 import Utils from "../utils.js";
-import { Position } from "../consts";
+import {Position} from "../consts";
 
 export default class StatsFiltersController {
   constructor(container, onTabChange) {
@@ -10,16 +10,16 @@ export default class StatsFiltersController {
   }
 
   getActiveTab() {
-    this._statsFilters.onFiltersClick(evt => {
+    this._statsFilters.onFiltersClick((evt) => {
       this.onTabChange(evt.target.value);
     });
   }
 
   render() {
     Utils.render(
-      this._container.getElement(),
-      this._statsFilters.getElement(),
-      Position.BEFOREEND
+        this._container.getElement(),
+        this._statsFilters.getElement(),
+        Position.BEFOREEND
     );
     this.getActiveTab();
   }

@@ -1,6 +1,6 @@
 import Utils from "../utils.js";
 import Sort from "../components/sort.js";
-import { Position, SortType } from "../consts";
+import {Position, SortType} from "../consts";
 
 export default class SortController {
   constructor(container, onSortChange) {
@@ -11,7 +11,7 @@ export default class SortController {
 
   init() {
     Utils.render(this._container, this._sort.getElement(), Position.AFTERBEGIN);
-    this._sort.onSortBtnClick(evt => {
+    this._sort.onSortBtnClick((evt) => {
       evt.preventDefault();
       const type = evt.target.dataset.sortType;
       this._sort.makeButtonStateActive(type);

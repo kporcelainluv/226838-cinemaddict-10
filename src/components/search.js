@@ -1,6 +1,6 @@
 import AbstractComponent from "./abstract-component.js";
-import { debounce } from "lodash";
-import { DEBOUNCE_TIMEOUT } from "../consts";
+import {debounce} from "lodash";
+import {DEBOUNCE_TIMEOUT} from "../consts";
 
 export default class Search extends AbstractComponent {
   constructor() {
