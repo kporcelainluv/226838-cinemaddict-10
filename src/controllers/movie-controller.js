@@ -162,8 +162,9 @@ export default class MovieController {
     });
   }
   onCommentsChange(newComments, updateType) {
+    const film = this._film;
     const updatedFilm = {
-      ...this._film,
+      ...film,
       comments: newComments
     };
     this._onFilmChange(updatedFilm, updateType);

@@ -39,8 +39,9 @@ export default class Provider {
       return this._api
         .createComment({ film, comment: ModelComment.toRAW(comment) })
         .then(response => {
+          const movie = response.movie;
           const updatedFilm = ModelMovie.parseMovie({
-            ...response.movie,
+            ...movie,
             comments: response.comments
           });
           const newFilms = Utils.updateFilms(films, updatedFilm);
@@ -146,9 +147,10 @@ export default class Provider {
       elm.comments = commentsRaw[index];
     });
     return this._api.syncFilms(filmsRaw).then(async result => {
+      const updatedResult = result.updated;
       this._isSynchronized = true;
       if (result) {
-        const films = ModelMovie.parseMovies(Object.values(result.updated));
+        const films = ModelMovie.parseMovies(Object.values(updatedResult));
 
         return Promise.resolve(films);
       }

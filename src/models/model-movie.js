@@ -44,32 +44,32 @@ export default class ModelMovie {
   /* eslint-disable camelcase */
   static toRAW(film) {
     return {
-      id: film.id,
-      film_info: {
-        title: film.title,
-        alternative_title: film.originalTitle,
-        poster: film.poster,
-        description: film.description,
-        total_rating: Number(film.rating),
-        genre: film.genres,
-        age_rating: Number(film.ageRate),
-        runtime: Number(film.runtime),
-        release: {
-          date: new Date(film.date),
-          release_country: film.country
+      'id': film.id,
+      'film_info': {
+        'title': film.title,
+        'alternative_title': film.originalTitle,
+        'poster': film.poster,
+        'description': film.description,
+        'total_rating': Number(film.rating),
+        'genre': film.genres,
+        'age_rating': Number(film.ageRate),
+        'runtime': Number(film.runtime),
+        'release': {
+          'date': new Date(film.date),
+          'release_country': film.country
         },
-        director: film.director,
-        writers: film.writers,
-        actors: film.actors
+        'director': film.director,
+        'writers': film.writers,
+        'actors': film.actors
       },
-      user_details: {
+      'user_details': {
         [`personal_rating`]: Number(film.personalRating),
-        favorite: Boolean(film.isFavorite),
-        watchlist: Boolean(film.isWatchlist),
+        'favorite': Boolean(film.isFavorite),
+        'watchlist': Boolean(film.isWatchlist),
         [`already_watched`]: Boolean(film.isWatched),
         [`watching_date`]: new Date(film.viewedDate)
       },
-      comments: film.comments.map((comment) => comment.id)
+      'comments': film.comments.map((comment) => comment.id)
     };
   }
 }
