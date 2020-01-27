@@ -38,8 +38,10 @@ export default class ModelMovie {
     return new ModelMovie(movie);
   }
 
-  static parseMovies(movie) {
-    return movie.map(ModelMovie.parseMovie);
+  static parseMovies(movies) {
+    return movies.map((movie)=>{
+      return ModelMovie.parseMovie(movie);
+    });
   }
   /* eslint-disable camelcase */
   static toRAW(film) {

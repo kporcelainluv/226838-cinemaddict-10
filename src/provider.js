@@ -104,15 +104,15 @@ export default class Provider {
     if (this._isOnline()) {
       return this._api.getFilms().then((films) => {
         films.map((film) => {
-          const newFilm = Object.assign({}, film);
+          const newFilm = Object.assign({}, ModelMovie.parseMovie(film));
           newFilm[`comments`] = ModelComment.parseComments(film.comments);
           this._store.setItem({
             key: newFilm.id,
-            item: newFilm
+            item: ModelMovie.parseMovie(film)
           });
         });
         return films.slice(0).map((film) => {
-          const newFilm = Object.assign({}, film);
+          const newFilm = Object.assign({}, ModelMovie.parseMovie(film));
           newFilm[`comments`] = ModelComment.parseComments(film.comments);
           return newFilm;
         });
