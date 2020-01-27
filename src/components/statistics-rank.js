@@ -1,6 +1,6 @@
 import AbstractComponent from "./abstract-component.js";
 
-export class StatsRank extends AbstractComponent {
+export default class StatsRank extends AbstractComponent {
   constructor(rank) {
     super();
     this._rank = rank;

@@ -1,8 +1,8 @@
-import { StatsChart } from "../components/statistics-chart";
+import StatsChart from "../components/statistics-chart.js";
 import Utils from "../utils.js";
 import { Position } from "../consts";
 
-export class StatsChartController {
+export default class StatsChartController {
   constructor(container) {
     this._container = container;
     this._chart = new StatsChart();

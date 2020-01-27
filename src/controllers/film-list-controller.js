@@ -1,5 +1,5 @@
-import { MovieController } from "./movie-controller";
-import { ShowMoreButton } from "../components/show-more-btn";
+import MovieController from "./movie-controller.js";
+import ShowMoreButton from "../components/show-more-btn.js";
 import Utils from "../utils.js";
 import {
   PER_PAGE,
@@ -9,7 +9,7 @@ import {
   DEFAULT_AMOUNT_DISPLAYED
 } from "../consts";
 
-export class FilmListController {
+export default class FilmListController {
   constructor({
     container,
     films,

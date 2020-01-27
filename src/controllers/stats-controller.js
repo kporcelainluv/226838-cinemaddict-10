@@ -1,12 +1,12 @@
-import { StatisticsSection } from "../components/statistics-section";
-import { UserRankController } from "./user-rank-controller";
-import { StatsFiltersController } from "./stats-filters-controller";
-import { StatsSummaryController } from "./stats-summary-controller";
-import { StatsChartController } from "./stats-chart-controller";
+import StatisticsSection from "../components/statistics-section.js";
+import UserRankController from "./user-rank-controller.js";
+import StatsFiltersController from "./stats-filters-controller.js";
+import StatsSummaryController from "./stats-summary-controller.js";
+import StatsChartController from "./stats-chart-controller.js";
 import Utils from "../utils.js";
 import { Position, StatsFilterType } from "../consts";
 
-export class StatsController {
+export default class StatsController {
   constructor(container, films) {
     this._container = container;
     this._films = films;

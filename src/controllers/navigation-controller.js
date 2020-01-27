@@ -1,5 +1,5 @@
 import Utils from "../utils.js";
-import { Navigation } from "../components/navigation";
+import Navigation from "../components/navigation.js";
 import { Position } from "../consts";
 
 export class NavigationController {

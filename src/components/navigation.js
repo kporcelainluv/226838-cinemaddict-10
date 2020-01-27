@@ -1,7 +1,7 @@
 import AbstractComponent from "./abstract-component.js";
 import { NavTab } from "../consts";
 
-export class Navigation extends AbstractComponent {
+export default class Navigation extends AbstractComponent {
   constructor(historyAmount, watchlistAmount, favoritesAmount) {
     super();
     this._watchlistAmount = watchlistAmount;

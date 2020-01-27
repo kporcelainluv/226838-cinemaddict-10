@@ -1,6 +1,6 @@
 import AbstractComponent from "./abstract-component.js";
 
-export class StatisticsSection extends AbstractComponent {
+export default class StatisticsSection extends AbstractComponent {
   constructor() {
     super();
   }

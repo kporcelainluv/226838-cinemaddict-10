@@ -1,8 +1,8 @@
-import { Search } from "../components/search";
+import Search from "../components/search.js";
 import Utils from "../utils.js";
 import { Position } from "../consts";
 
-export class SearchController {
+export default class SearchController {
   constructor(container, onSearchChange) {
     this._search = new Search();
     this._onSearchChange = onSearchChange;

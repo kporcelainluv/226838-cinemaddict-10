@@ -1,6 +1,6 @@
-import AbstractComponent from './abstract-component.js';
+import AbstractComponent from "./abstract-component.js";
 
-export class DefaultFilmList extends AbstractComponent {
+export default class DefaultFilmList extends AbstractComponent {
   constructor() {
     super();
   }

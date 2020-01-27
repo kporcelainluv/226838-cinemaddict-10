@@ -1,8 +1,8 @@
 import Utils from "../utils.js";
-import { Sort } from "../components/sort";
+import Sort from "../components/sort.js";
 import { Position, SortType } from "../consts";
 
-export class SortController {
+export default class SortController {
   constructor(container, onSortChange) {
     this._sort = new Sort();
     this._onSortChange = onSortChange;

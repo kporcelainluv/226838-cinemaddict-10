@@ -1,5 +1,5 @@
 import AbstractComponent from "./abstract-component.js";
-export class EmptySearch extends AbstractComponent {
+export default class EmptySearch extends AbstractComponent {
   constructor() {
     super();
   }

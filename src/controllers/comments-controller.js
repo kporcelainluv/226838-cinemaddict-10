@@ -1,4 +1,4 @@
-import { CommentsSection } from "../components/comments-component";
+import CommentsSection from "../components/comments-component.js";
 import Utils from "../utils.js";
 import {
   UpdateType,
@@ -15,7 +15,7 @@ const EMOJI = {
   "emoji-angry": `angry`
 };
 
-export class CommentsController {
+export default class CommentsController {
   constructor(popup, comments, onCommentsChange) {
     this._popup = popup;
     this._onCommentsChange = onCommentsChange;

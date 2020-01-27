@@ -1,8 +1,8 @@
-import { StatsFilters } from "../components/statistic-filters";
+import StatsFilters from "../components/statistic-filters.js";
 import Utils from "../utils.js";
 import { Position } from "../consts";
 
-export class StatsFiltersController {
+export default class StatsFiltersController {
   constructor(container, onTabChange) {
     this._container = container;
     this._statsFilters = new StatsFilters();

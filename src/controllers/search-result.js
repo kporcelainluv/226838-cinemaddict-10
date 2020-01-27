@@ -1,11 +1,11 @@
 import Utils from "../utils.js";
-import { FilmListController } from "./film-list-controller";
-import { SearchResultHeading } from "../components/search-result-heading";
-import { EmptySearch } from "../components/empty-search";
-import { SearchResultContainer } from "../components/search-result-container";
+import FilmListController from "./film-list-controller.js";
+import SearchResultHeading from "../components/search-result-heading.js";
+import EmptySearch from "../components/empty-search.js";
+import SearchResultContainer from "../components/search-result-container.js";
 import { Position, PageType } from "../consts";
 
-export class SearchResultController {
+export default class SearchResultController {
   constructor({ container, onFilmUpdate }) {
     this._container = container;
     this._subscriptions = [];

@@ -1,5 +1,5 @@
 import AbstractComponent from "./abstract-component.js";
-export class SearchResultContainer extends AbstractComponent {
+export default class SearchResultContainer extends AbstractComponent {
   constructor() {
     super();
   }

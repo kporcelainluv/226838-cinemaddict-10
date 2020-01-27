@@ -1,8 +1,8 @@
 import Utils from "../utils.js";
-import { StatsSummary } from "../components/statistics-summary";
+import StatsSummary from "../components/statistics-summary.js";
 import { Position } from "../consts";
 
-export class StatsSummaryController {
+export default class StatsSummaryController {
   constructor(container) {
     this._container = container;
     this._statsList = new StatsSummary({});

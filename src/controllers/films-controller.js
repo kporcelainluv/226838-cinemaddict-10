@@ -1,13 +1,13 @@
 import Utils from "../utils.js";
-import { DefaultFilmList } from "../components/default-film-list";
-import { FilmsContainer } from "../components/film-containter";
-import { FilmListController } from "./film-list-controller";
-import { AdditionalFilmList } from "../components/additional-film-blocks";
-import { Loading } from "../components/loading";
-import { EmptyFilms } from "../components/empty-films";
+import DefaultFilmList from "../components/default-film-list.js";
+import FilmsContainer from "../components/film-containter.js";
+import FilmListController from "./film-list-controller.js";
+import AdditionalFilmList from "../components/additional-film-blocks.js";
+import Loading from "../components/loading.js";
+import EmptyFilms from "../components/empty-films.js";
 import { PageType, Position } from "../consts";
 
-export class FilmsController {
+export default class FilmsController {
   constructor({ container, onFilmUpdate }) {
     this._container = container;
     this._subscriptions = [];

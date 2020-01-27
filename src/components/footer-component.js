@@ -1,5 +1,5 @@
 import AbstractComponent from "./abstract-component.js";
-export class Footer extends AbstractComponent {
+export default class Footer extends AbstractComponent {
   constructor() {
     super();
   }

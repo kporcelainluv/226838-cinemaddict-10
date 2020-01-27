@@ -1,12 +1,12 @@
-import { ModelMovie } from "./models/model-movie";
-import { ModelComment } from "./models/model-comments";
+import ModelMovie from "./models/model-movie.js";
+import ModelComment from "./models/model-comments.js";
 import Utils from "./utils.js";
 
 const objectToArray = object => {
   return Object.keys(object).map(id => object[id]);
 };
 
-export const Provider = class {
+export default class Provider {
   constructor({ api, store }) {
     this._api = api;
     this._store = store;
@@ -154,4 +154,4 @@ export const Provider = class {
       }
     });
   }
-};
+}

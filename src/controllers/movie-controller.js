@@ -1,12 +1,12 @@
-import { Popup } from "../components/popup";
+import Popup from "../components/popup.js";
 import Utils from "../utils.js";
 import { EXIT_KEY_ESC, EXIT_KEY_ESCAPE, Position, UpdateType } from "../consts";
-import { FilmCard } from "../components/film-card";
-import { CommentsController } from "../controllers/comments-controller";
+import FilmCard from "../components/film-card.js";
+import CommentsController from "../controllers/comments-controller.js";
 
 const body = document.getElementsByTagName(`body`)[0];
 
-export class MovieController {
+export default class MovieController {
   constructor(container, film, onFilmChange, onTogglePopup) {
     this._film = film;
     this._container = container;

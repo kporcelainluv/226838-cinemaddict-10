@@ -1,5 +1,5 @@
 import AbstractComponent from "./abstract-component.js";
-export class ShowMoreButton extends AbstractComponent {
+export default class ShowMoreButton extends AbstractComponent {
   constructor() {
     super();
     this.callback = undefined;

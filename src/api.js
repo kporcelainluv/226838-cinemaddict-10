@@ -28,7 +28,7 @@ const fetchWrapper = ({
   );
 };
 
-export class API {
+export default class API {
   constructor({ endPoint, authorization }) {
     this._endPoint = endPoint;
     this._authorization = authorization;

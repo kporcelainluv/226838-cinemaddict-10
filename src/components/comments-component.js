@@ -3,7 +3,7 @@ import AbstractComponent from "./abstract-component.js";
 
 import Utils from "../utils.js";
 
-export class CommentsSection extends AbstractComponent {
+export default class CommentsSection extends AbstractComponent {
   constructor(comments) {
     super();
     this._comments = comments;

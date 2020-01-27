@@ -1,6 +1,6 @@
 import AbstractComponent from "./abstract-component.js";
 
-export class StatsSummary extends AbstractComponent {
+export default class StatsSummary extends AbstractComponent {
   constructor(watched, hours, minutes, topGenre) {
     super();
     this._filmsAmount = watched;

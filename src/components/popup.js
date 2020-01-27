@@ -4,7 +4,7 @@ import moment from "moment";
 import { RATING_LENGTH, TIMEOUT, DEBOUNCE_TIMEOUT } from "../consts";
 import { debounce } from "lodash";
 
-export class Popup extends AbstractComponent {
+export default class Popup extends AbstractComponent {
   constructor(film) {
     super();
     this._title = film.title;

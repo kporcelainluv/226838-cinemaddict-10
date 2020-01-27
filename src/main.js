@@ -1,7 +1,7 @@
-import { PageController } from "./controllers/page-controller";
-import { API } from "./api";
-import { Provider } from "./provider";
-import { Store } from "./store";
+import PageController from "./controllers/page-controller.js";
+import API from "./api.js";
+import Provider from "./provider.js";
+import Store from "./store.js";
 import {
   AUTHORIZATION,
   TASKS_STORE_KEY,

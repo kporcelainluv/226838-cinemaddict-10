@@ -1,6 +1,6 @@
 import AbstractComponent from "./abstract-component.js";
 
-export class Loading extends AbstractComponent {
+export default class Loading extends AbstractComponent {
   constructor() {
     super();
   }

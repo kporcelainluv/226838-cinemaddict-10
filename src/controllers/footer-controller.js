@@ -1,8 +1,8 @@
-import { Footer } from "../components/footer-component";
+import Footer from "../components/footer-component.js";
 import Utils from "../utils.js";
 import { Position } from "../consts";
 
-export class FooterController {
+export default class FooterController {
   constructor() {
     this._body = document.getElementsByTagName(`body`)[0];
     this._footer = new Footer();

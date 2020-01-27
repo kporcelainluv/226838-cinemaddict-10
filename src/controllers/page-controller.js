@@ -1,16 +1,16 @@
 import { difference, head, pipe, sort } from "ramda";
 import Utils from "../utils.js";
 import { NavTab, SEARCH_QUERY_LENGTH, SortType, UpdateType } from "../consts";
-import { SearchResultController } from "./search-result";
-import { StatsController } from "../controllers/stats-controller";
+import SearchResultController from "./search-result.js";
+import StatsController from "../controllers/stats-controller.js";
 
-import { SortController } from "./sort-controller";
-import { HeaderController } from "./header-controller";
-import { FilmsController } from "./films-controller";
-import { FooterController } from "./footer-controller";
-import { NavigationController } from "./navigation-controller";
+import SortController from "./sort-controller.js";
+import HeaderController from "./header-controller.js";
+import FilmsController from "./films-controller.js";
+import FooterController from "./footer-controller.js";
+import NavigationController from "./navigation-controller.js";
 
-export class PageController {
+export default class PageController {
   constructor(headerContainer, container, films, provider) {
     this._container = container;
     this._provider = provider;

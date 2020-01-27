@@ -1,6 +1,6 @@
 import AbstractComponent from "./abstract-component.js";
 
-export class AdditionalFilmList extends AbstractComponent {
+export default class AdditionalFilmList extends AbstractComponent {
   constructor(blockName) {
     super();
     this._blockName = blockName;

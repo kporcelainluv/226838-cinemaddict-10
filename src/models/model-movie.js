@@ -1,7 +1,7 @@
 import DOMPurify from "dompurify";
 import Utils from "../utils.js";
 
-export class ModelMovie {
+export default class ModelMovie {
   /* eslint-disable camelcase */
   constructor(movie) {
     this.id = movie[`id`];

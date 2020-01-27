@@ -4,7 +4,7 @@ import AbstractComponent from "./abstract-component.js";
 import Utils from "../utils.js";
 import { debounce } from "lodash";
 
-export class FilmCard extends AbstractComponent {
+export default class FilmCard extends AbstractComponent {
   constructor(film) {
     super();
     this._title = film.title;

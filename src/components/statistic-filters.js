@@ -1,6 +1,6 @@
-import AbstractComponent from './abstract-component.js';
+import AbstractComponent from "./abstract-component.js";
 
-export class StatsFilters extends AbstractComponent {
+export default class StatsFilters extends AbstractComponent {
   constructor() {
     super();
   }
@@ -26,9 +26,9 @@ export class StatsFilters extends AbstractComponent {
   }
   onFiltersClick(callback) {
     const filters = this.getElement().querySelectorAll(
-        `.statistic__filters-input`
+      `.statistic__filters-input`
     );
-    filters.forEach((element) => {
+    filters.forEach(element => {
       element.addEventListener(`click`, callback);
     });
   }

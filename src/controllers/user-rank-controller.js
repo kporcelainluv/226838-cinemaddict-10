@@ -1,8 +1,8 @@
-import { StatsRank } from "../components/statistics-rank";
+import StatsRank from "../components/statistics-rank.js";
 import Utils from "../utils.js";
 import { Position } from "../consts";
 
-export class UserRankController {
+export default class UserRankController {
   constructor(container) {
     this._container = container;
     this._statsRank = new StatsRank(null);

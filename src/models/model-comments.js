@@ -1,6 +1,6 @@
 import DOMPurify from "dompurify";
 
-export class ModelComment {
+export default class ModelComment {
   constructor(comment) {
     this.id = comment[`id`];
     this.author = DOMPurify.sanitize(comment[`author`]);

@@ -1,5 +1,5 @@
 import AbstractComponent from "./abstract-component.js";
-export class SearchResultHeading extends AbstractComponent {
+export default class SearchResultHeading extends AbstractComponent {
   constructor(amount) {
     super();
     this._filmsAmount = amount;
