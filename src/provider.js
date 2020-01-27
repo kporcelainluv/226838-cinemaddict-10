@@ -151,6 +151,7 @@ export default class Provider {
 
         return Promise.resolve(newFilms);
       }
+      return true;
     });
   }
 }

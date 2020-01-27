@@ -149,7 +149,7 @@ export default class Utils {
       if (parseInt(a.id, 10) > parseInt(b.id, 10)) {
         return 1;
         // eslint-disable-next-line radix
-      } else if (parseInt(a.id,10) < parseInt(b.id,10)) {
+      } else if (parseInt(a.id, 10) < parseInt(b.id, 10)) {
         return -1;
       }
       return 0;
