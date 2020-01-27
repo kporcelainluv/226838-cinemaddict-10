@@ -155,15 +155,6 @@ export default class PageController {
     this._navigationController.render(this._allFilms, this._currentTab);
   }
 
-  rerenderAll(films) {
-    this._films = Utils.updateFilms(this._films, films);
-    this._allFilms = Utils.updateFilms(this._allFilms, films);
-
-    this._filmsController.render(
-      Utils.filterFilmsbyTab(this._currentTab, this._allFilms)
-    );
-    this._navigationController.render(this._allFilms, this._currentTab);
-  }
   /* eslint-disable consistent-return */
   _onFilmUpdate(updatedFilm, meta) {
     const { updateType, onSuccess, onError } = meta;

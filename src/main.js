@@ -34,7 +34,7 @@ window.addEventListener(ConnectionStatus.ONLINE, () => {
   document.title = document.title.split(`[OFFLINE]`)[0];
   if (provider.isSynchronized) {
     provider.syncFilms().then(updatedFilms => {
-      page.rerenderAll(updatedFilms);
+      page.rerender(updatedFilms);
     });
   }
 });
