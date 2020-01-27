@@ -41,7 +41,7 @@ export default class ModelMovie {
   static parseMovies(movie) {
     return movie.map(ModelMovie.parseMovie);
   }
-
+  /* eslint-disable camelcase */
   static toRAW(film) {
     return {
       id: film.id,

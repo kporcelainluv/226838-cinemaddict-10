@@ -208,5 +208,6 @@ export default class PageController {
         })
         .catch();
     }
+    return true;
   }
 }

@@ -1,6 +1,6 @@
-import { Method } from "./consts";
+import {Method} from "./consts";
 
-const checkStatus = response => {
+const checkStatus = (response) => {
   if (response.status >= 200 && response.status < 300) {
     return response;
   } else {
@@ -8,7 +8,7 @@ const checkStatus = response => {
   }
 };
 
-const toJSON = response => {
+const toJSON = (response) => {
   return response.json();
 };
 
@@ -20,16 +20,16 @@ const fetchWrapper = ({
   authorization
 }) => {
   const headers = {
-    "Content-Type": "application/json",
-    Authorization: authorization
+    "Content-Type": `application/json`,
+    "Authorization": authorization
   };
-  return fetch(`${endpoint}/${url}`, { method, body, headers }).then(
-    checkStatus
+  return fetch(`${endpoint}/${url}`, {method, body, headers}).then(
+      checkStatus
   );
 };
 
 export default class API {
-  constructor({ endPoint, authorization }) {
+  constructor({endPoint, authorization}) {
     this._endPoint = endPoint;
     this._authorization = authorization;
   }
@@ -84,11 +84,11 @@ export default class API {
   async getFilms() {
     const films = await this._get(`movies`);
 
-    const commentsPromises = films
-      .map(f => {
-        return f.id;
+    const commentsPromises = (films)
+      .map((film) => {
+        return film.id;
       })
-      .map(id => {
+      .map((id) => {
         return this._getComments(`comments/${id}`);
       });
 
@@ -100,15 +100,15 @@ export default class API {
     return films;
   }
 
-  updateFilm({ film }) {
+  updateFilm({film}) {
     return this._update(`movies/${film.id}`, JSON.stringify(film));
   }
 
-  createComment({ film, comment }) {
+  createComment({film, comment}) {
     return this._create(`comments/${film.id}`, JSON.stringify(comment));
   }
 
-  deleteComment({ comment }) {
+  deleteComment({comment}) {
     return this._delete(`comments/${comment.id}`);
   }
   syncFilms(films) {

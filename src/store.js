@@ -1,13 +1,13 @@
 export default class Store {
-  constructor({ key, storage }) {
+  constructor({key, storage}) {
     this._storage = storage;
     this._storeKey = key;
   }
 
-  setItem({ key, item }) {
+  setItem({key, item}) {
     const store = this.getAll();
     const newValue = {};
-    Object.assign(newValue, store, { [key]: item });
+    Object.assign(newValue, store, {[key]: item});
     this._storage.setItem(this._storeKey, JSON.stringify(newValue));
   }
 
